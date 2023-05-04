@@ -172,7 +172,7 @@ Array EditorVCSInterfaceGit::_get_modified_files_data() {
 		} else {
 			path = entry->head_to_index->new_file.path;
 		}
-		static Map<int, ChangeType> map_changes;
+		static HashMap<int, ChangeType> map_changes;
 		map_changes[GIT_STATUS_WT_NEW] = CHANGE_TYPE_NEW;
 		map_changes[GIT_STATUS_INDEX_NEW] = CHANGE_TYPE_NEW;
 		map_changes[GIT_STATUS_WT_MODIFIED] = CHANGE_TYPE_MODIFIED;

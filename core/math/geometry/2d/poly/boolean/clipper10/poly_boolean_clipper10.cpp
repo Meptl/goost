@@ -44,7 +44,7 @@ void PolyBoolean2DClipper10::boolean_polypaths_tree(const Vector<Vector<Point2>>
 	clp.Execute(clip_type, tree, solution_open, subject_fill_rule);
 
 	List<clipperlib::PolyPath *> to_visit;
-	Map<clipperlib::PolyPath *, PolyNode2D *> nodes;
+	HashMap<clipperlib::PolyPath *, PolyNode2D *> nodes;
 
 	nodes.insert(&tree, r_root);
 	to_visit.push_back(&tree);

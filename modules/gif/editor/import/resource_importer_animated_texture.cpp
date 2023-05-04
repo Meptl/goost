@@ -26,7 +26,7 @@ String ResourceImporterAnimatedTexture::get_save_extension() const {
 	return "atex";
 }
 
-bool ResourceImporterAnimatedTexture::get_option_visibility(const String &p_option, const Map<StringName, Variant> &p_options) const {
+bool ResourceImporterAnimatedTexture::get_option_visibility(const String &p_option, const HashMap<StringName, Variant> &p_options) const {
 	return true;
 }
 

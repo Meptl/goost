@@ -100,7 +100,7 @@ public:
 class PolyPath2D : public PolyNode2D {
 	GDCLASS(PolyPath2D, PolyNode2D);
 
-	Map<ObjectID, Ref<Curve2D>> paths; // Path2D : Cached Curve2D
+	HashMap<ObjectID, Ref<Curve2D>> paths; // Path2D : Cached Curve2D
 
 	real_t buffer_offset = 32.0;
 	Ref<PolyOffsetParameters2D> buffer_parameters;
@@ -125,7 +125,7 @@ public:
 
 	void set_tessellation_stages(int p_tessellation_stages);
 	int get_tessellation_stages() const { return tessellation_stages; }
-	
+
 	void set_tessellation_tolerance_degrees(float p_tessellation_tolerance_degrees);
 	float get_tessellation_tolerance_degrees() const { return tessellation_tolerance_degrees; }
 

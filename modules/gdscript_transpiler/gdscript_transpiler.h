@@ -27,7 +27,7 @@ public:
 
 class GDScriptTranspilerLanguage {
 protected:
-	Map<String, GDScriptTranspilerUtils::CodeBuilder> code;
+	HashMap<String, GDScriptTranspilerUtils::CodeBuilder> code;
 	String script_path;
 
 public:

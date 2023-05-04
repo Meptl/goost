@@ -460,9 +460,9 @@ String CommandLineParser::_get_usage(const Vector<Pair<const CommandLineOption *
 	return usage;
 }
 
-String CommandLineParser::_get_options_description(const OrderedHashMap<String, PackedStringArray> &p_categories_data) const {
+String CommandLineParser::_get_options_description(const HashMap<String, PackedStringArray> &p_categories_data) const {
 	String description;
-	for (OrderedHashMap<String, PackedStringArray>::ConstElement E = p_categories_data.front(); E; E = E.next()) {
+	for (HashMap<String, PackedStringArray>::ConstElement E = p_categories_data.front(); E; E = E.next()) {
 		const String &category = E.key();
 		const PackedStringArray &lines = E.value();
 
@@ -685,7 +685,7 @@ Error CommandLineParser::parse(const PackedStringArray &p_args) {
 	}
 	for (int i = 0; i < _options.size(); ++i) {
 		CommandLineOption *option = _options.get(i).ptr();
-		const Map<const CommandLineOption *, PackedStringArray>::Element *E = _parsed_values.find(option);
+		HashMap<const CommandLineOption *, PackedStringArray>::Element *E = _parsed_values.find(option);
 		if (E) {
 			option->emit_signal("parsed", E->value());
 		}
@@ -801,7 +801,7 @@ String CommandLineParser::get_value(const Ref<CommandLineOption> &p_option) cons
 PackedStringArray CommandLineParser::get_value_list(const Ref<CommandLineOption> &p_option) const {
 	ERR_FAIL_COND_V(p_option.is_null(), PackedStringArray());
 	ERR_FAIL_COND_V_MSG(p_option->get_arg_count() == 0, PackedStringArray(), vformat("Option '%s' does not accept arguments.", _to_string(p_option->get_names())));
-	const Map<const CommandLineOption *, PackedStringArray>::Element *E = _parsed_values.find(p_option.ptr());
+	HashMap<const CommandLineOption *, PackedStringArray>::Element *E = _parsed_values.find(p_option.ptr());
 	if (!E) {
 		return PackedStringArray();
 	}
@@ -819,7 +819,7 @@ String CommandLineParser::get_prefix(const Ref<CommandLineOption> &p_option) con
 
 PackedStringArray CommandLineParser::get_prefix_list(const Ref<CommandLineOption> &p_option) const {
 	ERR_FAIL_COND_V(p_option.is_null(), PackedStringArray());
-	const Map<const CommandLineOption *, PackedStringArray>::Element *E = _parsed_prefixes.find(p_option.ptr());
+	HashMap<const CommandLineOption *, PackedStringArray>::Element *E = _parsed_prefixes.find(p_option.ptr());
 	if (!E) {
 		return PackedStringArray();
 	}
@@ -828,7 +828,7 @@ PackedStringArray CommandLineParser::get_prefix_list(const Ref<CommandLineOption
 
 int CommandLineParser::get_occurrence_count(const Ref<CommandLineOption> &p_option) const {
 	ERR_FAIL_COND_V(p_option.is_null(), 0);
-	const Map<const CommandLineOption *, int>::Element *E = _parsed_count.find(p_option.ptr());
+	HashMap<const CommandLineOption *, int>::Element *E = _parsed_count.find(p_option.ptr());
 	if (!E) {
 		return 0;
 	}
@@ -866,7 +866,7 @@ String CommandLineParser::get_help_text(const Ref<CommandLineHelpFormat> &p_form
 	const int descriptions_length = format->get_line_length() - options_length;
 
 	// Fill categories and their data.
-	OrderedHashMap<String, PackedStringArray> categories_data;
+	HashMap<String, PackedStringArray> categories_data;
 	for (int i = 0; i < printable_options.size(); ++i) {
 		String line = printable_options[i].second.rpad(options_length - format->get_left_pad());
 		line = line.lpad(line.length() + format->get_left_pad());

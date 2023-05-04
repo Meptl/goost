@@ -137,9 +137,9 @@ class CommandLineParser : public RefCounted {
 	PackedStringArray _long_prefixes;
 	PackedStringArray _short_prefixes;
 
-	Map<const CommandLineOption *, PackedStringArray> _parsed_values;
-	Map<const CommandLineOption *, PackedStringArray> _parsed_prefixes;
-	Map<const CommandLineOption *, int> _parsed_count;
+	HashMap<const CommandLineOption *, PackedStringArray> _parsed_values;
+	HashMap<const CommandLineOption *, PackedStringArray> _parsed_prefixes;
+	HashMap<const CommandLineOption *, int> _parsed_count;
 
 	String _error_text;
 
@@ -173,7 +173,7 @@ class CommandLineParser : public RefCounted {
 
 	// Help text printers.
 	String _get_usage(const Vector<Pair<const CommandLineOption *, String>> &p_printable_options, const String &p_title) const;
-	String _get_options_description(const OrderedHashMap<String, PackedStringArray> &p_categories_data) const;
+	String _get_options_description(const HashMap<String, PackedStringArray> &p_categories_data) const;
 
 	// Other utilies.
 	String _to_string(const PackedStringArray &p_names) const; // Returns all option names separated by commas with all prefix variants.

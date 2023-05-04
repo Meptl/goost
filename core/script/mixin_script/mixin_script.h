@@ -67,7 +67,7 @@ class MixinScript : public Script {
 
 	Vector<Ref<Script> > mixins;
 	Vector<Mixin *> mixin_instances;
-	Map<Object *, MixinScriptInstance *> instances;
+	HashMap<Object *, MixinScriptInstance *> instances;
 
 protected:
 	static void _bind_methods();

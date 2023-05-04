@@ -236,7 +236,7 @@ void MixinScript::set_mixin(int p_idx, const Ref<Script> &p_script) {
 	mixins.set(p_idx, p_script);
 	Ref<Script> s = p_script;
 
-	for (Map<Object *, MixinScriptInstance *>::Element *E = instances.front(); E; E = E->next()) {
+	for (HashMap<Object *, MixinScriptInstance *>::Element *E = instances.front(); E; E = E->next()) {
 		MixinScriptInstance *msi = E->get();
 		// Looks like there's no need to explicitly free a previous
 		// script instance in `msi->instances`, because `s->instance_create`

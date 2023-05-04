@@ -24,7 +24,7 @@ Variant GDScriptTranspilerCpp::transpile(const Ref<GDScript> &p_script) {
 	transpile_node(cpp_tree);
 
 	Dictionary ret;
-	for (Map<String, GDScriptTranspilerUtils::CodeBuilder>::Element *E = code.front(); E; E = E->next()) {
+	for (HashMap<String, GDScriptTranspilerUtils::CodeBuilder>::Element *E = code.front(); E; E = E->next()) {
 		ret[E->key()] = E->get().get_code();
 	}
 	clear();

@@ -103,7 +103,7 @@ protected:
 	void _update_colors();
 
 private:
-	Map<Vector2i, Variant> metadata;
+	HashMap<Vector2i, Variant> metadata;
 	Dictionary current_line;
 
 	Vector2 _point_snapped;

@@ -77,7 +77,7 @@ public:
 			}
 		};
 		Vector<Member> variables;
-		Map<StringName, Constant> constant_expressions;
+		HashMap<StringName, Constant> constant_expressions;
 		Vector<FunctionNode *> functions;
 
 		ClassNode() {

@@ -49,7 +49,7 @@ void PolyBoolean2DClipper6::boolean_polypaths_tree(const Vector<Vector<Point2>> 
 	clp.Execute(clip_type, tree, subject_fill_type, clip_fill_type);
 
 	List<ClipperLib::PolyNode *> to_visit;
-	Map<ClipperLib::PolyNode *, PolyNode2D *> nodes;
+	HashMap<ClipperLib::PolyNode *, PolyNode2D *> nodes;
 
 	nodes.insert(&tree, r_root);
 	to_visit.push_back(&tree);
