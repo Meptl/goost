@@ -1,7 +1,7 @@
 extends "res://addons/gut/test.gd"
 
 
-func test_create_local_instance():
+func test_create_local_instantiate():
 	var rng = Random2D.new_instance()
 	Random2D.seed = hash("Goost")
 	rng.seed = 37

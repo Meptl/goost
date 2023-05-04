@@ -47,7 +47,7 @@ public:
 		default_backend_id = find_backend_id(p_name);
 	}
 
-	T get_default_backend_instance() const {
+	T get_default_backend_instantiate() const {
 		if (default_backend_id != -1) {
 			return backends[default_backend_id].instance;
 		}
@@ -87,7 +87,7 @@ public:
 				backends_list += ",";
 			}
 		}
-		T default_backend = get_default_backend_instance();
+		T default_backend = get_default_backend_instantiate();
 		if (default_backend) {
 			// Suggest restart because the singleton can also be used in extension mode.
 			GLOBAL_DEF_RST(setting_name, default_backend_name);

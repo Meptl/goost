@@ -11,7 +11,7 @@ var poly_c = Transform2D(0, Vector2.ONE * SIZE).xform(poly_b)
 var solution = []
 
 
-func test_create_local_instance():
+func test_create_local_instantiate():
 	var global = PolyOffset2D
 	var local = PolyOffset2D.new_instance()
 	assert_ne(local, PolyOffset2D)

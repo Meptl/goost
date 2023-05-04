@@ -14,7 +14,7 @@ public:
 
 	PolyOffset2DBackend() {
 		default_parameters.instantiate();
-		parameters.instance();
+		parameters.instantiate();
 	}
 	virtual ~PolyOffset2DBackend() {}
 
@@ -64,7 +64,7 @@ public:
 		if (!singleton) {
 			singleton = this;
 		}
-		parameters.instance();
+		parameters.instantiate();
 	}
 
 protected:

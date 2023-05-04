@@ -30,7 +30,7 @@ void register_geometry_types() {
 	ClassDB::register_class<PolyNode2D>();
 
 #ifdef GOOST_PolyOffset2D
-	_poly_offset_2d.instance();
+	_poly_offset_2d.instantiate();
 	ClassDB::register_class<_PolyOffset2D>();
 	Object *poly_offset_2d = Object::cast_to<Object>(_PolyOffset2D::get_singleton());
 	Engine::get_singleton()->add_singleton(Engine::Singleton("PolyOffset2D", poly_offset_2d));
@@ -38,7 +38,7 @@ void register_geometry_types() {
 	ClassDB::register_class<PolyOffsetParameters2D>();
 
 #ifdef GOOST_PolyDecomp2D
-	_poly_decomp_2d.instance();
+	_poly_decomp_2d.instantiate();
 	ClassDB::register_class<_PolyDecomp2D>();
 	Object *poly_decomp_2d = Object::cast_to<Object>(_PolyDecomp2D::get_singleton());
 	Engine::get_singleton()->add_singleton(Engine::Singleton("PolyDecomp2D", poly_decomp_2d));
@@ -46,7 +46,7 @@ void register_geometry_types() {
 	ClassDB::register_class<PolyDecompParameters2D>();
 
 #ifdef GOOST_Random2D
-	_random_2d.instance();
+	_random_2d.instantiate();
 	ClassDB::register_class<Random2D>();
 	Object *random_2d = Object::cast_to<Object>(Random2D::get_singleton());
 	Engine::get_singleton()->add_singleton(Engine::Singleton("Random2D", random_2d));

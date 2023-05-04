@@ -12,7 +12,7 @@ var poly_d = Transform2D(0, Vector2.ONE * SIZE).xform(poly_c)
 var solution = []
 
 
-func test_create_local_instance():
+func test_create_local_instantiate():
 	var global = PolyBoolean2D
 	var local = PolyBoolean2D.new_instance()
 	assert_ne(local, PolyBoolean2D)

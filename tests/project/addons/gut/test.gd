@@ -48,7 +48,7 @@ class DoubleInfo:
 	var strategy
 	var make_partial
 	var extension
-	var _utils = load('res://addons/gut/utils.gd').get_instance()
+	var _utils = load('res://addons/gut/utils.gd').get_instantiate()
 	var _is_native = false
 	var is_valid = false
 
@@ -99,7 +99,7 @@ class DoubleInfo:
 # ------------------------------------------------------------------------------
 # Begin test.gd
 # ------------------------------------------------------------------------------
-var _utils = load('res://addons/gut/utils.gd').get_instance()
+var _utils = load('res://addons/gut/utils.gd').get_instantiate()
 var _compare = _utils.Comparator.new()
 
 # constant for signal when calling yield_for
@@ -254,7 +254,7 @@ func _fail_if_parameters_not_array(parameters):
 func _create_obj_from_type(type):
 	var obj = null
 	if type.is_class("PackedScene"):
-		obj = type.instance()
+		obj = type.instantiate()
 		add_child(obj)
 	else:
 		obj = type.new()
@@ -1373,7 +1373,7 @@ func ignore_method_when_doubling(thing, method_name):
 	var path = double_info.path
 
 	if(double_info.is_scene()):
-		var inst = thing.instance()
+		var inst = thing.instantiate()
 		if(inst.get_script()):
 			path = inst.get_script().get_path()
 

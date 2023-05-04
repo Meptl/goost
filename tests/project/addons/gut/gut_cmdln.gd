@@ -113,7 +113,7 @@ class OptionResolver:
 # Here starts the actual script that uses the Options class to kick off Gut
 # and run your tests.
 # ------------------------------------------------------------------------------
-var _utils = load('res://addons/gut/utils.gd').get_instance()
+var _utils = load('res://addons/gut/utils.gd').get_instantiate()
 var _gut_config = load('res://addons/gut/gut_config.gd').new()
 # instance of gut
 var _tester = null
@@ -281,7 +281,7 @@ func _on_tests_finished(should_exit, should_exit_on_success):
 		OS.exit_code = 1
 
 	# Overwrite the exit code with the post_script
-	var post_inst = _tester.get_post_run_script_instance()
+	var post_inst = _tester.get_post_run_script_instantiate()
 	if(post_inst != null and post_inst.get_exit_code() != null):
 		OS.exit_code = post_inst.get_exit_code()
 

@@ -64,7 +64,7 @@ const WAITING_MESSAGE = '/# waiting #/'
 const PAUSE_MESSAGE = '/# Pausing.  Press continue button...#/'
 const COMPLETED = 'completed'
 
-var _utils = load('res://addons/gut/utils.gd').get_instance()
+var _utils = load('res://addons/gut/utils.gd').get_instantiate()
 var _lgr = _utils.get_logger()
 var _strutils = _utils.Strutils.new()
 # Used to prevent multiple messages for deprecated setup/teardown messages
@@ -169,7 +169,7 @@ func _init():
 	_stubber.set_logger(_lgr)
 	_test_collector.set_logger(_lgr)
 
-	_gui = load('res://addons/gut/GutScene.tscn').instance()
+	_gui = load('res://addons/gut/GutScene.tscn').instantiate()
 
 
 func _process(delta):
@@ -1580,12 +1580,12 @@ func set_post_run_script(post_run_script):
 
 # ------------------------------------------------------------------------------
 # ------------------------------------------------------------------------------
-func get_pre_run_script_instance():
+func get_pre_run_script_instantiate():
 	return _pre_run_script_instance
 
 # ------------------------------------------------------------------------------
 # ------------------------------------------------------------------------------
-func get_post_run_script_instance():
+func get_post_run_script_instantiate():
 	return _post_run_script_instance
 
 # ------------------------------------------------------------------------------

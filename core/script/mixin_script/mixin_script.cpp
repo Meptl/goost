@@ -241,7 +241,7 @@ void MixinScript::set_mixin(int p_idx, const Ref<Script> &p_script) {
 		// Looks like there's no need to explicitly free a previous
 		// script instance in `msi->instances`, because `s->instance_create`
 		// will free it by itself, otherwise this leads to random crashes.
-		if (s->can_instance()) {
+		if (s->can_instantiate()) {
 			msi->instances.set(p_idx, s->instance_create(mixin_instances[p_idx]));
 		} else {
 			msi->instances.set(p_idx, nullptr);
@@ -293,7 +293,7 @@ void MixinScript::add_mixin(const Ref<Script> &p_script) {
 	for (Map<Object *, MixinScriptInstance *>::Element *E = instances.front(); E; E = E->next()) {
 		MixinScriptInstance *msi = E->get();
 
-		if (p_script->can_instance()) {
+		if (p_script->can_instantiate()) {
 			script_owner->real_owner = msi->object;
 			msi->instances.push_back(s->instance_create(script_owner));
 		} else {
@@ -339,7 +339,7 @@ void MixinScript::insert_mixin(int p_pos, const Ref<Script> &p_script) {
 	for (Map<Object *, MixinScriptInstance *>::Element *E = instances.front(); E; E = E->next()) {
 		MixinScriptInstance *msi = E->get();
 
-		if (s->can_instance()) {
+		if (s->can_instantiate()) {
 			script_owner->real_owner = msi->object;
 			msi->instances.insert(p_pos, s->instance_create(script_owner));
 		} else {
@@ -371,7 +371,7 @@ ScriptInstance *MixinScript::instance_create(Object *p_this) {
 		ScriptInstance *si = nullptr;
 		Ref<Script> script = mixins[i];
 
-		if (script->can_instance()) {
+		if (script->can_instantiate()) {
 			mixin_instances[i]->real_owner = p_this;
 			si = script->instance_create(mixin_instances[i]);
 		} else {

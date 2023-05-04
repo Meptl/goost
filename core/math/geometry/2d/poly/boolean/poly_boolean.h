@@ -24,7 +24,7 @@ public:
 
 	PolyBoolean2DBackend() {
 		default_parameters.instantiate();
-		parameters.instance();
+		parameters.instantiate();
 	}
 	virtual ~PolyBoolean2DBackend() {}
 
@@ -101,7 +101,7 @@ public:
 		if (!singleton) {
 			singleton = this;
 		}
-		parameters.instance();
+		parameters.instantiate();
 	}
 
 protected:

@@ -100,7 +100,7 @@ void PolyShape2D::_queue_update() {
 
 void PolyShape2D::_update_shapes() {
 	_build_shapes();
-	auto script = get_script_instance();
+	auto script = get_script_instantiate();
 	if (script && script->has_method("_apply_shapes")) {
 		script->call("_apply_shapes");
 		emit_signal("shapes_applied");

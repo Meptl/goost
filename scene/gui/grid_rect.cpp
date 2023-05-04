@@ -119,7 +119,7 @@ void GridRect::_gui_input(const Ref<InputEvent> &p_event) {
 }
 
 bool GridRect::_draw_line(const Vector2 &p_from, const Vector2 &p_to, const Color &p_color, float p_width, const Dictionary &p_line) {
-	auto script = get_script_instance();
+	auto script = get_script_instantiate();
 	if (script && script->has_method("_draw_line")) {
 		return script->call("_draw_line", p_from, p_to, p_color, p_width, p_line);
 	}

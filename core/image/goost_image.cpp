@@ -316,17 +316,17 @@ Ref<Image> GoostImage::repeat(const Ref<Image> &p_image, const Size2i &p_count, 
 		src_fx->flip_x();
 	}
 	if (p_mode == TILE_FLIP_XY || p_mode == TILE_FLIP_Y) {
-		src_fy.instance();
+		src_fy.instantiate();
 		src_fy->copy_internals_from(src);
 		src_fy->flip_y();
 	}
 	if (p_mode == TILE_FLIP_XY) {
-		src_fxy.instance();
+		src_fxy.instantiate();
 		src_fxy->copy_internals_from(src_fx);
 		src_fxy->flip_y();
 	}
 	Ref<Image> dest;
-	dest.instance();
+	dest.instantiate();
 
 	int dw = CLAMP(w * cols, 0, p_max_size.x);
 	int dh = CLAMP(h * rows, 0, p_max_size.y);
@@ -493,7 +493,7 @@ Ref<Image> GoostImage::render_svg(const String &p_svg, real_t p_scale) {
 #ifdef MODULE_SVG_ENABLED
 	ERR_FAIL_COND_V_MSG(p_svg.empty(), Ref<Image>(), "Empty SVG document.");
 	ERR_FAIL_COND_V_MSG(p_scale <= 0, Ref<Image>(), "Scale must be positive.");
-	image.instance();
+	image.instantiate();
 	CharString svg = p_svg.utf8();
 	const char *svg_str = svg.get_data();
 	ImageLoaderSVG::create_image_from_string(image, svg_str, p_scale, false, false);
@@ -650,7 +650,7 @@ void _image_from_pix(Ref<Image> p_image, PIX *p_pix, bool p_include_alpha) {
 
 Ref<Image> image_create_from_pix(PIX *p_pix, bool p_include_alpha) {
 	Ref<Image> image;
-	image.instance();
+	image.instantiate();
 	_image_from_pix(image, p_pix, p_include_alpha);
 	return image;
 }

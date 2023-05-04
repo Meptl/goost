@@ -14,7 +14,7 @@ func before_all():
 	poly_hole.invert()
 
 
-func test_create_local_instance():
+func test_create_local_instantiate():
 	var global = PolyDecomp2D
 	var local = PolyDecomp2D.new_instance()
 	assert_ne(local, PolyDecomp2D)

@@ -74,7 +74,7 @@ protected:
 
 public:
 	void remove_instance(Object *p_object);
-	virtual bool can_instance() const { return true; }
+	virtual bool can_instantiate() const { return true; }
 
 	virtual StringName get_instance_base_type() const;
 	virtual ScriptInstance *instance_create(Object *p_this);

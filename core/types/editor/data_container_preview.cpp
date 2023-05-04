@@ -33,7 +33,7 @@ Ref<Texture> DataContainerPreviewGenerator::generate(const Ref<Resource> &p_from
 			image->create(p_size.x, p_size.y, false, Image::FORMAT_RGBA8);
 			image->fill(color);
 			Ref<ImageTexture> img_tex;
-			img_tex.instance();
+			img_tex.instantiate();
 			img_tex->create_from_image(image, 0);
 			tex = img_tex;
 		} break;
@@ -44,7 +44,7 @@ Ref<Texture> DataContainerPreviewGenerator::generate(const Ref<Resource> &p_from
 				Ref<Image> image = obj_tex->get_data();
 				image->resize(p_size.x, p_size.y);
 				Ref<ImageTexture> img_tex;
-				img_tex.instance();
+				img_tex.instantiate();
 				img_tex->create_from_image(image, 0);
 				tex = img_tex;
 			}

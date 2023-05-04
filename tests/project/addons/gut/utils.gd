@@ -55,7 +55,7 @@ static func get_root_node():
 # ------------------------------------------------------------------------------
 # Get the ONE instance of utils
 # ------------------------------------------------------------------------------
-static func get_instance():
+static func get_instantiate():
 	var the_root = get_root_node()
 	var inst = null
 	if(the_root.has_node(INSTANCE_NAME())):

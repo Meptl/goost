@@ -4,7 +4,7 @@
 # of a run and exporting it in a specific format.  This can also serve as a
 # unofficial GUT export format.
 # ------------------------------------------------------------------------------
-var _utils = load('res://addons/gut/utils.gd').get_instance()
+var _utils = load('res://addons/gut/utils.gd').get_instantiate()
 
 func _export_tests(summary_script):
 	var to_return = {}
@@ -54,7 +54,7 @@ func _make_results_dict():
 		}
 	}
 	return result
-	
+
 
 # TODO
 #	time
@@ -62,12 +62,12 @@ func _make_results_dict():
 func get_results_dictionary(gut, include_scripts=true):
 	var summary = gut.get_summary()
 	var scripts = []
-	
-	
+
+
 	if(include_scripts):
 		scripts = _export_scripts(summary)
-	
-	var result =  _make_results_dict()	
+
+	var result =  _make_results_dict()
 	if(summary != null):
 		var totals = summary.get_totals()
 
@@ -79,7 +79,7 @@ func get_results_dictionary(gut, include_scripts=true):
 		props.time = gut.get_gui().elapsed_time_as_str().replace('s', '')
 		props.orpahns = gut.get_orphan_counter().get_counter('total')
 		result.test_scripts.scripts = scripts
-		
+
 	return result
 
 

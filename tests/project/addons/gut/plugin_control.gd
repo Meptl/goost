@@ -168,7 +168,7 @@ func _check_for_templates():
 	return true
 
 func _setup_gut():
-	var _utils = load('res://addons/gut/utils.gd').get_instance()
+	var _utils = load('res://addons/gut/utils.gd').get_instantiate()
 
 	_lgr = _utils.get_logger()
 	_gut = load('res://addons/gut/gut.gd').new()

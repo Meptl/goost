@@ -22,21 +22,21 @@ void register_gif_types() {
 	resource_format_image_frames.instantiate();
 	ResourceLoader::add_resource_format_loader(resource_format_image_frames);
 
-	resource_format_animated_texture.instance();
+	resource_format_animated_texture.instantiate();
 	ResourceLoader::add_resource_format_loader(resource_format_animated_texture);
 
-	resource_format_sprite_frames.instance();
+	resource_format_sprite_frames.instantiate();
 	ResourceLoader::add_resource_format_loader(resource_format_sprite_frames);
 
 	ClassDB::register_class<ImageFrames>();
 
 #ifdef TOOLS_ENABLED
 	Ref<ResourceImporterAnimatedTexture> import_animated_texture;
-	import_animated_texture.instance();
+	import_animated_texture.instantiate();
 	ResourceFormatImporter::get_singleton()->add_importer(import_animated_texture);
 
 	Ref<ResourceImporterSpriteFrames> import_sprite_frames;
-	import_sprite_frames.instance();
+	import_sprite_frames.instantiate();
 	ResourceFormatImporter::get_singleton()->add_importer(import_sprite_frames);
 #endif
 }

@@ -175,7 +175,7 @@ RES ResourceFormatLoaderAnimatedTexture::load(const String &p_path, const String
 		ERR_FAIL_V(RES());
 	}
 	Ref<AnimatedTexture> atex;
-	atex.instance();
+	atex.instantiate();
 
 	uint32_t tex_flags = f->get_32();
 	uint32_t frame_count = f->get_32();
@@ -185,7 +185,7 @@ RES ResourceFormatLoaderAnimatedTexture::load(const String &p_path, const String
 
 	for (size_t i = 0; i < frame_count; ++i) {
 		Ref<ImageTexture> frame;
-		frame.instance();
+		frame.instantiate();
 		// Frame image data.
 		Vector<uint8_t> data;
 		uint32_t len = f->get_32();
@@ -193,7 +193,7 @@ RES ResourceFormatLoaderAnimatedTexture::load(const String &p_path, const String
 		f->get_buffer(data.ptrw(), len);
 
 		Ref<Image> image;
-		image.instance();
+		image.instantiate();
 		image->create(width, height, false, Image::FORMAT_RGBA8, data);
 		frame->create_from_image(image, tex_flags);
 		atex->set_frame_texture(i, frame);
@@ -243,7 +243,7 @@ RES ResourceFormatLoaderSpriteFrames::load(const String &p_path, const String &p
 		ERR_FAIL_V(RES());
 	}
 	Ref<SpriteFrames> sframes;
-	sframes.instance();
+	sframes.instantiate();
 
 	uint32_t tex_flags = f->get_32();
 	uint32_t frame_count = f->get_32();
@@ -253,7 +253,7 @@ RES ResourceFormatLoaderSpriteFrames::load(const String &p_path, const String &p
 
 	for (size_t i = 0; i < frame_count; ++i) {
 		Ref<ImageTexture> frame;
-		frame.instance();
+		frame.instantiate();
 		// Frame image data.
 		Vector<uint8_t> data;
 		uint32_t len = f->get_32();
@@ -261,7 +261,7 @@ RES ResourceFormatLoaderSpriteFrames::load(const String &p_path, const String &p
 		f->get_buffer(data.ptrw(), len);
 
 		Ref<Image> image;
-		image.instance();
+		image.instantiate();
 		image->create(width, height, false, Image::FORMAT_RGBA8, data);
 		frame->create_from_image(image, tex_flags);
 		sframes->add_frame("default", frame);

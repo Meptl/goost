@@ -78,7 +78,7 @@ class ScriptMethods:
 class ObjectInfo:
 	var _path = null
 	var _subpaths = []
-	var _utils = load('res://addons/gut/utils.gd').get_instance()
+	var _utils = load('res://addons/gut/utils.gd').get_instantiate()
 	var _method_strategy = null
 	var make_partial_double = false
 	var scene_path = null
@@ -228,7 +228,7 @@ class PackedSceneDouble:
 # ------------------------------------------------------------------------------
 # START Doubler
 # ------------------------------------------------------------------------------
-var _utils = load('res://addons/gut/utils.gd').get_instance()
+var _utils = load('res://addons/gut/utils.gd').get_instantiate()
 
 var _ignored_methods = _utils.OneToMany.new()
 var _stubber = _utils.Stubber.new()
@@ -340,7 +340,7 @@ func _double_scene_and_script(scene_info):
 	var to_return = PackedSceneDouble.new()
 	to_return.load_scene(scene_info.get_path())
 
-	var inst = load(scene_info.get_path()).instance()
+	var inst = load(scene_info.get_path()).instantiate()
 	var script_path = null
 	if(inst.get_script()):
 		script_path = inst.get_script().get_path()

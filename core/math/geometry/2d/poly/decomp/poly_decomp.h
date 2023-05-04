@@ -27,7 +27,7 @@ public:
 
 	PolyDecomp2DBackend() {
 		default_parameters.instantiate();
-		parameters.instance();
+		parameters.instantiate();
 	}
 	virtual ~PolyDecomp2DBackend() {}
 
@@ -90,7 +90,7 @@ public:
 		if (!singleton) {
 			singleton = this;
 		}
-		parameters.instance();
+		parameters.instantiate();
 	}
 
 protected:

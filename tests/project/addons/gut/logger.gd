@@ -91,7 +91,7 @@ var _last_yield_text = ''
 
 
 func _init():
-	_utils = load('res://addons/gut/utils.gd').get_instance()
+	_utils = load('res://addons/gut/utils.gd').get_instantiate()
 	_printers.terminal = _utils.Printers.TerminalPrinter.new()
 	_printers.console = _utils.Printers.ConsolePrinter.new()
 	# There were some problems in the timing of disabling this at the right

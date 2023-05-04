@@ -86,8 +86,8 @@ void Graph::remove_edge(GraphEdge *p_edge) {
 
 GraphVertex *Graph::_create_vertex() {
 	GraphVertex *vertex = nullptr;
-	if (get_script_instance() && get_script_instance()->has_method(StringNames::get_singleton()->_create_vertex)) {
-		Object *obj = get_script_instance()->call(StringNames::get_singleton()->_create_vertex);
+	if (get_script_instantiate() && get_script_instantiate()->has_method(StringNames::get_singleton()->_create_vertex)) {
+		Object *obj = get_script_instantiate()->call(StringNames::get_singleton()->_create_vertex);
 		vertex = Object::cast_to<GraphVertex>(obj);
 		ERR_FAIL_NULL_V_MSG(vertex, nullptr, "The returned object is not a valid GraphVertex");
 	} else {
@@ -98,8 +98,8 @@ GraphVertex *Graph::_create_vertex() {
 
 GraphEdge *Graph::_create_edge() {
 	GraphEdge *edge = nullptr;
-	if (get_script_instance() && get_script_instance()->has_method(StringNames::get_singleton()->_create_edge)) {
-		Object *obj = get_script_instance()->call(StringNames::get_singleton()->_create_edge);
+	if (get_script_instantiate() && get_script_instantiate()->has_method(StringNames::get_singleton()->_create_edge)) {
+		Object *obj = get_script_instantiate()->call(StringNames::get_singleton()->_create_edge);
 		edge = Object::cast_to<GraphEdge>(obj);
 		ERR_FAIL_NULL_V_MSG(edge, nullptr, "The returned object is not a valid GraphEdge");
 	} else {
@@ -787,8 +787,8 @@ Graph::Graph() {
 	graph->id = get_instance_id();
 	ERR_FAIL_COND(graph->id == 0);
 
-	G_dfs.instance();
-	G_bfs.instance();
+	G_dfs.instantiate();
+	G_bfs.instantiate();
 	G = G_dfs; // Set depth-first search iterator by default.
 }
 
@@ -912,7 +912,7 @@ void GraphIteratorBFS::_bind_methods() {
 void GraphIterator::initialize(GraphVertex *p_root) {
 	ERR_FAIL_NULL(p_root);
 
-	auto s = get_script_instance();
+	auto s = get_script_instantiate();
 	if (s && s->has_method(StringNames::get_singleton()->initialize)) {
 		Variant root = p_root;
 		s->call(StringNames::get_singleton()->initialize, root);
@@ -922,7 +922,7 @@ void GraphIterator::initialize(GraphVertex *p_root) {
 }
 
 bool GraphIterator::has_next() const {
-	auto s = get_script_instance();
+	auto s = get_script_instantiate();
 	if (s && s->has_method(StringNames::get_singleton()->has_next)) {
 		return s->call(StringNames::get_singleton()->has_next);
 	}
@@ -930,7 +930,7 @@ bool GraphIterator::has_next() const {
 }
 
 GraphVertex *GraphIterator::next() {
-	auto s = get_script_instance();
+	auto s = get_script_instantiate();
 	if (s && s->has_method(StringNames::get_singleton()->next)) {
 		Object *obj = s->call(StringNames::get_singleton()->next);
 		GraphVertex *v = Object::cast_to<GraphVertex>(obj);
