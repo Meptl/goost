@@ -135,9 +135,7 @@ Error ImageLoaderIndexedPNG::_load_image(void *rf_up, png_rw_ptr p_func, Ref<Ima
 
 	dstbuff.resize(rowsize * height);
 
-	Vector<uint8_t>::Write dstbuff_write = dstbuff.write();
-
-	uint8_t *data = dstbuff_write.ptr();
+	uint8_t *data = dstbuff.ptrw();
 
 	uint8_t **row_p = memnew_arr(uint8_t *, height);
 
@@ -155,7 +153,7 @@ Error ImageLoaderIndexedPNG::_load_image(void *rf_up, png_rw_ptr p_func, Ref<Ima
 
 		Vector<uint8_t> palette_data;
 		palette_data.resize(palette_size * 4);
-		Vector<uint8_t>::Write w = palette_data.write();
+		uint8_t *w = palette_data.ptrw();
 
 		if (png_palette_alpha && palette_alpha_size == palette_size) {
 			for (int i = 0; i < palette_size; i++) {

@@ -18,8 +18,6 @@ void GoostImage::replace_color(Ref<Image> p_image, const Color &p_color, const C
 		return;
 	}
 
-	p_image->lock();
-
 	for (int y = 0; y < p_image->get_height(); ++y) {
 		for (int x = 0; x < p_image->get_width(); ++x) {
 			if (p_image->get_pixel(x, y) == p_color) {
@@ -27,7 +25,6 @@ void GoostImage::replace_color(Ref<Image> p_image, const Color &p_color, const C
 			}
 		}
 	}
-	p_image->unlock();
 }
 
 // Based on flood-fill algorithm.
@@ -40,7 +37,6 @@ Ref<Image> GoostImage::bucket_fill(Ref<Image> p_image, const Point2 &p_at, const
 	if (!has_pixelv(p_image, p_at)) {
 		return Ref<Image>();
 	}
-	p_image->lock();
 
 	Color filling_color = p_image->get_pixelv(p_at);
 
@@ -51,7 +47,6 @@ Ref<Image> GoostImage::bucket_fill(Ref<Image> p_image, const Point2 &p_at, const
 
 	Ref<Image> fill_image = memnew(Image);
 	fill_image->create(width, height, mipmaps, format);
-	fill_image->lock();
 
 	Vector2 at;
 	Vector2 pos = p_at;
@@ -114,9 +109,6 @@ Ref<Image> GoostImage::bucket_fill(Ref<Image> p_image, const Point2 &p_at, const
 		p_image->blend_rect(fill_image, fill_rect, Point2());
 	}
 
-	fill_image->unlock();
-	p_image->unlock();
-
 	return fill_image;
 }
 
@@ -139,11 +131,6 @@ void GoostImage::resize_hqx(Ref<Image> p_image, int p_scale) {
 	const int new_height = p_image->get_height() * p_scale;
 	dest.resize(new_width * new_height * 4);
 	{
-		Vector<uint8_t>::Read r = src.read();
-		Vector<uint8_t>::Write w = dest.write();
-
-		ERR_FAIL_COND(!r.ptr());
-
 		HQx *hqx;
 		if (p_scale == 2) {
 			hqx = memnew(HQ2x);
@@ -152,7 +139,7 @@ void GoostImage::resize_hqx(Ref<Image> p_image, int p_scale) {
 		} else {
 			hqx = memnew(HQ2x); // Fallback to HQ2x in all cases.
 		}
-		hqx->resize((const uint32_t *)r.ptr(), p_image->get_width(), p_image->get_height(), (uint32_t *)w.ptr());
+		hqx->resize((const uint32_t *)src.ptr(), p_image->get_width(), p_image->get_height(), (uint32_t *)dest.ptrw());
 		memdelete(hqx);
 	}
 	p_image->create(new_width, new_height, false, Image::FORMAT_RGBA8, dest);
@@ -554,9 +541,7 @@ PIX *pix_create_from_image(Ref<Image> p_image) {
 	const Image::Format format = p_image->get_format();
 
 	Vector<uint8_t> src = p_image->get_data();
-	Vector<uint8_t>::Read read = src.read();
-	ERR_FAIL_COND_V(!read.ptr(), nullptr);
-	const uint8_t *r = read.ptr();
+	const uint8_t *r = src.ptr();
 
 	const int w = p_image->get_width();
 	const int h = p_image->get_height();
@@ -618,8 +603,7 @@ void _image_from_pix(Ref<Image> p_image, PIX *p_pix, bool p_include_alpha) {
 	{
 		const int data_size = Image::get_image_data_size(width, height, format);
 		image_data.resize(data_size);
-		Vector<uint8_t>::Write write = image_data.write();
-		uint8_t *w = write.ptr();
+		uint8_t *w = image_data.ptrw();
 
 		const int pixel_count = width * height;
 		const int pixel_size = Image::get_format_pixel_size(format);

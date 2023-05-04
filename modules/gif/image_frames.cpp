@@ -110,7 +110,7 @@ Error ImageFrames::save_gif(const String &p_filepath, int p_color_count) {
 		Vector<uint8_t> color_map = indexed->get_palette_data();
 		ColorMapObject *gif_color_map = nullptr;
 		{
-			Vector<uint8_t>::Read r = color_map.read();
+			uint8_t *r = color_map.ptr();
 			GifColorType *gif_colors = (GifColorType *)malloc(sizeof(GifColorType) * indexed->get_palette_size());
 			const int pixel_size = Image::get_format_pixel_size(indexed->get_format());
 
@@ -153,8 +153,7 @@ Error ImageFrames::save_gif(const String &p_filepath, int p_color_count) {
 		GifFreeMapObject(gif_color_map);
 
 		Vector<uint8_t> index_data = indexed->get_index_data();
-		Vector<uint8_t>::Write w = index_data.write();
-		GifPixelType *raster = static_cast<GifPixelType *>(w.ptr());
+		GifPixelType *raster = static_cast<GifPixelType *>(index_data.ptrw());
 
 		for (int j = 0; j < frame->get_height(); j++) {
 			if (EGifPutLine(gif, raster + j * frame->get_width(), frame->get_width()) == GIF_ERROR) {

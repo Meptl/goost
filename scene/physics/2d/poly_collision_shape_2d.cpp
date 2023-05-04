@@ -32,7 +32,7 @@ void PolyCollisionShape2D::_apply_shapes() {
 
 				Vector<Vector2> segments;
 				segments.resize(polygon.size() * 2);
-				Vector<Vector2>::Write w = segments.write();
+				Vector2 *w = segments.ptrw();
 
 				const int vertices_count = polygon.size();
 				for (int j = 0; j < vertices_count; j++) {

@@ -201,8 +201,7 @@ Error GifLoader::_load_frames(Ref<ImageFrames> &r_image_frames, int max_frames) 
 
 				PackedByteArray frame_data;
 				frame_data.resize(image_size);
-				PoolByteArray::Write data_write = frame_data.write();
-				memcpy(data_write.ptr(), screen, image_size);
+				memcpy(frame_data.ptrw(), screen, image_size);
 
 				float delay = gcb.DelayTime / 100.0;
 				if (delay == 0) {
@@ -235,7 +234,7 @@ Error GifLoader::_load_frames(Ref<ImageFrames> &r_image_frames, int max_frames) 
 							for (int y = 0; y < imageDesc.Height; y++) {
 								int write_y = y + imageDesc.Top;
 								int write_index = (write_y * gif->SWidth + imageDesc.Left) * RGBA;
-								memcpy(&screen[write_index], &last_frame_read.ptr()[write_index], row_size);
+								memcpy(&screen[write_index], &last_frame_data.ptr()[write_index], row_size);
 							}
 						}
 					} break;

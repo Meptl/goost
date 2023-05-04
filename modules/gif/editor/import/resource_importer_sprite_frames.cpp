@@ -109,9 +109,8 @@ Error ResourceImporterSpriteFrames::import(const String &p_source_file, const St
 	for (int i = 0; i < frame_count; ++i) {
 		// Frame image data.
 		Vector<uint8_t> data = image_frames->get_frame_image(i)->get_data();
-		Vector<uint8_t>::Read r = data.read();
 		f->store_32(data.size());
-		f->store_buffer(r.ptr(), data.size());
+		f->store_buffer(data.ptr(), data.size());
 	}
 	// Animation speed.
 	real_t speed = 1.0 / average_time;

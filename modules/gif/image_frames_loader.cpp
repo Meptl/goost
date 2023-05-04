@@ -190,8 +190,7 @@ RES ResourceFormatLoaderAnimatedTexture::load(const String &p_path, const String
 		Vector<uint8_t> data;
 		uint32_t len = f->get_32();
 		data.resize(len);
-		Vector<uint8_t>::Write w = data.write();
-		f->get_buffer(w.ptr(), len);
+		f->get_buffer(data.ptrw(), len);
 
 		Ref<Image> image;
 		image.instance();
@@ -259,8 +258,7 @@ RES ResourceFormatLoaderSpriteFrames::load(const String &p_path, const String &p
 		Vector<uint8_t> data;
 		uint32_t len = f->get_32();
 		data.resize(len);
-		Vector<uint8_t>::Write w = data.write();
-		f->get_buffer(w.ptr(), len);
+		f->get_buffer(data.ptrw(), len);
 
 		Ref<Image> image;
 		image.instance();

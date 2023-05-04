@@ -43,7 +43,7 @@ Error MidiFile::load(const String fileName) {
 	Vector<uint8_t> theData;
 	theData.resize(size);
 
-	Vector<uint8_t>::Write w = theData.write();
+	uint8_t *w = theData.ptrw();
 	int theReadSize = f->get_buffer(&w[0], size);
 
 	if (theReadSize < size) {
@@ -84,8 +84,7 @@ PackedByteArray MidiFile::get_data() const {
 	if (data_len && data) {
 		vdata.resize(data_len);
 		{
-			Vector<uint8_t>::Write w = vdata.write();
-			memcpy(w.ptr(), data, data_len);
+			memcpy(vdata.ptrw(), data, data_len);
 		}
 	}
 	return vdata;

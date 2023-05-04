@@ -14,8 +14,6 @@ private:
 	Vector<uint8_t> index_data;
 	Vector<uint8_t> palette_data;
 
-	Vector<uint8_t>::Write write_lock_indexed;
-
 protected:
 	static void _bind_methods();
 
@@ -44,9 +42,6 @@ public:
 
 	void set_pixel_indexed(int p_x, int p_y, int p_index);
 	int get_pixel_indexed(int p_x, int p_y) const;
-
-	void lock_indexed();
-	void unlock_indexed();
 
 	real_t generate_palette(int p_num_colors = MAX_PALETTE_SIZE, DitherMode p_dither = DITHER_NONE, bool p_with_alpha = true, bool p_high_quality = false);
 	void clear_palette();
