@@ -59,10 +59,10 @@
 		</method>
 		<method name="load_gif_from_buffer">
 			<return type="int" enum="Error" />
-			<argument index="0" name="data" type="PoolByteArray" />
+			<argument index="0" name="data" type="PackedByteArray" />
 			<argument index="1" name="max_frames" type="int" default="0" />
 			<description>
-				Loads the data from a [PoolByteArray] GIF buffer. The [code]max_frames[/code] parameter limits the number of frames which can be loaded.
+				Loads the data from a [PackedByteArray] GIF buffer. The [code]max_frames[/code] parameter limits the number of frames which can be loaded.
 			</description>
 		</method>
 		<method name="remove_frame">

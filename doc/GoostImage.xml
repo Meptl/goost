@@ -110,7 +110,7 @@
 		</method>
 		<method name="render_polygon">
 			<return type="Image" />
-			<argument index="0" name="polygon" type="PoolVector2Array" />
+			<argument index="0" name="polygon" type="PackedVector2Array" />
 			<argument index="1" name="fill" type="bool" default="false" />
 			<argument index="2" name="foreground_color" type="Color" default="Color( 1, 1, 1, 1 )" />
 			<argument index="3" name="background_color" type="Color" default="Color( 0, 0, 0, 0 )" />

@@ -107,9 +107,7 @@ void ImageBlender::blend_rect(const Ref<Image> p_src, const Rect2 &p_src_rect, R
 	Point2 src_underscan = Point2(MIN(0, p_src_rect.position.x), MIN(0, p_src_rect.position.y));
 	Rect2i dest_rect = Rect2i(0, 0, p_dst->get_width(), p_dst->get_height()).clip(Rect2i(p_dst_pos - src_underscan, clipped_src_rect.size));
 
-	p_dst->lock();
 	Ref<Image> img = p_src;
-	img->lock();
 
 	for (int i = 0; i < dest_rect.size.y; i++) {
 		for (int j = 0; j < dest_rect.size.x; j++) {
@@ -125,8 +123,6 @@ void ImageBlender::blend_rect(const Ref<Image> p_src, const Rect2 &p_src_rect, R
 			p_dst->set_pixel(dst_x, dst_y, blend_colors(sc, dc));
 		}
 	}
-	img->unlock();
-	p_dst->unlock();
 }
 
 void ImageBlender::stamp_rect(const Ref<Image> p_src, const Rect2 &p_src_rect, Ref<Image> p_dst, const Point2 &p_dst_init_pos, const Point2 &p_dst_end_pos, float p_spacing) const {

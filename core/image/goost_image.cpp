@@ -132,15 +132,15 @@ void GoostImage::resize_hqx(Ref<Image> p_image, int p_scale) {
 	if (current != Image::FORMAT_RGBA8) {
 		p_image->convert(Image::FORMAT_RGBA8);
 	}
-	PoolVector<uint8_t> dest;
-	PoolVector<uint8_t> src = p_image->get_data();
+	Vector<uint8_t> dest;
+	Vector<uint8_t> src = p_image->get_data();
 
 	const int new_width = p_image->get_width() * p_scale;
 	const int new_height = p_image->get_height() * p_scale;
 	dest.resize(new_width * new_height * 4);
 	{
-		PoolVector<uint8_t>::Read r = src.read();
-		PoolVector<uint8_t>::Write w = dest.write();
+		Vector<uint8_t>::Read r = src.read();
+		Vector<uint8_t>::Write w = dest.write();
 
 		ERR_FAIL_COND(!r.ptr());
 
@@ -553,8 +553,8 @@ PIX *pix_create_from_image(Ref<Image> p_image) {
 	}
 	const Image::Format format = p_image->get_format();
 
-	PoolVector<uint8_t> src = p_image->get_data();
-	PoolVector<uint8_t>::Read read = src.read();
+	Vector<uint8_t> src = p_image->get_data();
+	Vector<uint8_t>::Read read = src.read();
 	ERR_FAIL_COND_V(!read.ptr(), nullptr);
 	const uint8_t *r = read.ptr();
 
@@ -614,11 +614,11 @@ void _image_from_pix(Ref<Image> p_image, PIX *p_pix, bool p_include_alpha) {
 	}
 	l_uint32 *pix_data = pixGetData(pix);
 	ERR_FAIL_COND_MSG(!pix_data, "Could not fetch image data.");
-	PoolVector<uint8_t> image_data;
+	Vector<uint8_t> image_data;
 	{
 		const int data_size = Image::get_image_data_size(width, height, format);
 		image_data.resize(data_size);
-		PoolVector<uint8_t>::Write write = image_data.write();
+		Vector<uint8_t>::Write write = image_data.write();
 		uint8_t *w = write.ptr();
 
 		const int pixel_count = width * height;

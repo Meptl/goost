@@ -71,13 +71,13 @@ Variant Random::pick(const Variant &p_sequence) {
 			ERR_FAIL_COND_V_MSG(str.empty(), Variant(), "String is empty.");
 			return str.substr(randi() % str.length(), 1); // Not size().
 		} break;
-		case Variant::POOL_BYTE_ARRAY:
-		case Variant::POOL_INT_ARRAY:
-		case Variant::POOL_REAL_ARRAY:
-		case Variant::POOL_STRING_ARRAY:
-		case Variant::POOL_VECTOR2_ARRAY:
-		case Variant::POOL_VECTOR3_ARRAY:
-		case Variant::POOL_COLOR_ARRAY:
+		case Variant::PACKED_BYTE_ARRAY:
+		case Variant::PACKED_INT32_ARRAY:
+		case Variant::PACKED_FLOAT32_ARRAY:
+		case Variant::PACKED_STRING_ARRAY:
+		case Variant::PACKED_VECTOR2_ARRAY:
+		case Variant::PACKED_VECTOR3_ARRAY:
+		case Variant::PACKED_COLOR_ARRAY:
 		case Variant::ARRAY: {
 			Array arr = p_sequence;
 			ERR_FAIL_COND_V_MSG(arr.empty(), Variant(), "Array is empty.");
@@ -100,14 +100,14 @@ Variant Random::pop(const Variant &p_sequence) {
 		case Variant::STRING: {
 			ERR_FAIL_V_MSG(Variant(), "Unsupported: String is passed by value.");
 		} break;
-		case Variant::POOL_BYTE_ARRAY:
-		case Variant::POOL_INT_ARRAY:
-		case Variant::POOL_REAL_ARRAY:
-		case Variant::POOL_STRING_ARRAY:
-		case Variant::POOL_VECTOR2_ARRAY:
-		case Variant::POOL_VECTOR3_ARRAY:
-		case Variant::POOL_COLOR_ARRAY: {
-			ERR_FAIL_V_MSG(Variant(), "Unsupported: Pool*Arrays are passed by value rather than reference.");
+		case Variant::PACKED_BYTE_ARRAY:
+		case Variant::PACKED_INT32_ARRAY:
+		case Variant::PACKED_FLOAT32_ARRAY:
+		case Variant::PACKED_STRING_ARRAY:
+		case Variant::PACKED_VECTOR2_ARRAY:
+		case Variant::PACKED_VECTOR3_ARRAY:
+		case Variant::PACKED_COLOR_ARRAY: {
+			ERR_FAIL_V_MSG(Variant(), "Unsupported: Packed*Arrays are passed by value rather than reference.");
 		} break;
 		case Variant::ARRAY: {
 			Array arr = p_sequence;
@@ -138,7 +138,7 @@ Variant Random::pop(const Variant &p_sequence) {
 	return Variant();
 }
 
-Array Random::choices(const Variant &p_sequence, int p_count, const PoolIntArray &p_weights, bool p_is_cumulative) {
+Array Random::choices(const Variant &p_sequence, int p_count, const PackedInt32Array &p_weights, bool p_is_cumulative) {
 	int sum = 0;
 	LocalVector<int, int> cumulative_weights;
 	LocalVector<int, int> weights;
@@ -210,13 +210,13 @@ Array Random::choices(const Variant &p_sequence, int p_count, const PoolIntArray
 			}
 			return weighted_choices;
 		} break;
-		case Variant::POOL_BYTE_ARRAY:
-		case Variant::POOL_INT_ARRAY:
-		case Variant::POOL_REAL_ARRAY:
-		case Variant::POOL_STRING_ARRAY:
-		case Variant::POOL_VECTOR2_ARRAY:
-		case Variant::POOL_VECTOR3_ARRAY:
-		case Variant::POOL_COLOR_ARRAY:
+		case Variant::PACKED_BYTE_ARRAY:
+		case Variant::PACKED_INT32_ARRAY:
+		case Variant::PACKED_FLOAT32_ARRAY:
+		case Variant::PACKED_STRING_ARRAY:
+		case Variant::PACKED_VECTOR2_ARRAY:
+		case Variant::PACKED_VECTOR3_ARRAY:
+		case Variant::PACKED_COLOR_ARRAY:
 		case Variant::ARRAY: {
 			Array arr = p_sequence;
 			ERR_FAIL_COND_V_MSG(arr.empty(), Variant(), "Array is empty.");

@@ -2,7 +2,7 @@ extends "res://addons/gut/test.gd"
 
 const SIZE = 50.0
 
-var base_poly = PoolVector2Array([Vector2(-1, -1), Vector2(1, -1), Vector2(1, 1), Vector2(-1, 1)])
+var base_poly = PackedVector2Array([Vector2(-1, -1), Vector2(1, -1), Vector2(1, 1), Vector2(-1, 1)])
 
 var poly_a = Transform2D(0, Vector2.ONE).scaled(Vector2.ONE * SIZE).xform(base_poly)
 var poly_b = Transform2D(0, Vector2.ONE * SIZE).xform(poly_a)

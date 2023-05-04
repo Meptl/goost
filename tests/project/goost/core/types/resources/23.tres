@@ -2,4 +2,4 @@
 
 [resource]
 type = 24
-value = PoolVector2Array(  )
+value = PackedVector2Array(  )

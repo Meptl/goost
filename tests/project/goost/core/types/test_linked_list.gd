@@ -512,7 +512,7 @@ func test_create_from_array():
 
 
 func test_create_from_pool_array():
-	var pool_array = PoolIntArray([0, 1, 2, 3])
+	var pool_array = PackedInt32Array([0, 1, 2, 3])
 	list.create_from(pool_array)
 	assert_eq(list.front.value, 0)
 	assert_eq(list.front.next.value, 1)

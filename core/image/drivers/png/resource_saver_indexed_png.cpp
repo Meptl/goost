@@ -115,7 +115,7 @@ Error ResourceSaverIndexedPNG::save_image(const String &p_path, const Ref<ImageI
 	png_bytep png_palette_alpha = nullptr;
 
 	if (has_palette) {
-		PoolVector<uint8_t>::Read r = p_img->get_palette_data().read();
+		Vector<uint8_t>::Read r = p_img->get_palette_data().read();
 
 		int ps = 4;
 
@@ -164,7 +164,7 @@ Error ResourceSaverIndexedPNG::save_image(const String &p_path, const Ref<ImageI
 		ERR_FAIL_V(ERR_CANT_OPEN);
 	}
 
-	PoolVector<uint8_t>::Read r;
+	Vector<uint8_t>::Read r;
 	if (has_palette) {
 		r = p_img->get_index_data().read();
 	} else {

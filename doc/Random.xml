@@ -23,7 +23,7 @@
 			<return type="Array" />
 			<argument index="0" name="sequence" type="Variant" />
 			<argument index="1" name="count" type="int" default="1" />
-			<argument index="2" name="weights" type="PoolIntArray" default="null" />
+			<argument index="2" name="weights" type="PackedInt32Array" default="null" />
 			<argument index="3" name="cumulative" type="bool" default="false" />
 			<description>
 				Returns an [Array] of randomly picked elements from a [code]sequence[/code], with the number of elements equal to [code]count[/code]. The elements are picked according to integer [code]weights[/code] or an array of values from the [code]sequence[/code] if it's a [Dictionary] and if [code]weights[/code] is empty.
@@ -93,7 +93,7 @@
 			<description>
 				Returns a random element from an [Array] or [Dictionary], and then removes the value from it. If container is empty, prints an error and returns [code]null[/code].
 				For performance reasons, this will modify the original order in the [Array]: the last value is swapped with the popped element, and then [method Array.pop_back] is called. See [method Array.remove] for explanations.
-				Unlike [method pick], the [String] and [b]Pool*Array[/b] types are not supported, since they are passed by value when calling this function.
+				Unlike [method pick], the [String] and [b]Packed*Array[/b] types are not supported, since they are passed by value when calling this function.
 			</description>
 		</method>
 		<method name="range">

@@ -7,11 +7,11 @@ class CommandLineOption : public RefCounted {
 	GDCLASS(CommandLineOption, RefCounted);
 
 	// Names for the options. e.g --help or -h.
-	PoolStringArray _names;
+	PackedStringArray _names;
 	// List of default values for each argument, empty if any value is allowed.
-	PoolStringArray _default_args;
+	PackedStringArray _default_args;
 	// List of allowed values for each argument, empty if any value is allowed.
-	PoolStringArray _allowed_args;
+	PackedStringArray _allowed_args;
 	// Option's description that will be displayed in help.
 	String _description;
 	// Option's category, options sharing the same category are grouped together in help.
@@ -36,14 +36,14 @@ protected:
 	static void _bind_methods();
 
 public:
-	void set_names(const PoolStringArray &p_names);
-	PoolStringArray get_names() const { return _names; }
+	void set_names(const PackedStringArray &p_names);
+	PackedStringArray get_names() const { return _names; }
 
-	void set_default_args(const PoolStringArray &p_args) { _default_args = p_args; }
-	PoolStringArray get_default_args() const { return _default_args; }
+	void set_default_args(const PackedStringArray &p_args) { _default_args = p_args; }
+	PackedStringArray get_default_args() const { return _default_args; }
 
-	void set_allowed_args(const PoolStringArray &p_args) { _allowed_args = p_args; }
-	PoolStringArray get_allowed_args() const { return _allowed_args; }
+	void set_allowed_args(const PackedStringArray &p_args) { _allowed_args = p_args; }
+	PackedStringArray get_allowed_args() const { return _allowed_args; }
 
 	void set_description(const String &p_description) { _description = p_description; }
 	String get_description() const { return _description; }
@@ -78,7 +78,7 @@ public:
 	void add_allowed_arg(const String &p_arg);
 
 	CommandLineOption() = default;
-	explicit CommandLineOption(const PoolStringArray &p_names, int p_arg_count = 1);
+	explicit CommandLineOption(const PackedStringArray &p_names, int p_arg_count = 1);
 };
 
 class CommandLineHelpFormat : public RefCounted {
@@ -131,14 +131,14 @@ class CommandLineParser : public RefCounted {
 
 	Vector<Ref<CommandLineOption>> _options;
 
-	PoolStringArray _args;
-	PoolStringArray _forwarding_args;
+	PackedStringArray _args;
+	PackedStringArray _forwarding_args;
 
-	PoolStringArray _long_prefixes;
-	PoolStringArray _short_prefixes;
+	PackedStringArray _long_prefixes;
+	PackedStringArray _short_prefixes;
 
-	Map<const CommandLineOption *, PoolStringArray> _parsed_values;
-	Map<const CommandLineOption *, PoolStringArray> _parsed_prefixes;
+	Map<const CommandLineOption *, PackedStringArray> _parsed_values;
+	Map<const CommandLineOption *, PackedStringArray> _parsed_prefixes;
 	Map<const CommandLineOption *, int> _parsed_count;
 
 	String _error_text;
@@ -173,11 +173,11 @@ class CommandLineParser : public RefCounted {
 
 	// Help text printers.
 	String _get_usage(const Vector<Pair<const CommandLineOption *, String>> &p_printable_options, const String &p_title) const;
-	String _get_options_description(const OrderedHashMap<String, PoolStringArray> &p_categories_data) const;
+	String _get_options_description(const OrderedHashMap<String, PackedStringArray> &p_categories_data) const;
 
 	// Other utilies.
-	String _to_string(const PoolStringArray &p_names) const; // Returns all option names separated by commas with all prefix variants.
-	String _get_prefixed_longest_name(const PoolStringArray &p_names) const; // Returns longest name with first available prefix (long or short).
+	String _to_string(const PackedStringArray &p_names) const; // Returns all option names separated by commas with all prefix variants.
+	String _get_prefixed_longest_name(const PackedStringArray &p_names) const; // Returns longest name with first available prefix (long or short).
 	ParsedPrefix _parse_prefix(const String &p_arg) const;
 	String _find_most_similar(const String &p_name) const;
 	static bool _contains_optional_options(const Vector<Pair<const CommandLineOption *, String>> &p_printable_options);
@@ -186,9 +186,9 @@ protected:
 	static void _bind_methods();
 
 public:
-	Error parse(const PoolStringArray &p_args);
+	Error parse(const PackedStringArray &p_args);
 
-	Ref<CommandLineOption> add_option(const String &p_name, const String &p_description = "", const String &p_default_value = "", const PoolStringArray &p_allowed_values = PoolStringArray());
+	Ref<CommandLineOption> add_option(const String &p_name, const String &p_description = "", const String &p_default_value = "", const PackedStringArray &p_allowed_values = PackedStringArray());
 	Ref<CommandLineOption> add_help_option();
 	Ref<CommandLineOption> add_version_option();
 
@@ -202,24 +202,24 @@ public:
 	bool is_set(const Ref<CommandLineOption> &p_option) const;
 
 	String get_value(const Ref<CommandLineOption> &p_option) const;
-	PoolStringArray get_value_list(const Ref<CommandLineOption> &p_option) const;
+	PackedStringArray get_value_list(const Ref<CommandLineOption> &p_option) const;
 
 	String get_prefix(const Ref<CommandLineOption> &p_option) const;
-	PoolStringArray get_prefix_list(const Ref<CommandLineOption> &p_option) const;
+	PackedStringArray get_prefix_list(const Ref<CommandLineOption> &p_option) const;
 
 	int get_occurrence_count(const Ref<CommandLineOption> &p_option) const;
 
-	PoolStringArray get_forwarding_args() const { return _forwarding_args; }
-	PoolStringArray get_args() const { return _args; }
+	PackedStringArray get_forwarding_args() const { return _forwarding_args; }
+	PackedStringArray get_args() const { return _args; }
 
 	String get_help_text(const Ref<CommandLineHelpFormat> &p_format = Ref<CommandLineHelpFormat>()) const;
 	String get_error_text() const { return _error_text; }
 
-	void set_long_prefixes(const PoolStringArray &p_prefixes) { _long_prefixes = p_prefixes; }
-	PoolStringArray get_long_prefixes() const { return _long_prefixes; }
+	void set_long_prefixes(const PackedStringArray &p_prefixes) { _long_prefixes = p_prefixes; }
+	PackedStringArray get_long_prefixes() const { return _long_prefixes; }
 
-	void set_short_prefixes(const PoolStringArray &p_prefixes) { _short_prefixes = p_prefixes; }
-	PoolStringArray get_short_prefixes() const { return _short_prefixes; }
+	void set_short_prefixes(const PackedStringArray &p_prefixes) { _short_prefixes = p_prefixes; }
+	PackedStringArray get_short_prefixes() const { return _short_prefixes; }
 
 	void set_similarity_bias(float p_bias) { _similarity_bias = CLAMP(p_bias, 0.0f, 1.0f); }
 	float get_similarity_bias() const { return _similarity_bias; }

@@ -103,7 +103,7 @@ void MixinScriptEditor::reload(bool p_soft) {
 void MixinScriptEditor::get_breakpoints(List<int> *p_breakpoints) {
 }
 
-void MixinScriptEditor::add_callback(const String &p_function, PoolStringArray p_args) {
+void MixinScriptEditor::add_callback(const String &p_function, PackedStringArray p_args) {
 }
 
 bool MixinScriptEditor::show_members_overview() {

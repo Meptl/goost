@@ -47,7 +47,7 @@
 			<argument index="0" name="name" type="String" />
 			<argument index="1" name="description" type="String" default="&quot;&quot;" />
 			<argument index="2" name="default_value" type="String" default="&quot;&quot;" />
-			<argument index="3" name="allowed_values" type="PoolStringArray" default="PoolStringArray(  )" />
+			<argument index="3" name="allowed_values" type="PackedStringArray" default="PackedStringArray(  )" />
 			<description>
 				Instantiates a new [CommandLineOption] with a single name and adds it to the parser. Description, default value, and a list of allowed values can be optionally specified. Note that this method provides common parameters only, you can create [CommandLineOption] and use [method append_option] manually if you need to configure other properties for a new option, or modify the properties of the option returned by this method instead before parsing command-line arguments with [method parse].
 			</description>
@@ -79,7 +79,7 @@
 			</description>
 		</method>
 		<method name="get_args" qualifiers="const">
-			<return type="PoolStringArray" />
+			<return type="PackedStringArray" />
 			<description>
 				Returns all arguments that were passed by [method parse].
 			</description>
@@ -91,7 +91,7 @@
 			</description>
 		</method>
 		<method name="get_forwarding_args" qualifiers="const">
-			<return type="PoolStringArray" />
+			<return type="PackedStringArray" />
 			<description>
 				Returns all arguments that were forwarded after parsing (e.g. all arguments after [code]--[/code]).
 			</description>
@@ -131,7 +131,7 @@
 			</description>
 		</method>
 		<method name="get_prefix_list" qualifiers="const">
-			<return type="PoolStringArray" />
+			<return type="PackedStringArray" />
 			<argument index="0" name="option" type="CommandLineOption" />
 			<description>
 				Returns all used prefixes for [code]option[/code].
@@ -145,7 +145,7 @@
 			</description>
 		</method>
 		<method name="get_value_list" qualifiers="const">
-			<return type="PoolStringArray" />
+			<return type="PackedStringArray" />
 			<argument index="0" name="option" type="CommandLineOption" />
 			<description>
 				Returns all specified values for [code]option[/code].
@@ -160,7 +160,7 @@
 		</method>
 		<method name="parse">
 			<return type="int" enum="Error" />
-			<argument index="0" name="args" type="PoolStringArray" />
+			<argument index="0" name="args" type="PackedStringArray" />
 			<description>
 				Parses command-line [code]args[/code]. Returns [constant OK] upon success, or [constant ERR_PARSE_ERROR] upon failure. In case of user error, refer to [method get_error_text] which returns human-readable error message which can be printed to a user.
 				The method can accept command-line arguments returned by [method OS.get_cmdline_args].
@@ -196,10 +196,10 @@
 		<member name="allow_sticky" type="bool" setter="set_allow_sticky" getter="is_sticky_allowed" default="true">
 			If [code]true[/code], values for short options can be specified without a space. Example: [code]-ifilename.png[/code].
 		</member>
-		<member name="long_prefixes" type="PoolStringArray" setter="set_long_prefixes" getter="get_long_prefixes" default="PoolStringArray( &quot;--&quot; )">
+		<member name="long_prefixes" type="PackedStringArray" setter="set_long_prefixes" getter="get_long_prefixes" default="PackedStringArray( &quot;--&quot; )">
 			A list of prefixes after which an argument will be considered a long option. If two or more prefixes share the same set of characters (e.g. [code]--[/code] and [code]--no-[/code]), longest prefixes have higher precedence for parsing. For instance, [code]--no-debug[/code] won't be parsed as a separate [code]no-debug[/code] option, but as [code]debug[/code].
 		</member>
-		<member name="short_prefixes" type="PoolStringArray" setter="set_short_prefixes" getter="get_short_prefixes" default="PoolStringArray( &quot;-&quot; )">
+		<member name="short_prefixes" type="PackedStringArray" setter="set_short_prefixes" getter="get_short_prefixes" default="PackedStringArray( &quot;-&quot; )">
 			A list of prefixes after which an argument will be considered a short option.
 		</member>
 		<member name="similarity_bias" type="float" setter="set_similarity_bias" getter="get_similarity_bias" default="0.3">

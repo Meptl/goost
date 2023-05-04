@@ -19,7 +19,7 @@ func test_set_value():
 
 
 func test_set_value_convert_type():
-	res.value = PoolStringArray(["Godot", "merge", "Goost"])
+	res.value = PackedStringArray(["Godot", "merge", "Goost"])
 	assert_eq(res.type, TYPE_STRING_ARRAY)
 
 	res.type = TYPE_STRING

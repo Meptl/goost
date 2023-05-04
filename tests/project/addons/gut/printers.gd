@@ -123,7 +123,7 @@ class ConsolePrinter:
 class TerminalPrinter:
 	extends Printer
 
-	var escape = PoolByteArray([0x1b]).get_string_from_ascii()
+	var escape = PackedByteArray([0x1b]).get_string_from_ascii()
 	var cmd_colors  = {
 		red = escape + '[31m',
 		yellow = escape + '[33m',

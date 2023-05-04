@@ -51,7 +51,7 @@
 		</method>
 		<method name="new_child">
 			<return type="PolyNode2D" />
-			<argument index="0" name="from_points" type="PoolVector2Array" />
+			<argument index="0" name="from_points" type="PackedVector2Array" />
 			<description>
 				Constructs a new [PolyNode2D] using vertices from supplied points.
 			</description>
@@ -80,7 +80,7 @@
 		<member name="operation" type="int" setter="set_operation" getter="get_operation" enum="PolyNode2D.Operation" default="1">
 			The boolean operation that is performed on this node. This is ignored for the first child node as the operation is between this node and the previous child of this nodes parent.
 		</member>
-		<member name="points" type="PoolVector2Array" setter="set_points" getter="get_points" default="PoolVector2Array(  )">
+		<member name="points" type="PackedVector2Array" setter="set_points" getter="get_points" default="PackedVector2Array(  )">
 			The vertices which represent the outer or inner outline of this node.
 		</member>
 		<member name="texture" type="Texture" setter="set_texture" getter="get_texture">

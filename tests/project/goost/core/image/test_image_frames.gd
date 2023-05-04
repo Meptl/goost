@@ -160,7 +160,7 @@ func test_image_frames_invalid_data():
 	var frames = ImageFrames.new()
 	frames.get_frame_image(-20)
 	frames.load(".", 4)
-	frames.load_gif_from_buffer(PoolByteArray([]), -31)
+	frames.load_gif_from_buffer(PackedByteArray([]), -31)
 	assert_eq(frames.get_frame_count(), 0)
 
 	frames = ImageFrames.new()

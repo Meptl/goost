@@ -52,7 +52,7 @@ const PARAM_PREFIX = 'p_'
 	# TYPE_OBJECT = 17 — Variable is of type Object.
 	# TYPE_DICTIONARY = 18 — Variable is of type Dictionary.
 	# TYPE_ARRAY = 19 — Variable is of type Array.
-	# TYPE_VECTOR2_ARRAY = 24 — Variable is of type PoolVector2Array.
+	# TYPE_VECTOR2_ARRAY = 24 — Variable is of type PackedVector2Array.
 
 
 
@@ -64,12 +64,12 @@ const PARAM_PREFIX = 'p_'
 # TYPE_TRANSFORM = 13 — Variable is of type Transform.
 # TYPE_NODE_PATH = 15 — Variable is of type NodePath.
 # TYPE_RID = 16 — Variable is of type RID.
-# TYPE_RAW_ARRAY = 20 — Variable is of type PoolByteArray.
-# TYPE_INT_ARRAY = 21 — Variable is of type PoolIntArray.
-# TYPE_REAL_ARRAY = 22 — Variable is of type PoolRealArray.
-# TYPE_STRING_ARRAY = 23 — Variable is of type PoolStringArray.
-# TYPE_VECTOR3_ARRAY = 25 — Variable is of type PoolVector3Array.
-# TYPE_COLOR_ARRAY = 26 — Variable is of type PoolColorArray.
+# TYPE_RAW_ARRAY = 20 — Variable is of type PackedByteArray.
+# TYPE_INT_ARRAY = 21 — Variable is of type PackedInt32Array.
+# TYPE_FLOAT32_ARRAY = 22 — Variable is of type PackedRealArray.
+# TYPE_STRING_ARRAY = 23 — Variable is of type PackedStringArray.
+# TYPE_VECTOR3_ARRAY = 25 — Variable is of type PackedVector3Array.
+# TYPE_COLOR_ARRAY = 26 — Variable is of type PackedColorArray.
 # TYPE_MAX = 27 — Marker for end of type constants.
 # ------------------------------------------------------
 var _supported_defaults = []

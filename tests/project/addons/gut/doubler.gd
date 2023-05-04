@@ -116,7 +116,7 @@ class ObjectInfo:
 		return _path
 
 	func get_subpath():
-		return PoolStringArray(_subpaths).join('/')
+		return PackedStringArray(_subpaths).join('/')
 
 	func has_subpath():
 		return _subpaths.size() != 0

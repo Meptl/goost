@@ -131,11 +131,11 @@ Error ImageLoaderIndexedPNG::_load_image(void *rf_up, png_rw_ptr p_func, Ref<Ima
 	//int rowsize = png_get_rowbytes(png, info);
 	int rowsize = components * width;
 
-	PoolVector<uint8_t> dstbuff;
+	Vector<uint8_t> dstbuff;
 
 	dstbuff.resize(rowsize * height);
 
-	PoolVector<uint8_t>::Write dstbuff_write = dstbuff.write();
+	Vector<uint8_t>::Write dstbuff_write = dstbuff.write();
 
 	uint8_t *data = dstbuff_write.ptr();
 
@@ -153,9 +153,9 @@ Error ImageLoaderIndexedPNG::_load_image(void *rf_up, png_rw_ptr p_func, Ref<Ima
 		// Loaded data are indices
 		ERR_FAIL_COND_V_MSG(png_palette == nullptr, ERR_BUG, "Expected to extract PNG palette, got none.");
 
-		PoolVector<uint8_t> palette_data;
+		Vector<uint8_t> palette_data;
 		palette_data.resize(palette_size * 4);
-		PoolVector<uint8_t>::Write w = palette_data.write();
+		Vector<uint8_t>::Write w = palette_data.write();
 
 		if (png_palette_alpha && palette_alpha_size == palette_size) {
 			for (int i = 0; i < palette_size; i++) {

@@ -241,7 +241,7 @@ Vector<Vector<Point2>> PolyPath2D::_build_outlines() {
 			continue;
 		}
 		// Tessellate!
-		PoolVector2Array tessellated = curve->tessellate(tessellation_stages, tessellation_tolerance_degrees);
+		PackedVector2Array tessellated = curve->tessellate(tessellation_stages, tessellation_tolerance_degrees);
 		Vector<Point2> polyline;
 		for (int i = 0; i < tessellated.size(); ++i) {
 			polyline.push_back(tessellated[i]);

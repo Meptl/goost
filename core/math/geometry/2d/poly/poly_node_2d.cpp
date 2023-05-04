@@ -410,7 +410,7 @@ void PolyNode2D::_bind_methods() {
 	ClassDB::bind_method(D_METHOD("_update_outlines"), &PolyNode2D::_update_outlines);
 	ClassDB::bind_method(D_METHOD("_queue_update"), &PolyNode2D::_queue_update);
 
-	ADD_PROPERTY(PropertyInfo(Variant::POOL_VECTOR2_ARRAY, "points"), "set_points", "get_points");
+	ADD_PROPERTY(PropertyInfo(Variant::PACKED_VECTOR2_ARRAY, "points"), "set_points", "get_points");
 	ADD_PROPERTY(PropertyInfo(Variant::INT, "operation", PROPERTY_HINT_ENUM, "None,Union,Difference,Intersection,Xor"), "set_operation", "get_operation");
 	ADD_PROPERTY(PropertyInfo(Variant::BOOL, "open"), "set_open", "is_open");
 

@@ -47,7 +47,7 @@
 			<description>
 				Initializes the list from a [Variant] compatible type. Clears all nodes before copying.
 				If [code]value[/code] is [code]null[/code], just clears the contents of the list.
-				If [code]value[/code] is [Array], each element in the array is converted to a [ListNode]. Pool*Arrays are converted similarly to [Array].
+				If [code]value[/code] is [Array], each element in the array is converted to a [ListNode]. Packed*Arrays are converted similarly to [Array].
 				If [code]value[/code] is [Dictionary], each key in the dictionary is converted to a [ListNode], and the values are encoded as [ListNode] meta variables using [method Object.set_meta]. Values can be retrieved later with [code]node.get_meta("value")[/code] for each node.
 				Any other type is simply pushed back to the list.
 			</description>

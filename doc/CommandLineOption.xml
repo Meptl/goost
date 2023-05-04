@@ -32,7 +32,7 @@
 		</method>
 	</methods>
 	<members>
-		<member name="allowed_args" type="PoolStringArray" setter="set_allowed_args" getter="get_allowed_args" default="PoolStringArray(  )">
+		<member name="allowed_args" type="PackedStringArray" setter="set_allowed_args" getter="get_allowed_args" default="PackedStringArray(  )">
 			A set of values that are allowed by the option. If a different value is passed, the parsing will fail. Empty if any value is allowed.
 		</member>
 		<member name="arg_count" type="int" setter="set_arg_count" getter="get_arg_count" default="1">
@@ -44,7 +44,7 @@
 		<member name="category" type="String" setter="set_category" getter="get_category" default="&quot;&quot;">
 			Category name, options sharing the same category are grouped together in the help message.
 		</member>
-		<member name="default_args" type="PoolStringArray" setter="set_default_args" getter="get_default_args" default="PoolStringArray(  )">
+		<member name="default_args" type="PackedStringArray" setter="set_default_args" getter="get_default_args" default="PackedStringArray(  )">
 			A set of values that will be used by default if no value specified.
 		</member>
 		<member name="description" type="String" setter="set_description" getter="get_description" default="&quot;&quot;">
@@ -59,7 +59,7 @@
 		<member name="multitoken" type="bool" setter="set_multitoken" getter="is_multitoken" default="false">
 			If [code]true[/code], option can be specified multiple times. Total count can be obtained using [method CommandLineParser.get_occurrence_count].
 		</member>
-		<member name="names" type="PoolStringArray" setter="set_names" getter="get_names" default="PoolStringArray(  )">
+		<member name="names" type="PackedStringArray" setter="set_names" getter="get_names" default="PackedStringArray(  )">
 			Specifies all valid names (aliases) for this option.
 		</member>
 		<member name="positional" type="bool" setter="set_positional" getter="is_positional" default="false">
@@ -71,7 +71,7 @@
 	</members>
 	<signals>
 		<signal name="parsed">
-			<argument index="0" name="values" type="PoolStringArray" />
+			<argument index="0" name="values" type="PackedStringArray" />
 			<description>
 				Emitted after calling [method CommandLineParser.parse] if it returns [constant OK]. The [code]values[/code] list contains all values that were passed to the option.
 			</description>

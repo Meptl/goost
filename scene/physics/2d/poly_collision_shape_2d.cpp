@@ -30,9 +30,9 @@ void PolyCollisionShape2D::_apply_shapes() {
 				}
 				Ref<ConcavePolygonShape2D> concave = memnew(ConcavePolygonShape2D);
 
-				PoolVector<Vector2> segments;
+				Vector<Vector2> segments;
 				segments.resize(polygon.size() * 2);
-				PoolVector<Vector2>::Write w = segments.write();
+				Vector<Vector2>::Write w = segments.write();
 
 				const int vertices_count = polygon.size();
 				for (int j = 0; j < vertices_count; j++) {

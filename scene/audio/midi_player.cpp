@@ -40,10 +40,10 @@ Error MidiFile::load(const String fileName) {
 
 	int size = f->get_len();
 
-	PoolVector<uint8_t> theData;
+	Vector<uint8_t> theData;
 	theData.resize(size);
 
-	PoolVector<uint8_t>::Write w = theData.write();
+	Vector<uint8_t>::Write w = theData.write();
 	int theReadSize = f->get_buffer(&w[0], size);
 
 	if (theReadSize < size) {
@@ -71,27 +71,27 @@ void MidiFile::_bind_methods() {
 	ClassDB::bind_method(D_METHOD("set_format", "format"), &MidiFile::set_format);
 	ClassDB::bind_method(D_METHOD("get_format"), &MidiFile::get_format);
 
-	ADD_PROPERTY(PropertyInfo(Variant::POOL_BYTE_ARRAY, "data", PROPERTY_HINT_NONE, "", PROPERTY_USAGE_NOEDITOR), "set_data", "get_data");
+	ADD_PROPERTY(PropertyInfo(Variant::PACKED_BYTE_ARRAY, "data", PROPERTY_HINT_NONE, "", PROPERTY_USAGE_NOEDITOR), "set_data", "get_data");
 	ADD_PROPERTY(PropertyInfo(Variant::INT, "format"), "set_format", "get_format");
 
 	BIND_ENUM_CONSTANT(FORMAT_MIDI);
 	BIND_ENUM_CONSTANT(FORMAT_SF2);
 }
 
-PoolByteArray MidiFile::get_data() const {
-	PoolVector<uint8_t> vdata;
+PackedByteArray MidiFile::get_data() const {
+	Vector<uint8_t> vdata;
 
 	if (data_len && data) {
 		vdata.resize(data_len);
 		{
-			PoolVector<uint8_t>::Write w = vdata.write();
+			Vector<uint8_t>::Write w = vdata.write();
 			memcpy(w.ptr(), data, data_len);
 		}
 	}
 	return vdata;
 }
 
-void MidiFile::set_data(const PoolVector<uint8_t> &dataIn) {
+void MidiFile::set_data(const Vector<uint8_t> &dataIn) {
 	data_len = dataIn.size();
 	ERR_FAIL_COND(data_len == 0);
 
@@ -138,7 +138,7 @@ void MidiPlayer::set_soundfont(Ref<MidiFile> sf) {
 	if (soundfont.is_valid()) {
 		// Load data in memory.
 		int data_len = soundfont->get_data().size();
-		PoolVector<uint8_t> dataIn = soundfont->get_data();
+		Vector<uint8_t> dataIn = soundfont->get_data();
 		void *dataOut = memalloc(data_len);
 		memcpy(dataOut, dataIn.read().ptr(), data_len);
 		// Load tiny sound font using memory data.
@@ -169,7 +169,7 @@ void MidiPlayer::set_midi(Ref<MidiFile> mid) {
 	if (midi.is_valid()) {
 		// Load data in memory.
 		int data_len = midi->get_data().size();
-		PoolVector<uint8_t> dataIn = midi->get_data();
+		Vector<uint8_t> dataIn = midi->get_data();
 		void *dataOut = memalloc(data_len);
 		memcpy(dataOut, dataIn.read().ptr(), data_len);
 		// Load tiny midi loader using memory data.
@@ -185,8 +185,8 @@ Ref<MidiFile> MidiPlayer::get_midi() const {
 	return midi;
 }
 
-PoolStringArray MidiPlayer::get_preset_names() const {
-	PoolStringArray theReturnValue;
+PackedStringArray MidiPlayer::get_preset_names() const {
+	PackedStringArray theReturnValue;
 
 	if (mTsf != nullptr) {
 		unsigned theIndex, theEnd;
@@ -333,8 +333,8 @@ float MidiPlayer::channel_get_tuning(int inChannel) {
 	return tsf_channel_get_tuning(mTsf, inChannel);
 }
 
-PoolVector2Array MidiPlayer::get_buffer(int inSize) {
-	PoolVector2Array theBuffer;
+PackedVector2Array MidiPlayer::get_buffer(int inSize) {
+	PackedVector2Array theBuffer;
 
 	if (inSize > 0 && mTsf != nullptr) {
 		theBuffer.resize(inSize);

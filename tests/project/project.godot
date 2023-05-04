@@ -35,7 +35,7 @@ draw/2d/antialiased=true
 
 [editor_plugins]
 
-enabled=PoolStringArray( "res://addons/gut/plugin.cfg" )
+enabled=PackedStringArray( "res://addons/gut/plugin.cfg" )
 
 [rendering]
 

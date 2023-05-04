@@ -2,4 +2,4 @@
 
 [resource]
 type = 20
-value = PoolByteArray(  )
+value = PackedByteArray(  )

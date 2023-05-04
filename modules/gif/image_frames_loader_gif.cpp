@@ -46,7 +46,7 @@ struct GIFBuffer { // Used to read the GIF data from a buffer.
 	int size;
 	int index;
 
-	GIFBuffer(const PoolByteArray &p_data) {
+	GIFBuffer(const PackedByteArray &p_data) {
 		data = p_data.read().ptr();
 		size = p_data.size();
 		index = 0;
@@ -199,7 +199,7 @@ Error GifLoader::_load_frames(Ref<ImageFrames> &r_image_frames, int max_frames) 
 				}
 				memdelete_arr(rasterBits);
 
-				PoolByteArray frame_data;
+				PackedByteArray frame_data;
 				frame_data.resize(image_size);
 				PoolByteArray::Write data_write = frame_data.write();
 				memcpy(data_write.ptr(), screen, image_size);
@@ -231,8 +231,7 @@ Error GifLoader::_load_frames(Ref<ImageFrames> &r_image_frames, int max_frames) 
 								memset(&screen[write_index], 0, row_size);
 							}
 						} else {
-							PoolByteArray last_frame_data = r_image_frames->get_frame_image(last_undisposed_frame)->get_data();
-							PoolByteArray::Read last_frame_read = last_frame_data.read();
+							PackedByteArray last_frame_data = r_image_frames->get_frame_image(last_undisposed_frame)->get_data();
 							for (int y = 0; y < imageDesc.Height; y++) {
 								int write_y = y + imageDesc.Top;
 								int write_index = (write_y * gif->SWidth + imageDesc.Left) * RGBA;
@@ -294,7 +293,7 @@ Error GifLoader::load_from_file_access(Ref<ImageFrames> &r_image_frames, FileAcc
 	return OK;
 }
 
-Error GifLoader::load_from_buffer(Ref<ImageFrames> &r_image_frames, const PoolByteArray &p_data, int max_frames) {
+Error GifLoader::load_from_buffer(Ref<ImageFrames> &r_image_frames, const PackedByteArray &p_data, int max_frames) {
 	GIFBuffer f = GIFBuffer(p_data);
 	Error err;
 	err = _open(&f, SourceType::BUFFER);

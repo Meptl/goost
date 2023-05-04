@@ -4,7 +4,7 @@ var testbed
 
 const SIZE = 50.0
 
-var poly_base = PoolVector2Array([Vector2(-1, -1), Vector2(1, -1), Vector2(1, 1), Vector2(-1, 1)])
+var poly_base = PackedVector2Array([Vector2(-1, -1), Vector2(1, -1), Vector2(1, 1), Vector2(-1, 1)])
 var poly_a = Transform2D(0, Vector2.ONE).scaled(Vector2.ONE * SIZE).xform(poly_base)
 var poly_b = Transform2D(0, Vector2.ONE * SIZE).xform(poly_a)
 var poly_boundary = GoostGeometry2D.regular_polygon(8, SIZE * 2)
@@ -242,7 +242,7 @@ func test_simplify_polyline():
 
 
 func test_simplify_polyline_zero_epsilon():
-	var input = PoolVector2Array([
+	var input = PackedVector2Array([
 		Vector2(-2.182464, -3.504493),
 		Vector2(-2.662979, -1.333622),
 		Vector2(2.71501, 1.567903),

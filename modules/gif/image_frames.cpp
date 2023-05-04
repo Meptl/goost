@@ -24,7 +24,7 @@ Error ImageFrames::load(const String &p_path, int max_frames) {
 	}
 }
 
-Error ImageFrames::load_gif_from_buffer(const PoolByteArray &p_data, int max_frames) {
+Error ImageFrames::load_gif_from_buffer(const PackedByteArray &p_data, int max_frames) {
 	ERR_FAIL_COND_V_MSG(p_data.empty(), ERR_INVALID_DATA, "Invalid GIF data");
 	clear();
 	if (p_data[0] == 'G') {
@@ -107,10 +107,10 @@ Error ImageFrames::save_gif(const String &p_filepath, int p_color_count) {
 		}
 
 		// Generate GIF color map.
-		PoolVector<uint8_t> color_map = indexed->get_palette_data();
+		Vector<uint8_t> color_map = indexed->get_palette_data();
 		ColorMapObject *gif_color_map = nullptr;
 		{
-			PoolVector<uint8_t>::Read r = color_map.read();
+			Vector<uint8_t>::Read r = color_map.read();
 			GifColorType *gif_colors = (GifColorType *)malloc(sizeof(GifColorType) * indexed->get_palette_size());
 			const int pixel_size = Image::get_format_pixel_size(indexed->get_format());
 
@@ -152,8 +152,8 @@ Error ImageFrames::save_gif(const String &p_filepath, int p_color_count) {
 		}
 		GifFreeMapObject(gif_color_map);
 
-		PoolVector<uint8_t> index_data = indexed->get_index_data();
-		PoolVector<uint8_t>::Write w = index_data.write();
+		Vector<uint8_t> index_data = indexed->get_index_data();
+		Vector<uint8_t>::Write w = index_data.write();
 		GifPixelType *raster = static_cast<GifPixelType *>(w.ptr());
 
 		for (int j = 0; j < frame->get_height(); j++) {

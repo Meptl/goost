@@ -28,6 +28,6 @@ class GifLoader {
 
 public:
 	Error load_from_file_access(Ref<ImageFrames> &r_image_frames, FileAccess *f, int max_frames = 0);
-	Error load_from_buffer(Ref<ImageFrames> &r_image_frames, const PoolByteArray &p_data, int max_frames = 0);
+	Error load_from_buffer(Ref<ImageFrames> &r_image_frames, const PackedByteArray &p_data, int max_frames = 0);
 };
 

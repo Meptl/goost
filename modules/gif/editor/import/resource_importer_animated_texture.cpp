@@ -101,8 +101,8 @@ Error ResourceImporterAnimatedTexture::import(const String &p_source_file, const
 
 	for (int i = 0; i < frame_count; ++i) {
 		// Frame image data.
-		PoolVector<uint8_t> data = image_frames->get_frame_image(i)->get_data();
-		PoolVector<uint8_t>::Read r = data.read();
+		Vector<uint8_t> data = image_frames->get_frame_image(i)->get_data();
+		Vector<uint8_t>::Read r = data.read();
 		f->store_32(data.size());
 		f->store_buffer(r.ptr(), data.size());
 		// Frame delay data.

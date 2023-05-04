@@ -45,9 +45,9 @@ void CommandLineOption::_bind_methods() {
 	ClassDB::bind_method(D_METHOD("add_default_arg", "arg"), &CommandLineOption::add_default_arg);
 	ClassDB::bind_method(D_METHOD("add_allowed_arg", "arg"), &CommandLineOption::add_allowed_arg);
 
-	ADD_PROPERTY(PropertyInfo(Variant::POOL_STRING_ARRAY, "names"), "set_names", "get_names");
-	ADD_PROPERTY(PropertyInfo(Variant::POOL_STRING_ARRAY, "default_args"), "set_default_args", "get_default_args");
-	ADD_PROPERTY(PropertyInfo(Variant::POOL_STRING_ARRAY, "allowed_args"), "set_allowed_args", "get_allowed_args");
+	ADD_PROPERTY(PropertyInfo(Variant::PACKED_STRING_ARRAY, "names"), "set_names", "get_names");
+	ADD_PROPERTY(PropertyInfo(Variant::PACKED_STRING_ARRAY, "default_args"), "set_default_args", "get_default_args");
+	ADD_PROPERTY(PropertyInfo(Variant::PACKED_STRING_ARRAY, "allowed_args"), "set_allowed_args", "get_allowed_args");
 	ADD_PROPERTY(PropertyInfo(Variant::STRING, "description"), "set_description", "get_description");
 	ADD_PROPERTY(PropertyInfo(Variant::STRING, "category"), "set_category", "get_category");
 	ADD_PROPERTY(PropertyInfo(Variant::STRING, "arg_text"), "set_arg_text", "get_arg_text");
@@ -58,10 +58,10 @@ void CommandLineOption::_bind_methods() {
 	ADD_PROPERTY(PropertyInfo(Variant::BOOL, "multitoken"), "set_multitoken", "is_multitoken");
 	ADD_PROPERTY(PropertyInfo(Variant::BOOL, "meta"), "set_as_meta", "is_meta");
 
-	ADD_SIGNAL(MethodInfo("parsed", PropertyInfo(Variant::POOL_STRING_ARRAY, "values")));
+	ADD_SIGNAL(MethodInfo("parsed", PropertyInfo(Variant::PACKED_STRING_ARRAY, "values")));
 }
 
-void CommandLineOption::set_names(const PoolStringArray &p_names) {
+void CommandLineOption::set_names(const PackedStringArray &p_names) {
 	_names.resize(0);
 	for (int i = 0; i < p_names.size(); ++i) {
 		add_name(p_names[i]);
@@ -83,7 +83,7 @@ void CommandLineOption::add_allowed_arg(const String &p_arg) {
 	_allowed_args.push_back(p_arg);
 }
 
-CommandLineOption::CommandLineOption(const PoolStringArray &p_names, int p_arg_count) :
+CommandLineOption::CommandLineOption(const PackedStringArray &p_names, int p_arg_count) :
 		_names(p_names),
 		_arg_count(p_arg_count) {}
 
@@ -141,7 +141,7 @@ struct CommandLineParser::ParsedPrefix {
 // CommandLineParser
 
 // TODO: can be ported to PackedStringArray::find() method in Godot 4.0.
-static int find_arg(const PoolStringArray &p_args, const String &p_arg) {
+static int find_arg(const PackedStringArray &p_args, const String &p_arg) {
 	for (int i = 0; i < p_args.size(); ++i) {
 		if (p_args[i] == p_arg) {
 			return i;
@@ -151,7 +151,7 @@ static int find_arg(const PoolStringArray &p_args, const String &p_arg) {
 }
 
 // TODO: can be ported to PackedStringArray::has() method in Godot 4.0.
-static bool has_arg(const PoolStringArray &p_args, const String &p_arg) {
+static bool has_arg(const PackedStringArray &p_args, const String &p_arg) {
 	for (int i = 0; i < p_args.size(); ++i) {
 		if (p_args[i] == p_arg) {
 			return true;
@@ -161,7 +161,7 @@ static bool has_arg(const PoolStringArray &p_args, const String &p_arg) {
 }
 
 // TODO: can be ported to PackedStringArray::join() method in Godot 4.0.
-static String join_args(const PoolStringArray &p_args) {
+static String join_args(const PackedStringArray &p_args) {
 	Vector<String> to_join;
 	for (int i = 0; i < p_args.size(); ++i) {
 		to_join.push_back(p_args[i]);
@@ -175,7 +175,7 @@ bool CommandLineParser::_are_options_valid() const {
 
 	for (int i = 0; i < _options.size(); ++i) {
 		const CommandLineOption *option = _options[i].ptr();
-		const PoolStringArray default_args = option->get_default_args();
+		const PackedStringArray default_args = option->get_default_args();
 
 		ERR_FAIL_COND_V_MSG(option->is_positional() && option->get_arg_count() == 0, false,
 				vformat("Option '%s' cannot be positional and take no arguments.", _to_string(option->get_names())));
@@ -186,7 +186,7 @@ bool CommandLineParser::_are_options_valid() const {
 		ERR_FAIL_COND_V_MSG(!default_args.empty() && option->is_required(), false,
 				vformat("Option '%s' cannot have default arguments and be required.", _to_string(option->get_names())));
 
-		const PoolStringArray allowed_args = option->get_allowed_args();
+		const PackedStringArray allowed_args = option->get_allowed_args();
 		for (int j = 0; j < default_args.size(); ++j) {
 			if (!allowed_args.empty() && find_arg(allowed_args, default_args[j]) == -1) {
 				ERR_PRINT(vformat("Option '%s' cannot have default argument '%s', because it's not allowed.", _to_string(option->get_names()), default_args[j]));
@@ -199,8 +199,8 @@ bool CommandLineParser::_are_options_valid() const {
 		for (int j = i + 1; j < _options.size(); ++j) {
 			const CommandLineOption *another_option = _options[j].ptr();
 
-			PoolStringArray opt_names = option->get_names();
-			PoolStringArray another_opt_names = another_option->get_names();
+			PackedStringArray opt_names = option->get_names();
+			PackedStringArray another_opt_names = another_option->get_names();
 
 			bool same_name = true;
 
@@ -224,7 +224,7 @@ void CommandLineParser::_read_default_args() {
 	for (int i = 0; i < _options.size(); ++i) {
 		const CommandLineOption *option = _options[i].ptr();
 		if (!_parsed_values.has(option)) {
-			const PoolStringArray default_args = option->get_default_args();
+			const PackedStringArray default_args = option->get_default_args();
 			if (!default_args.empty()) {
 				_parsed_values[option] = default_args;
 			}
@@ -410,7 +410,7 @@ void CommandLineParser::_save_parsed_option(const CommandLineOption *p_option, c
 	if (!p_prefix.empty()) {
 		_parsed_prefixes[p_option].push_back(p_prefix);
 	}
-	PoolStringArray &values = _parsed_values[p_option];
+	PackedStringArray &values = _parsed_values[p_option];
 	if (!p_additional_value.empty()) {
 		values.push_back(p_additional_value);
 	}
@@ -438,7 +438,7 @@ String CommandLineParser::_get_usage(const Vector<Pair<const CommandLineOption *
 		if (!option->is_required()) {
 			continue;
 		}
-		const PoolStringArray names = option->get_names();
+		const PackedStringArray names = option->get_names();
 		usage += ' ';
 		if (option->is_positional()) {
 			usage += '[';
@@ -460,11 +460,11 @@ String CommandLineParser::_get_usage(const Vector<Pair<const CommandLineOption *
 	return usage;
 }
 
-String CommandLineParser::_get_options_description(const OrderedHashMap<String, PoolStringArray> &p_categories_data) const {
+String CommandLineParser::_get_options_description(const OrderedHashMap<String, PackedStringArray> &p_categories_data) const {
 	String description;
-	for (OrderedHashMap<String, PoolStringArray>::ConstElement E = p_categories_data.front(); E; E = E.next()) {
+	for (OrderedHashMap<String, PackedStringArray>::ConstElement E = p_categories_data.front(); E; E = E.next()) {
 		const String &category = E.key();
-		const PoolStringArray &lines = E.value();
+		const PackedStringArray &lines = E.value();
 
 		description += '\n'; // Add a blank line for readability.
 		if (!category.empty()) {
@@ -477,13 +477,13 @@ String CommandLineParser::_get_options_description(const OrderedHashMap<String, 
 	return description;
 }
 
-String CommandLineParser::_to_string(const PoolStringArray &p_names) const {
+String CommandLineParser::_to_string(const PackedStringArray &p_names) const {
 	String string;
 	for (int i = 0; i < p_names.size(); ++i) {
 		if (i != 0) {
 			string += ", ";
 		}
-		const PoolStringArray &prefixes = p_names[i].length() == 1 ? _short_prefixes : _long_prefixes;
+		const PackedStringArray &prefixes = p_names[i].length() == 1 ? _short_prefixes : _long_prefixes;
 		for (int j = 0; j < prefixes.size(); ++j) {
 			if (j != 0) {
 				string += ", ";
@@ -494,7 +494,7 @@ String CommandLineParser::_to_string(const PoolStringArray &p_names) const {
 	return string;
 }
 
-String CommandLineParser::_get_prefixed_longest_name(const PoolStringArray &p_names) const {
+String CommandLineParser::_get_prefixed_longest_name(const PackedStringArray &p_names) const {
 	int longest_idx = 0;
 	for (int i = 0, longest_size = 0; i < p_names.size(); ++i) {
 		const int current_size = p_names[i].size();
@@ -548,7 +548,7 @@ String CommandLineParser::_find_most_similar(const String &p_name) const {
 	float max_similarity = _similarity_bias; // Start with this value to avoid returning unrelated names.
 
 	for (int i = 0; i < _options.size(); ++i) {
-		const PoolStringArray flags = _options[i]->get_names();
+		const PackedStringArray flags = _options[i]->get_names();
 		for (int j = 0; j < flags.size(); ++j) {
 			float similarity = flags[j].similarity(p_name);
 			if (max_similarity < similarity) {
@@ -572,7 +572,7 @@ bool CommandLineParser::_contains_optional_options(const Vector<Pair<const Comma
 void CommandLineParser::_bind_methods() {
 	ClassDB::bind_method(D_METHOD("parse", "args"), &CommandLineParser::parse);
 
-	ClassDB::bind_method(D_METHOD("add_option", "name", "description", "default_value", "allowed_values"), &CommandLineParser::add_option, DEFVAL(""), DEFVAL(""), DEFVAL(PoolStringArray()));
+	ClassDB::bind_method(D_METHOD("add_option", "name", "description", "default_value", "allowed_values"), &CommandLineParser::add_option, DEFVAL(""), DEFVAL(""), DEFVAL(PackedStringArray()));
 	ClassDB::bind_method(D_METHOD("add_help_option"), &CommandLineParser::add_help_option);
 	ClassDB::bind_method(D_METHOD("add_version_option"), &CommandLineParser::add_version_option);
 
@@ -622,8 +622,8 @@ void CommandLineParser::_bind_methods() {
 	ClassDB::bind_method(D_METHOD("set_allow_compound", "allow"), &CommandLineParser::set_allow_compound);
 	ClassDB::bind_method(D_METHOD("is_compound_allowed"), &CommandLineParser::is_compound_allowed);
 
-	ADD_PROPERTY(PropertyInfo(Variant::POOL_STRING_ARRAY, "long_prefixes"), "set_long_prefixes", "get_long_prefixes");
-	ADD_PROPERTY(PropertyInfo(Variant::POOL_STRING_ARRAY, "short_prefixes"), "set_short_prefixes", "get_short_prefixes");
+	ADD_PROPERTY(PropertyInfo(Variant::PACKED_STRING_ARRAY, "long_prefixes"), "set_long_prefixes", "get_long_prefixes");
+	ADD_PROPERTY(PropertyInfo(Variant::PACKED_STRING_ARRAY, "short_prefixes"), "set_short_prefixes", "get_short_prefixes");
 	ADD_PROPERTY(PropertyInfo(Variant::REAL, "similarity_bias"), "set_similarity_bias", "get_similarity_bias");
 	ADD_PROPERTY(PropertyInfo(Variant::BOOL, "allow_forwarding_args"), "set_allow_forwarding_args", "are_forwarding_args_allowed");
 	ADD_PROPERTY(PropertyInfo(Variant::BOOL, "allow_adjacent"), "set_allow_adjacent", "is_adjacent_allowed");
@@ -631,7 +631,7 @@ void CommandLineParser::_bind_methods() {
 	ADD_PROPERTY(PropertyInfo(Variant::BOOL, "allow_compound"), "set_allow_compound", "is_compound_allowed");
 }
 
-Error CommandLineParser::parse(const PoolStringArray &p_args) {
+Error CommandLineParser::parse(const PackedStringArray &p_args) {
 	_args = p_args;
 	_forwarding_args.resize(0);
 	_parsed_values.clear();
@@ -685,7 +685,7 @@ Error CommandLineParser::parse(const PoolStringArray &p_args) {
 	}
 	for (int i = 0; i < _options.size(); ++i) {
 		CommandLineOption *option = _options.get(i).ptr();
-		const Map<const CommandLineOption *, PoolStringArray>::Element *E = _parsed_values.find(option);
+		const Map<const CommandLineOption *, PackedStringArray>::Element *E = _parsed_values.find(option);
 		if (E) {
 			option->emit_signal("parsed", E->value());
 		}
@@ -736,7 +736,7 @@ Ref<CommandLineOption> CommandLineParser::find_option(const String &p_name) cons
 	return Ref<CommandLineOption>();
 }
 
-Ref<CommandLineOption> CommandLineParser::add_option(const String &p_name, const String &p_description, const String &p_default_value, const PoolStringArray &p_allowed_values) {
+Ref<CommandLineOption> CommandLineParser::add_option(const String &p_name, const String &p_description, const String &p_default_value, const PackedStringArray &p_allowed_values) {
 	ERR_FAIL_COND_V_MSG(p_name.empty(), Ref<CommandLineOption>(), "Option name cannot be empty.");
 
 	Ref<CommandLineOption> option = memnew(CommandLineOption);
@@ -755,7 +755,7 @@ Ref<CommandLineOption> CommandLineParser::add_option(const String &p_name, const
 }
 
 Ref<CommandLineOption> CommandLineParser::add_help_option() {
-	PoolVector<String> names;
+	Vector<String> names;
 	names.push_back("h");
 	names.push_back("help");
 
@@ -769,7 +769,7 @@ Ref<CommandLineOption> CommandLineParser::add_help_option() {
 }
 
 Ref<CommandLineOption> CommandLineParser::add_version_option() {
-	PoolVector<String> names;
+	Vector<String> names;
 	names.push_back("v");
 	names.push_back("version");
 
@@ -791,37 +791,37 @@ String CommandLineParser::get_value(const Ref<CommandLineOption> &p_option) cons
 	ERR_FAIL_COND_V(p_option.is_null(), String());
 	ERR_FAIL_COND_V_MSG(p_option->get_arg_count() == 0, String(), vformat("Option '%s' does not accept arguments.", _to_string(p_option->get_names())));
 
-	const PoolStringArray args = get_value_list(p_option);
+	const PackedStringArray args = get_value_list(p_option);
 	if (args.empty()) {
 		return String();
 	}
 	return args[0];
 }
 
-PoolStringArray CommandLineParser::get_value_list(const Ref<CommandLineOption> &p_option) const {
-	ERR_FAIL_COND_V(p_option.is_null(), PoolStringArray());
-	ERR_FAIL_COND_V_MSG(p_option->get_arg_count() == 0, PoolStringArray(), vformat("Option '%s' does not accept arguments.", _to_string(p_option->get_names())));
-	const Map<const CommandLineOption *, PoolStringArray>::Element *E = _parsed_values.find(p_option.ptr());
+PackedStringArray CommandLineParser::get_value_list(const Ref<CommandLineOption> &p_option) const {
+	ERR_FAIL_COND_V(p_option.is_null(), PackedStringArray());
+	ERR_FAIL_COND_V_MSG(p_option->get_arg_count() == 0, PackedStringArray(), vformat("Option '%s' does not accept arguments.", _to_string(p_option->get_names())));
+	const Map<const CommandLineOption *, PackedStringArray>::Element *E = _parsed_values.find(p_option.ptr());
 	if (!E) {
-		return PoolStringArray();
+		return PackedStringArray();
 	}
 	return E->value();
 }
 
 String CommandLineParser::get_prefix(const Ref<CommandLineOption> &p_option) const {
 	ERR_FAIL_COND_V(p_option.is_null(), String());
-	const PoolStringArray args = get_prefix_list(p_option);
+	const PackedStringArray args = get_prefix_list(p_option);
 	if (args.empty()) {
 		return String();
 	}
 	return args[0];
 }
 
-PoolStringArray CommandLineParser::get_prefix_list(const Ref<CommandLineOption> &p_option) const {
-	ERR_FAIL_COND_V(p_option.is_null(), PoolStringArray());
-	const Map<const CommandLineOption *, PoolStringArray>::Element *E = _parsed_prefixes.find(p_option.ptr());
+PackedStringArray CommandLineParser::get_prefix_list(const Ref<CommandLineOption> &p_option) const {
+	ERR_FAIL_COND_V(p_option.is_null(), PackedStringArray());
+	const Map<const CommandLineOption *, PackedStringArray>::Element *E = _parsed_prefixes.find(p_option.ptr());
 	if (!E) {
-		return PoolStringArray();
+		return PackedStringArray();
 	}
 	return E->value();
 }
@@ -851,7 +851,7 @@ String CommandLineParser::get_help_text(const Ref<CommandLineHelpFormat> &p_form
 		if (option->is_hidden()) {
 			continue;
 		}
-		const PoolStringArray names = option->get_names();
+		const PackedStringArray names = option->get_names();
 		ERR_CONTINUE_MSG(names.empty(), vformat("Option at index %d does not have any name.", i));
 
 		String line = _to_string(names);
@@ -866,7 +866,7 @@ String CommandLineParser::get_help_text(const Ref<CommandLineHelpFormat> &p_form
 	const int descriptions_length = format->get_line_length() - options_length;
 
 	// Fill categories and their data.
-	OrderedHashMap<String, PoolStringArray> categories_data;
+	OrderedHashMap<String, PackedStringArray> categories_data;
 	for (int i = 0; i < printable_options.size(); ++i) {
 		String line = printable_options[i].second.rpad(options_length - format->get_left_pad());
 		line = line.lpad(line.length() + format->get_left_pad());

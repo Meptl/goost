@@ -187,10 +187,10 @@ RES ResourceFormatLoaderAnimatedTexture::load(const String &p_path, const String
 		Ref<ImageTexture> frame;
 		frame.instance();
 		// Frame image data.
-		PoolVector<uint8_t> data;
+		Vector<uint8_t> data;
 		uint32_t len = f->get_32();
 		data.resize(len);
-		PoolVector<uint8_t>::Write w = data.write();
+		Vector<uint8_t>::Write w = data.write();
 		f->get_buffer(w.ptr(), len);
 
 		Ref<Image> image;
@@ -256,10 +256,10 @@ RES ResourceFormatLoaderSpriteFrames::load(const String &p_path, const String &p
 		Ref<ImageTexture> frame;
 		frame.instance();
 		// Frame image data.
-		PoolVector<uint8_t> data;
+		Vector<uint8_t> data;
 		uint32_t len = f->get_32();
 		data.resize(len);
-		PoolVector<uint8_t>::Write w = data.write();
+		Vector<uint8_t>::Write w = data.write();
 		f->get_buffer(w.ptr(), len);
 
 		Ref<Image> image;

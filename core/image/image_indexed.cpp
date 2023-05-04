@@ -19,7 +19,7 @@ Error ImageIndexed::create_indexed(int p_num_palette_entries) {
 	index_data.resize(0);
 	index_data.resize(num_pixels);
 	{
-		PoolVector<uint8_t>::Write w = index_data.write();
+		Vector<uint8_t>::Write w = index_data.write();
 		memset(w.ptr(), 0, num_pixels);
 	}
 
@@ -29,13 +29,13 @@ Error ImageIndexed::create_indexed(int p_num_palette_entries) {
 	palette_data.resize(0);
 	palette_data.resize(num_colors * ps);
 	{
-		PoolVector<uint8_t>::Write w = palette_data.write();
+		Vector<uint8_t>::Write w = palette_data.write();
 		memset(w.ptr(), 0, num_colors * ps);
 	}
 	return OK;
 }
 
-Error ImageIndexed::create_indexed_from_data(const PoolVector<uint8_t> &p_palette_data, const PoolVector<uint8_t> &p_index_data) {
+Error ImageIndexed::create_indexed_from_data(const Vector<uint8_t> &p_palette_data, const Vector<uint8_t> &p_index_data) {
 	ERR_FAIL_COND_V(empty(), ERR_UNCONFIGURED);
 	ERR_FAIL_COND_V(p_index_data.size() == 0, ERR_CANT_CREATE);
 	ERR_FAIL_COND_V(p_palette_data.size() == 0, ERR_CANT_CREATE);
@@ -63,7 +63,7 @@ Error ImageIndexed::create_indexed_from_data(const PoolVector<uint8_t> &p_palett
 #ifdef DEBUG_ENABLED
 	// Ensure all indices point to valid palette entries
 	{
-		PoolVector<uint8_t>::Read ind = p_index_data.read();
+		Vector<uint8_t>::Read ind = p_index_data.read();
 
 		for (int i = 0; i < index_size; ++i) {
 			ERR_FAIL_COND_V_MSG(ind[i] > palette_size - 1, ERR_INVALID_DATA, "Indices exceed (maximum) palette size.");
@@ -118,7 +118,7 @@ void ImageIndexed::lock_indexed() {
 }
 
 void ImageIndexed::unlock_indexed() {
-	write_lock_indexed = PoolVector<uint8_t>::Write();
+	write_lock_indexed = Vector<uint8_t>::Write();
 }
 
 real_t ImageIndexed::generate_palette(int p_num_colors, DitherMode p_dither, bool p_with_alpha, bool p_high_quality) {
@@ -132,8 +132,8 @@ real_t ImageIndexed::generate_palette(int p_num_colors, DitherMode p_dither, boo
 	const int num_colors = int(CLAMP(p_num_colors, 1, MAX_PALETTE_SIZE));
 
 	// Init
-	PoolVector<uint8_t> data = get_data();
-	PoolVector<uint8_t>::Write w_src = data.write();
+	Vector<uint8_t> data = get_data();
+	Vector<uint8_t>::Write w_src = data.write();
 	uint8_t *src = w_src.ptr();
 
 	exq_data *pExq = exq_init();
@@ -149,7 +149,7 @@ real_t ImageIndexed::generate_palette(int p_num_colors, DitherMode p_dither, boo
 	palette_data.resize(0);
 	palette_data.resize(num_colors * 4);
 
-	PoolVector<uint8_t>::Write w_pal_raw = palette_data.write();
+	Vector<uint8_t>::Write w_pal_raw = palette_data.write();
 	uint8_t *pal_raw = w_pal_raw.ptr();
 
 	exq_get_palette(pExq, pal_raw, num_colors);
@@ -158,7 +158,7 @@ real_t ImageIndexed::generate_palette(int p_num_colors, DitherMode p_dither, boo
 	index_data.resize(0);
 	index_data.resize(num_pixels);
 
-	PoolVector<uint8_t>::Write w_dest = index_data.write();
+	Vector<uint8_t>::Write w_dest = index_data.write();
 	uint8_t *dest = w_dest.ptr();
 
 	switch (p_dither) {
@@ -191,13 +191,13 @@ Error ImageIndexed::apply_palette() {
 	ERR_FAIL_COND_V_MSG(index_data.size() == 0, ERR_UNCONFIGURED, "No index data. Generate or create palette first.");
 	ERR_FAIL_COND_V_MSG(palette_data.size() == 0, ERR_UNCONFIGURED, "No palette data. Generate or manually set palette first.");
 
-	PoolVector<uint8_t> dest_data;
+	Vector<uint8_t> dest_data;
 	dest_data.resize(get_data().size());
-	PoolVector<uint8_t>::Write w_dest = dest_data.write();
+	Vector<uint8_t>::Write w_dest = dest_data.write();
 	uint8_t *dest = w_dest.ptr();
 
-	PoolVector<uint8_t>::Read pal = palette_data.read();
-	PoolVector<uint8_t>::Read ind = index_data.read();
+	Vector<uint8_t>::Read pal = palette_data.read();
+	Vector<uint8_t>::Read ind = index_data.read();
 
 	int ps = get_format_pixel_size(get_format());
 	int num_pixels = get_width() * get_height();
@@ -248,37 +248,37 @@ int ImageIndexed::get_palette_size() const {
 	return palette_data.size() / pixel_size;
 }
 
-void ImageIndexed::set_palette(const PoolColorArray &p_palette) {
+void ImageIndexed::set_palette(const PackedColorArray &p_palette) {
 	ERR_FAIL_COND_MSG(index_data.size() == 0, "No index data. Generate or create palette first.");
 	ERR_FAIL_COND_MSG(p_palette.size() != get_palette_size(), "Cannot set a palette with different size.");
 
 	int ps = get_format_pixel_size(get_format());
 	int num_colors = p_palette.size();
 
-	PoolColorArray::Read r = p_palette.read();
+	PackedColorArray *r = p_palette.ptr();
 
 	palette_data.resize(0);
 	palette_data.resize(num_colors * ps);
 
-	PoolVector<uint8_t>::Write w_pal = palette_data.write();
+	Vector<uint8_t>::Write w_pal = palette_data.write();
 	uint8_t *w = w_pal.ptr();
 
 	switch (ps) {
 		case 3: {
 			for (int i = 0; i < num_colors; i++) {
-				w[0] = r[i].r * 255.0f;
-				w[1] = r[i].g * 255.0f;
-				w[2] = r[i].b * 255.0f;
+				w[0] = r[i][0] * 255.0f;
+				w[1] = r[i][1] * 255.0f;
+				w[2] = r[i][2] * 255.0f;
 
 				w += ps;
 			}
 		} break;
 		case 4: {
 			for (int i = 0; i < num_colors; i++) {
-				w[0] = r[i].r * 255.0f;
-				w[1] = r[i].g * 255.0f;
-				w[2] = r[i].b * 255.0f;
-				w[3] = r[i].a * 255.0f;
+				w[0] = r[i][0] * 255.0f;
+				w[1] = r[i][1] * 255.0f;
+				w[2] = r[i][2] * 255.0f;
+				w[3] = r[i][3] * 255.0f;
 
 				w += ps;
 			}
@@ -289,19 +289,19 @@ void ImageIndexed::set_palette(const PoolColorArray &p_palette) {
 	}
 }
 
-PoolColorArray ImageIndexed::get_palette() const {
-	ERR_FAIL_COND_V(!has_palette(), PoolColorArray());
+PackedColorArray ImageIndexed::get_palette() const {
+	ERR_FAIL_COND_V(!has_palette(), PackedColorArray());
 
 	// Convert palette to bindable type
 	int ps = get_format_pixel_size(get_format());
 	int num_colors = palette_data.size() / ps;
 
-	PoolColorArray palette;
+	PackedColorArray palette;
 	palette.resize(num_colors);
 
-	PoolColorArray::Write w = palette.write();
+	PackedColorArray *w = palette.ptrw();
 
-	PoolVector<uint8_t>::Read r_pal = palette_data.read();
+	Vector<uint8_t>::Read r_pal = palette_data.read();
 	const uint8_t *r = r_pal.ptr();
 
 	switch (ps) {
@@ -325,7 +325,7 @@ PoolColorArray ImageIndexed::get_palette() const {
 			}
 		} break;
 		default: {
-			ERR_FAIL_V_MSG(PoolColorArray(), "Unsupported palette format");
+			ERR_FAIL_V_MSG(PackedColorArray(), "Unsupported palette format");
 		}
 	}
 	return palette;
@@ -339,7 +339,7 @@ void ImageIndexed::set_palette_color(int p_idx, const Color p_color) {
 
 	ERR_FAIL_INDEX(ofs, palette_data.size());
 
-	PoolVector<uint8_t>::Write write = palette_data.write();
+	Vector<uint8_t>::Write write = palette_data.write();
 	uint8_t *ptr = write.ptr();
 
 	switch (pixel_size) {
@@ -368,7 +368,7 @@ Color ImageIndexed::get_palette_color(int p_idx) const {
 
 	ERR_FAIL_INDEX_V(ofs, palette_data.size(), Color());
 
-	PoolVector<uint8_t>::Read read = palette_data.read();
+	Vector<uint8_t>::Read read = palette_data.read();
 	const uint8_t *ptr = read.ptr();
 
 	switch (ps) {
@@ -394,17 +394,17 @@ Color ImageIndexed::get_palette_color(int p_idx) const {
 	return Color();
 }
 
-PoolVector<uint8_t> ImageIndexed::get_palette_data() const {
+Vector<uint8_t> ImageIndexed::get_palette_data() const {
 	return palette_data;
 }
 
-PoolVector<uint8_t> ImageIndexed::get_index_data() const {
+Vector<uint8_t> ImageIndexed::get_index_data() const {
 	return index_data;
 }
 
 Error ImageIndexed::load_indexed_png(const String &p_path) {
 	Error err;
-	PoolVector<uint8_t> buffer;
+	Vector<uint8_t> buffer;
 
 	FileAccess *f = FileAccess::open(p_path, FileAccess::READ, &err);
 	if (!f) {
@@ -414,7 +414,7 @@ Error ImageIndexed::load_indexed_png(const String &p_path) {
 
 	int len = f->get_len();
 	buffer.resize(len);
-	PoolVector<uint8_t>::Write w = buffer.write();
+	Vector<uint8_t>::Write w = buffer.write();
 	uint8_t *png = w.ptr();
 	f->get_buffer(png, len);
 
@@ -464,13 +464,13 @@ void ImageIndexed::_bind_methods() {
 
 	ClassDB::bind_method(D_METHOD("set_palette", "palette"), &ImageIndexed::set_palette);
 	ClassDB::bind_method(D_METHOD("get_palette"), &ImageIndexed::get_palette);
-	ADD_PROPERTY(PropertyInfo(Variant::POOL_COLOR_ARRAY, "palette", PROPERTY_HINT_NONE, "", 0), "set_palette", "get_palette");
+	ADD_PROPERTY(PropertyInfo(Variant::PACKED_COLOR_ARRAY, "palette", PROPERTY_HINT_NONE, "", 0), "set_palette", "get_palette");
 
 	ClassDB::bind_method(D_METHOD("get_palette_data"), &ImageIndexed::get_palette_data);
-	ADD_PROPERTY(PropertyInfo(Variant::POOL_BYTE_ARRAY, "palette_data", PROPERTY_HINT_NONE, "", 0), "", "get_palette_data");
+	ADD_PROPERTY(PropertyInfo(Variant::PACKED_BYTE_ARRAY, "palette_data", PROPERTY_HINT_NONE, "", 0), "", "get_palette_data");
 
 	ClassDB::bind_method(D_METHOD("get_index_data"), &ImageIndexed::get_index_data);
-	ADD_PROPERTY(PropertyInfo(Variant::POOL_BYTE_ARRAY, "index_data", PROPERTY_HINT_NONE, "", 0), "", "get_index_data");
+	ADD_PROPERTY(PropertyInfo(Variant::PACKED_BYTE_ARRAY, "index_data", PROPERTY_HINT_NONE, "", 0), "", "get_index_data");
 
 	ClassDB::bind_method(D_METHOD("set_palette_color", "index", "color"), &ImageIndexed::set_palette_color);
 	ClassDB::bind_method(D_METHOD("get_palette_color", "index"), &ImageIndexed::get_palette_color);

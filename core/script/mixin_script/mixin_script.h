@@ -146,7 +146,7 @@ public:
 	virtual bool has_named_classes() const { return false; }
 	virtual bool supports_builtin_mode() const { return true; }
 	virtual int find_function(const String &p_function, const String &p_code) const { return -1; }
-	virtual String make_function(const String &p_class, const String &p_name, const PoolStringArray &p_args) const { return ""; }
+	virtual String make_function(const String &p_class, const String &p_name, const PackedStringArray &p_args) const { return ""; }
 
 	/* DEBUGGER FUNCTIONS */
 	virtual String debug_get_error() const { return ""; }

@@ -34,9 +34,9 @@
 			<argument index="0" name="polygon" type="Variant" />
 			<argument index="1" name="point_count" type="int" default="1" />
 			<description>
-				Generates a random point distributed within polygon's area. The distribution may not be completely uniform, but should be good enough in most cases. If [code]point_count == 1[/code], returns a single [Vector2] point. If [code]point_count &gt; 1[/code], returns a [PoolVector2Array] of points, which can be cached for further usage. This improves performance significantly as the polygon must be triangulated first.
+				Generates a random point distributed within polygon's area. The distribution may not be completely uniform, but should be good enough in most cases. If [code]point_count == 1[/code], returns a single [Vector2] point. If [code]point_count &gt; 1[/code], returns a [PackedVector2Array] of points, which can be cached for further usage. This improves performance significantly as the polygon must be triangulated first.
 				This works by first decomposing polygons into triangles with [method PolyDecomp2D.decompose_polygons]. For approximately uniform distribution, each triangle is weighted by its area to fetch the needed number of points. Random points are then generated with [method point_in_triangle] uniformly.
-				Polygons may consist of outer and inner polygons (holes), so the [code]polygon[/code] parameter also accepts an [Array] of [PoolVector2Array]s as input.
+				Polygons may consist of outer and inner polygons (holes), so the [code]polygon[/code] parameter also accepts an [Array] of [PackedVector2Array]s as input.
 				The quality of distribution works better for single polygons with arbitrary number of holes, so it's recommended to use this method on distinct, non-overlapping objects.
 			</description>
 		</method>
@@ -53,7 +53,7 @@
 		</method>
 		<method name="point_in_triangle">
 			<return type="Vector2" />
-			<argument index="0" name="triangle" type="PoolVector2Array" />
+			<argument index="0" name="triangle" type="PackedVector2Array" />
 			<description>
 				Generates a random point [b]uniformly[/b] distributed within triangle's area.
 			</description>

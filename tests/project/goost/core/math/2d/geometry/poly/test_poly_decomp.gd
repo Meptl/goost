@@ -2,7 +2,7 @@ extends "res://addons/gut/test.gd"
 
 const SIZE = 50.0
 
-var base_poly = PoolVector2Array([Vector2(-1, -1), Vector2(1, -1), Vector2(1, 1), Vector2(-1, 1)])
+var base_poly = PackedVector2Array([Vector2(-1, -1), Vector2(1, -1), Vector2(1, 1), Vector2(-1, 1)])
 var poly = Transform2D(0, Vector2.ONE * SIZE).xform(base_poly)
 var poly_boundary = GoostGeometry2D.regular_polygon(8, SIZE * 2)
 var poly_hole = GoostGeometry2D.regular_polygon(4, SIZE)

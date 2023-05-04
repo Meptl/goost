@@ -2,4 +2,4 @@
 
 [resource]
 type = 26
-value = PoolColorArray( 0.705882, 0, 0, 1, 0, 0.721569, 0, 1, 0, 0, 0.92549, 1 )
+value = PackedColorArray( 0.705882, 0, 0, 1, 0, 0.721569, 0, 1, 0, 0, 0.92549, 1 )

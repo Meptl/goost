@@ -49,7 +49,7 @@ Variant Random2D::point_in_polygon(const Variant &p_polygon, int p_point_count) 
 	int point_count = p_point_count;
 
 	switch (p_polygon.get_type()) {
-		case Variant::POOL_VECTOR2_ARRAY: {
+		case Variant::PACKED_VECTOR2_ARRAY: {
 			Vector<Point2> poly = p_polygon;
 			ERR_FAIL_COND_V_MSG(poly.size() < 3, Variant(), "Not a polygon.");
 			polygons_in.push_back(poly);
@@ -60,9 +60,9 @@ Variant Random2D::point_in_polygon(const Variant &p_polygon, int p_point_count) 
 #ifdef DEBUG_ENABLED
 			// Lets see if this actually contains polygons.
 			for (int i = 0; i < polygons.size(); ++i) {
-				if (polygons[i].get_type() != Variant::POOL_VECTOR2_ARRAY) {
+				if (polygons[i].get_type() != Variant::PACKED_VECTOR2_ARRAY) {
 					String name = Variant::get_type_name(polygons[i].get_type());
-					ERR_PRINT(vformat("Invalid type: expected an Array of PoolVector2Array as polygons, not %s", name));
+					ERR_PRINT(vformat("Invalid type: expected an Array of PackedVector2Array as polygons, not %s", name));
 					break;
 				}
 			}

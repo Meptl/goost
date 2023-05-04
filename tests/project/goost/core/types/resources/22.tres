@@ -2,4 +2,4 @@
 
 [resource]
 type = 23
-value = PoolStringArray(  )
+value = PackedStringArray(  )

@@ -58,8 +58,8 @@ public:
 	void set_format(Format p_format) { format = p_format; }
 	Format get_format() const { return format; }
 
-	void set_data(const PoolVector<uint8_t> &p_data);
-	PoolVector<uint8_t> get_data() const;
+	void set_data(const Vector<uint8_t> &p_data);
+	Vector<uint8_t> get_data() const;
 
 	~MidiFile();
 };
@@ -103,7 +103,7 @@ protected:
 	static void _bind_methods();
 	void _notification(int p_what);
 
-	PoolVector2Array get_buffer(int inSize);
+	PackedVector2Array get_buffer(int inSize);
 
 public:
 	void set_soundfont(Ref<MidiFile> sf);
@@ -118,7 +118,7 @@ public:
 	void set_looping(bool p_looping);
 	bool is_looping();
 
-	PoolStringArray get_preset_names() const;
+	PackedStringArray get_preset_names() const;
 	int get_preset_index(int inBank, int inPresetNumber);
 
 	void set_output(int inSampleRate, float inGainDb);

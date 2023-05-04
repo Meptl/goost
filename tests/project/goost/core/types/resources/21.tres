@@ -2,4 +2,4 @@
 
 [resource]
 type = 22
-value = PoolRealArray(  )
+value = PackedRealArray(  )
