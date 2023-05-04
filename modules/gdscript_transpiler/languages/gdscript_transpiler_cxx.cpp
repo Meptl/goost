@@ -173,7 +173,7 @@ GDScriptTranspilerCpp::ClassNode *GDScriptTranspilerCpp::translate_class(const G
 	} else {
 		cpp_class->class_name = GDScriptTranspilerUtils::filepath_to_pascal_case(script_path);
 	}
-	cpp_class->inherits = "Reference"; // by default
+	cpp_class->inherits = "RefCounted"; // by default
 	if (gd_class->extends_used) {
 		if (gd_class->extends_file != String()) {
 			cpp_class->inherits = GDScriptTranspilerUtils::filepath_to_pascal_case(String(gd_class->extends_file));

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<class name="PolyDecomp2D" inherits="Reference" version="3.5">
+<class name="PolyDecomp2D" inherits="RefCounted" version="3.5">
 	<brief_description>
 		Polygon partitioning.
 	</brief_description>
@@ -37,7 +37,7 @@
 			</description>
 		</method>
 		<method name="new_instance" qualifiers="const">
-			<return type="Reference" />
+			<return type="RefCounted" />
 			<description>
 				Instantiates a new local [PolyDecomp2D] instance, and [member parameters] can be configured.
 			</description>

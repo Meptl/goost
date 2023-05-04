@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<class name="GraphIterator" inherits="Reference" version="3.5">
+<class name="GraphIterator" inherits="RefCounted" version="3.5">
 	<brief_description>
 		A class used as a base for implementing custom iterators to traverse a [Graph].
 	</brief_description>

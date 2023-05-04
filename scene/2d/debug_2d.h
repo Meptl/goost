@@ -113,8 +113,8 @@ public:
 	Debug2D();
 };
 
-class DebugCapture : public Reference {
-	GDCLASS(DebugCapture, Reference);
+class DebugCapture : public RefCounted {
+	GDCLASS(DebugCapture, RefCounted);
 
 	friend class Debug2D;
 

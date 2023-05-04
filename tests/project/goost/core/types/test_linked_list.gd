@@ -559,7 +559,7 @@ func test_list_node_free_orphan():
 
 # Sorry, this doesn't work, use `ListNode.erase()` instead.
 # There seems to be no way to override `free()` or prevent
-# such calls from being made as in `Reference.free()`, but
+# such calls from being made as in `RefCounted.free()`, but
 # that's also enforced by GDScript itself rather than core.
 #
 # func test_list_node_free():

@@ -13,7 +13,7 @@ protected:
 
 public:
 	static Random *get_singleton() { return singleton; }
-	virtual Ref<Reference> new_instance() const { return memnew(Random); }
+	virtual Ref<RefCounted> new_instance() const { return memnew(Random); }
 
 	uint32_t get_number();
 	real_t get_value();

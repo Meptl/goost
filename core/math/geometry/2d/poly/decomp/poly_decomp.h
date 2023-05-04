@@ -58,8 +58,8 @@ private:
 
 // BIND
 
-class _PolyDecomp2D : public Reference {
-	GDCLASS(_PolyDecomp2D, Reference);
+class _PolyDecomp2D : public RefCounted {
+	GDCLASS(_PolyDecomp2D, RefCounted);
 
 private:
 	static _PolyDecomp2D *singleton;
@@ -70,7 +70,7 @@ protected:
 public:
 	static _PolyDecomp2D *get_singleton() { return singleton; }
 	// Not using Ref<_PolyDecomp2D> as return type due to namespace issues in Godot.
-	virtual Ref<Reference> new_instance() const { return memnew(_PolyDecomp2D); }
+	virtual Ref<RefCounted> new_instance() const { return memnew(_PolyDecomp2D); }
 
 	void set_parameters(const Ref<PolyDecompParameters2D> &p_parameters);
 	Ref<PolyDecompParameters2D> get_parameters() const;

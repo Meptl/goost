@@ -75,7 +75,7 @@
 			</description>
 		</method>
 		<method name="new_instance" qualifiers="const">
-			<return type="Reference" />
+			<return type="RefCounted" />
 			<description>
 				Instantiates a new local [Random] instance based on [RandomNumberGenerator]. Does not override the [Random] instance accessible at [@GlobalScope].
 			</description>

@@ -2,8 +2,8 @@
 
 #include "core/io/image.h"
 
-class ImageBlender : public Reference {
-	GDCLASS(ImageBlender, Reference);
+class ImageBlender : public RefCounted {
+	GDCLASS(ImageBlender, RefCounted);
 
 protected:
 	static void _bind_methods();

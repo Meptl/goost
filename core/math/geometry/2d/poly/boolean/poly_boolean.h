@@ -62,8 +62,8 @@ private:
 
 // BIND
 
-class _PolyBoolean2D : public Reference {
-	GDCLASS(_PolyBoolean2D, Reference);
+class _PolyBoolean2D : public RefCounted {
+	GDCLASS(_PolyBoolean2D, RefCounted);
 
 private:
 	static _PolyBoolean2D *singleton;
@@ -74,7 +74,7 @@ protected:
 public:
 	static _PolyBoolean2D *get_singleton() { return singleton; }
 	// Not using Ref<_PolyBoolean2D> as return type due to namespace issues in Godot.
-	virtual Ref<Reference> new_instance() const { return memnew(_PolyBoolean2D); }
+	virtual Ref<RefCounted> new_instance() const { return memnew(_PolyBoolean2D); }
 
 	void set_parameters(const Ref<PolyBooleanParameters2D> &p_parameters);
 	Ref<PolyBooleanParameters2D> get_parameters() const;

@@ -13,7 +13,7 @@ protected:
 
 public:
 	static Random2D *get_singleton() { return singleton; }
-	virtual Ref<Reference> new_instance() const { return memnew(Random2D); }
+	virtual Ref<RefCounted> new_instance() const { return memnew(Random2D); }
 
 	real_t get_rotation();
 	Vector2 get_direction(); // Unit vector.

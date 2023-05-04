@@ -216,8 +216,8 @@ public:
 	Ref<Graph> get_graph() const;
 };
 
-class GraphIterator : public Reference {
-	GDCLASS(GraphIterator, Reference);
+class GraphIterator : public RefCounted {
+	GDCLASS(GraphIterator, RefCounted);
 
 protected:
 	GraphData *graph = nullptr;

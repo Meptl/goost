@@ -39,8 +39,8 @@ private:
 
 // BIND
 
-class _PolyOffset2D : public Reference {
-	GDCLASS(_PolyOffset2D, Reference);
+class _PolyOffset2D : public RefCounted {
+	GDCLASS(_PolyOffset2D, RefCounted);
 
 private:
 	static _PolyOffset2D *singleton;
@@ -51,7 +51,7 @@ protected:
 public:
 	static _PolyOffset2D *get_singleton() { return singleton; }
 	// Not using Ref<_PolyOffset2D> as return type due to namespace issues in Godot.
-	virtual Ref<Reference> new_instance() const { return memnew(_PolyOffset2D); }
+	virtual Ref<RefCounted> new_instance() const { return memnew(_PolyOffset2D); }
 
 	void set_parameters(const Ref<PolyOffsetParameters2D> &p_parameters);
 	Ref<PolyOffsetParameters2D> get_parameters() const;

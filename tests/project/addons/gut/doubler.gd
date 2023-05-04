@@ -150,7 +150,7 @@ class ObjectInfo:
 		var inst = native_class.new()
 		_native_class_name = inst.get_class()
 		_path = _native_class_name
-		if(!inst is Reference):
+		if(!inst is RefCounted):
 			inst.free()
 
 	func get_native_class_name():
@@ -360,7 +360,7 @@ func _get_methods(object_info):
 	# any method in the script or super script
 	var script_methods = ScriptMethods.new()
 	var methods = obj.get_method_list()
-	if(!(obj is Reference)):
+	if(!(obj is RefCounted)):
 		obj.free()
 
 	# first pass is for local methods only

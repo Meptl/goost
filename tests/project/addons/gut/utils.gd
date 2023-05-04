@@ -296,7 +296,7 @@ func get_native_class_name(thing):
 	if(is_native_class(thing)):
 		var newone = thing.new()
 		to_return = newone.get_class()
-		if !newone is Reference:
+		if !newone is RefCounted:
 			newone.free()
 	return to_return
 
