@@ -1,7 +1,7 @@
 #pragma once
 
-#include "core/engine.h"
-#include "core/resource.h"
+#include "core/config/engine.h"
+#include "core/io/resource.h"
 #include "scene/2d/node_2d.h"
 #include "scene/main/canvas_layer.h"
 

@@ -1,7 +1,7 @@
 #pragma once
 
 #include "../poly_decomp.h"
-#include "core/reference.h"
+#include "core/object/ref_counted.h"
 
 class PolyDecompParameters2D;
 

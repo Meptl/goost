@@ -4,7 +4,7 @@
 #include "poly/decomp/poly_decomp.h"
 #include "poly/offset/poly_offset.h"
 
-#include "core/local_vector.h"
+#include "core/templates/local_vector.h"
 
 Vector<Vector<Point2>> GoostGeometry2D::merge_polygons(const Vector<Point2> &p_polygon_a, const Vector<Point2> &p_polygon_b) {
 	Vector<Vector<Point2>> subject;

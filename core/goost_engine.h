@@ -1,6 +1,6 @@
 #pragma once
 
-#include "core/object.h"
+#include "core/object/object.h"
 #include "scene/main/scene_tree.h"
 
 #include "func_buffer.h"

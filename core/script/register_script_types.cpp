@@ -4,7 +4,7 @@
 #include "mixin_script/editor/mixin_script_editor_plugin.h"
 #include "mixin_script/mixin_script.h"
 
-#include "core/script_language.h"
+#include "core/object/script_language.h"
 #include "editor/editor_node.h"
 #include "editor/plugins/script_editor_plugin.h"
 

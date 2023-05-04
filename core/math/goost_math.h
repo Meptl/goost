@@ -1,6 +1,6 @@
 #pragma once
 
-#include "core/object.h"
+#include "core/object/object.h"
 
 #define GOOST_CMP_EPSILON 0.000001
 

@@ -1,6 +1,6 @@
 #pragma once
 
-#include "core/image.h"
+#include "core/io/image.h"
 
 class ImageFrames;
 

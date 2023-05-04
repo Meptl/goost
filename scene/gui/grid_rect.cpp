@@ -1,6 +1,6 @@
 #include "grid_rect.h"
 
-#include "core/engine.h"
+#include "core/config/engine.h"
 #include "core/variant_parser.h"
 
 void GridRect::set_cell_size(const Vector2 &p_size) {

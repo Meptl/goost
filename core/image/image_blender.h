@@ -1,7 +1,6 @@
 #pragma once
 
-#include "core/image.h"
-#include "core/method_bind_ext.gen.inc"
+#include "core/io/image.h"
 
 class ImageBlender : public Reference {
 	GDCLASS(ImageBlender, Reference);

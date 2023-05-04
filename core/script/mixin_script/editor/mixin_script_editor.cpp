@@ -1,6 +1,6 @@
 #include "mixin_script_editor.h"
 
-#include "core/script_language.h"
+#include "core/object/script_language.h"
 #include "editor/editor_node.h"
 
 void MixinScriptEditor::apply_code() {

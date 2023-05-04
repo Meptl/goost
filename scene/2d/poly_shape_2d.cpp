@@ -1,6 +1,6 @@
 #include "poly_shape_2d.h"
 
-#include "core/engine.h"
+#include "core/config/engine.h"
 #include "core/math/geometry.h"
 
 #include "goost/core/math/geometry/2d/goost_geometry_2d.h"

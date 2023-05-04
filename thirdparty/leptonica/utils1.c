@@ -1023,7 +1023,7 @@ size_t  bufsize = 100;
 #if !defined(_WIN32) && !defined(__Fuchsia__)
 
 #include <sys/time.h>
-#include <sys/resource.h>
+#include <sys/io/resource.h>
 
 static struct rusage rusage_before;
 static struct rusage rusage_after;
@@ -1114,7 +1114,7 @@ struct timeval tv;
     if (usec) *usec = (l_int32)tv.tv_usec;
 }
 
-#elif defined(__Fuchsia__) /* resource.h not implemented on Fuchsia. */
+#elif defined(__Fuchsia__) /* io/resource.h not implemented on Fuchsia. */
 
     /* Timer functions are used for testing and debugging, and
      * are stubbed out.  If they are needed in the future, they
@@ -1149,7 +1149,7 @@ l_getCurrentTime(l_int32  *sec,
 {
 }
 
-#else   /* _WIN32 : resource.h not implemented under Windows */
+#else   /* _WIN32 : io/resource.h not implemented under Windows */
 
     /* Note: if division by 10^7 seems strange, the time is expressed
      * as the number of 100-nanosecond intervals that have elapsed

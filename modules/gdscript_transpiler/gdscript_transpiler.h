@@ -1,6 +1,6 @@
 #pragma once
 
-#include "core/reference.h"
+#include "core/object/ref_counted.h"
 
 #include "modules/gdscript/gdscript.h"
 #include "modules/gdscript/gdscript_parser.h"

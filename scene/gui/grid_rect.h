@@ -1,6 +1,6 @@
 #pragma once
 
-#include "core/color.h"
+#include "core/math/color.h"
 #include "scene/gui/control.h"
 
 class GridRect : public Control {

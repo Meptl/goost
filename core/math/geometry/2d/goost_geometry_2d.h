@@ -1,6 +1,6 @@
 #pragma once
 
-#include "core/variant.h"
+#include "core/variant/variant.h"
 
 class GoostGeometry2D {
 public:

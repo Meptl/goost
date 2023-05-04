@@ -1,7 +1,7 @@
 #pragma once
 
-#include "core/map.h"
-#include "core/vector.h"
+#include "core/templates/map.h"
+#include "core/templates/vector.h"
 /*
 	Based on Godot's DisjointSet structure:
 	https://github.com/godotengine/godot/blob/11e09e59d/core/math/disjoint_set.h
@@ -16,7 +16,7 @@ public:
 		Element *parent = nullptr;
 		int rank = 0;
 	};
-	using Container = Map<T, Element *, C, AL>;
+	using Container = RBMap<T, Element *, C, AL>;
 
 protected:
 	_FORCE_INLINE_ Element *get_element(T object);

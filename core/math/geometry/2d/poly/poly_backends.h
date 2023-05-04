@@ -1,6 +1,6 @@
 #pragma once
 
-#include "core/project_settings.h"
+#include "core/config/project_settings.h"
 
 #include "boolean/poly_boolean.h"
 #include "decomp/poly_decomp.h"
@@ -127,7 +127,7 @@ public:
 		poly_decomp.setting_name = "goost/geometry/2d/backends/poly_decomp";
 		poly_decomp.register_backend("polypartition", memnew(PolyDecomp2DPolyPartition));
 		poly_decomp.register_backend("clipper10:polypartition", memnew(PolyDecomp2DClipper10), true);
-		
+
 		update();
 	}
 

@@ -1,6 +1,6 @@
 #pragma once
 
-#include "core/local_vector.h"
+#include "core/templates/local_vector.h"
 
 // Currently just a simple implementation/wrapper over vector, for depth-first search.
 template <class T, class U = uint32_t>

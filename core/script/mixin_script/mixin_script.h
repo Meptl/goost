@@ -4,7 +4,7 @@
 // in previous versions of Godot: https://github.com/godotengine/godot/pull/8718
 
 #include "core/os/thread_safe.h"
-#include "core/script_language.h"
+#include "core/object/script_language.h"
 
 class MixinScript;
 

@@ -1,10 +1,10 @@
 #pragma once
 
-#include "core/resource.h"
+#include "core/io/resource.h"
 
-#include "core/hash_map.h"
-#include "core/local_vector.h"
-#include "core/oa_hash_map.h"
+#include "core/templates/hash_map.h"
+#include "core/templates/local_vector.h"
+#include "core/templates/oa_hash_map.h"
 
 #include "goost/core/types/templates/queue.h"
 #include "goost/core/types/templates/stack.h"

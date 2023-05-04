@@ -1,6 +1,6 @@
 #pragma once
 
-#include "core/resource.h"
+#include "core/io/resource.h"
 
 class PolyDecomp2D;
 class PolyDecompParameters2D;

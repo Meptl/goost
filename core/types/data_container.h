@@ -1,7 +1,7 @@
 #pragma once
 
-#include "core/resource.h"
-#include "core/variant.h"
+#include "core/io/resource.h"
+#include "core/variant/variant.h"
 
 class DataContainer : public Resource {
 	GDCLASS(DataContainer, Resource);

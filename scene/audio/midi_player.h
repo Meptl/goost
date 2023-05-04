@@ -28,8 +28,8 @@ SOFTWARE.
 #include "thirdparty/tsf/tsf.h"
 
 #include "core/io/resource_importer.h"
-#include "core/os/file_access.h"
-#include "core/resource.h"
+#include "core/io/file_access.h"
+#include "core/io/resource.h"
 
 #include "scene/audio/audio_stream_player.h"
 #include "servers/audio/effects/audio_stream_generator.h"
@@ -50,11 +50,11 @@ public:
 		FORMAT_MIDI,
 		FORMAT_SF2,
 	};
-	
+
 	Format format = FORMAT_MIDI; // Default.
 
 	Error load(const String fileName);
-	
+
 	void set_format(Format p_format) { format = p_format; }
 	Format get_format() const { return format; }
 

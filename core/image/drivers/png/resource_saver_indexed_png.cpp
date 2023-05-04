@@ -1,8 +1,8 @@
 #include "resource_saver_indexed_png.h"
 
-#include "core/image.h"
-#include "core/os/file_access.h"
-#include "core/project_settings.h"
+#include "core/io/image.h"
+#include "core/io/file_access.h"
+#include "core/config/project_settings.h"
 #include "scene/resources/texture.h"
 
 #include <png.h>

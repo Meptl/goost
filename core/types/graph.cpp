@@ -1,6 +1,6 @@
 #include "graph.h"
 
-#include "core/script_language.h"
+#include "core/object/script_language.h"
 #include "core/string_names.h"
 
 #include "core/types/templates/priority_queue.h"

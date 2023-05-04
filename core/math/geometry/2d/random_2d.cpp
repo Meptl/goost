@@ -3,8 +3,6 @@
 #include "goost/core/math/geometry/2d/goost_geometry_2d.h"
 #include "goost/core/math/geometry/2d/poly/decomp/poly_decomp.h"
 
-#include "core/method_bind_ext.gen.inc"
-
 Random2D *Random2D::singleton = nullptr;
 
 Vector2 Random2D::get_direction() {

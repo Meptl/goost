@@ -1,6 +1,6 @@
 #pragma once
 
-#include "core/object.h"
+#include "core/object/object.h"
 #include "gdscript_transpiler.h"
 
 class _GDScriptTranspiler : public Object {

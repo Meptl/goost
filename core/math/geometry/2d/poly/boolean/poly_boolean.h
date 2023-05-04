@@ -1,6 +1,6 @@
 #pragma once
 
-#include "core/resource.h"
+#include "core/io/resource.h"
 #include "../poly_node_2d.h"
 
 class PolyBoolean2D;

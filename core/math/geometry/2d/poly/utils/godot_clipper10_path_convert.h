@@ -1,7 +1,7 @@
 #pragma once
 
 #include "core/math/vector2.h"
-#include "core/vector.h"
+#include "core/templates/vector.h"
 #include "goost/thirdparty/clipper/clipper.h"
 
 namespace GodotClipperUtils {

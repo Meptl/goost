@@ -4,8 +4,8 @@
 // an instantiation of the `List<Variant>` template class for performance,
 // which also allows to register relevant classes to scripting.
 
-#include "core/reference.h"
-#include "core/sort_array.h"
+#include "core/object/ref_counted.h"
+#include "core/templates/sort_array.h"
 
 class ListNode;
 
@@ -44,8 +44,8 @@ public:
 	ListNode() {}
 };
 
-class LinkedList : public Reference {
-	GDCLASS(LinkedList, Reference);
+class LinkedList : public RefCounted {
+	GDCLASS(LinkedList, RefCounted);
 
 protected:
 	static void _bind_methods();

@@ -1,7 +1,7 @@
 #pragma once
 
 #include "core/math/vector2.h"
-#include "core/vector.h"
+#include "core/templates/vector.h"
 #include "thirdparty/misc/clipper.hpp"
 
 // Note: we provide a complete type for LocalMinimum as Clipper 6.4.2 only

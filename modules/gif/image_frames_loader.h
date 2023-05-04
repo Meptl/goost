@@ -3,7 +3,7 @@
 #include "image_frames.h"
 
 #include "core/io/resource_loader.h"
-#include "core/os/file_access.h"
+#include "core/io/file_access.h"
 
 class ImageFramesFormatLoader {
 	friend class ImageFramesLoader;

@@ -1,10 +1,10 @@
 #pragma once
 
-#include "core/reference.h"
+#include "core/object/ref_counted.h"
 #include "scene/main/scene_tree.h"
 
-class InvokeState : public Reference {
-	GDCLASS(InvokeState, Reference);
+class InvokeState : public RefCounted {
+	GDCLASS(InvokeState, RefCounted);
 
 	friend class GoostEngine;
 

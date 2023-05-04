@@ -1,7 +1,7 @@
 #include "shape_cast_2d.h"
 
 #include "core/core_string_names.h"
-#include "core/engine.h"
+#include "core/config/engine.h"
 #include "scene/2d/collision_object_2d.h"
 #include "scene/2d/physics_body_2d.h"
 #include "scene/resources/circle_shape_2d.h"

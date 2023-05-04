@@ -1,6 +1,6 @@
 #include "register_image_types.h"
 
-#include "core/engine.h"
+#include "core/config/engine.h"
 
 #include "drivers/png/image_loader_indexed_png.h"
 #include "drivers/png/resource_saver_indexed_png.h"

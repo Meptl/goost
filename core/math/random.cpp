@@ -1,7 +1,6 @@
 #include "random.h"
 
-#include "core/local_vector.h"
-#include "core/method_bind_ext.gen.inc"
+#include "core/templates/local_vector.h"
 
 Random *Random::singleton = nullptr;
 

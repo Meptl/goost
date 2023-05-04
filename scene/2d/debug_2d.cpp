@@ -6,8 +6,6 @@
 #include "scene/resources/theme.h"
 #include "scene/scene_string_names.h"
 
-#include "core/method_bind_ext.gen.inc"
-
 Debug2D *Debug2D::singleton = nullptr;
 
 void Debug2D::set_enabled(bool p_enabled) {

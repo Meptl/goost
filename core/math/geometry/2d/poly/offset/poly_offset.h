@@ -1,6 +1,6 @@
 #pragma once
 
-#include "core/resource.h"
+#include "core/io/resource.h"
 
 class PolyOffset2D;
 class PolyOffsetParameters2D;

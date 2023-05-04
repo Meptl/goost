@@ -1,6 +1,6 @@
 #include "register_core_types.h"
 
-#include "core/engine.h"
+#include "core/config/engine.h"
 #include "scene/main/scene_tree.h"
 
 #include "string_names.h"

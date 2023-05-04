@@ -1,6 +1,6 @@
 #include "git_manager.h"
 
-#include "core/os/file_access.h"
+#include "core/io/file_access.h"
 #include "core/os/os.h"
 #include "editor/editor_file_system.h"
 #include "editor/editor_node.h"

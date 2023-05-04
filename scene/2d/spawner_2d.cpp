@@ -1,6 +1,6 @@
 #include "spawner_2d.h"
 
-#include "core/engine.h"
+#include "core/config/engine.h"
 #include "scene/resources/packed_scene.h"
 
 #include "scene/scene_string_names.h"

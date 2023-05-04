@@ -1,6 +1,6 @@
 #include "image_frames.h"
 
-#include "core/os/file_access.h"
+#include "core/io/file_access.h"
 
 #include "modules/modules_enabled.gen.h"
 #ifdef MODULE_GOOST_ENABLED

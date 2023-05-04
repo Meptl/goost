@@ -1,6 +1,6 @@
 #pragma once
 
-#include "core/object.h"
+#include "core/object/object.h"
 
 class FuncBuffer {
 public:

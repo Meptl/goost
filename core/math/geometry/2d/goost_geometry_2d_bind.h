@@ -1,6 +1,6 @@
 #pragma once
 
-#include "core/object.h"
+#include "core/object/object.h"
 
 class _GoostGeometry2D : public Object {
 	GDCLASS(_GoostGeometry2D, Object);
