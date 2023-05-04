@@ -89,7 +89,7 @@ void unregister_core_types() {
 #if defined(TOOLS_ENABLED) && defined(GOOST_DataContainer)
 void _data_container_preview_init() {
 	Ref<DataContainerPreviewGenerator> data_container_preview;
-	data_container_preview.instance();
+	data_container_preview.instantiate();
 	EditorResourcePreview::get_singleton()->add_preview_generator(data_container_preview);
 }
 #endif

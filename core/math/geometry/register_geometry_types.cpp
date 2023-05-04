@@ -21,7 +21,7 @@ void register_geometry_types() {
 	PolyBackends2D::initialize();
 #endif
 #ifdef GOOST_PolyBoolean2D
-	_poly_boolean_2d.instance();
+	_poly_boolean_2d.instantiate();
 	ClassDB::register_class<_PolyBoolean2D>();
 	Object *poly_boolean_2d = Object::cast_to<Object>(_PolyBoolean2D::get_singleton());
 	Engine::get_singleton()->add_singleton(Engine::Singleton("PolyBoolean2D", poly_boolean_2d));

@@ -464,7 +464,7 @@ void Debug2D::_on_canvas_item_draw(Object *p_item) {
 Debug2D::Debug2D() {
 	ERR_FAIL_COND_MSG(singleton != nullptr, "Singleton already exists");
 	singleton = this;
-	state.instance();
+	state.instantiate();
 	set_process(true);
 
 	// Base for drawing.

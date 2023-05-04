@@ -26,7 +26,7 @@ Ref<Texture> DataContainerPreviewGenerator::generate(const Ref<Resource> &p_from
 		case Variant::COLOR: {
 			Color color = value;
 			Ref<Image> image;
-			image.instance();
+			image.instantiate();
 			// The icon is stretched in grid mode so it's possible to speed up
 			// generation in those cases, but won't work in tree mode (default).
 			// Therefore, we must still use `p_size` for the preview...

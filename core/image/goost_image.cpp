@@ -311,7 +311,7 @@ Ref<Image> GoostImage::repeat(const Ref<Image> &p_image, const Size2i &p_count, 
 	const int h = src->get_height();
 
 	if (p_mode == TILE_FLIP_XY || p_mode == TILE_FLIP_X) {
-		src_fx.instance();
+		src_fx.instantiate();
 		src_fx->copy_internals_from(src);
 		src_fx->flip_x();
 	}

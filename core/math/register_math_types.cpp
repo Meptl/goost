@@ -18,7 +18,7 @@ void register_math_types() {
 	Engine::get_singleton()->add_singleton(Engine::Singleton("GoostMath", GoostMath::get_singleton()));
 #endif
 #ifdef GOOST_Random
-	_random.instance();
+	_random.instantiate();
 	ClassDB::register_class<Random>();
 	Object *random = Object::cast_to<Object>(Random::get_singleton());
 	Engine::get_singleton()->add_singleton(Engine::Singleton("Random", random));

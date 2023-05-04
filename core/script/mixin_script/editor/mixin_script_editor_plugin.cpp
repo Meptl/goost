@@ -34,7 +34,7 @@ void EditorInspectorPluginMixinScript::_bind_methods() {
 
 MixinScriptEditorPlugin::MixinScriptEditorPlugin(EditorNode *p_node) {
 	Ref<EditorInspectorPluginMixinScript> inspector_plugin;
-	inspector_plugin.instance();
+	inspector_plugin.instantiate();
 	add_inspector_plugin(inspector_plugin);
 
 	EDITOR_DEF("text_editor/files/open_first_script_on_editing_mixin_script", false);

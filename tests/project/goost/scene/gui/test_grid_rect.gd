@@ -3,7 +3,7 @@ extends "res://addons/gut/test.gd"
 
 func test_snap():
 	Input.use_accumulated_input = false
-	var grid = preload("grid_rect.tscn").instance()
+	var grid = preload("grid_rect.tscn").instantiate()
 	add_child_autofree(grid)
 	watch_signals(grid)
 	yield(grid, "finished")

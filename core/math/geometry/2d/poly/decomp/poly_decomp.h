@@ -26,7 +26,7 @@ public:
 	virtual Vector<Vector<Point2>> decompose_convex_opt(const Vector<Vector<Point2>> &p_polygons) = 0;
 
 	PolyDecomp2DBackend() {
-		default_parameters.instance();
+		default_parameters.instantiate();
 		parameters.instance();
 	}
 	virtual ~PolyDecomp2DBackend() {}

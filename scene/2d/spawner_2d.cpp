@@ -56,7 +56,7 @@ Node *Spawner2D::spawn() {
 	Node *node = nullptr;
 
 	if (scene.is_valid()) {
-		node = scene->instance();
+		node = scene->instantiate();
 
 	} else if (script.is_valid()) {
 		StringName base_type = script->get_instance_base_type();

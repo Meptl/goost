@@ -19,7 +19,7 @@ void register_gif_types() {
 	image_frames_loader_gif = memnew(ImageFramesLoaderGIF);
 	ImageFramesLoader::add_image_frames_format_loader(image_frames_loader_gif);
 
-	resource_format_image_frames.instance();
+	resource_format_image_frames.instantiate();
 	ResourceLoader::add_resource_format_loader(resource_format_image_frames);
 
 	resource_format_animated_texture.instance();

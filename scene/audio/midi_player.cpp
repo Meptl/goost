@@ -115,7 +115,7 @@ void ResourceImporterMidiFile::get_recognized_extensions(List<String> *p_extensi
 
 Error ResourceImporterMidiFile::import(const String &p_source_file, const String &p_save_path, const Map<StringName, Variant> &p_options, List<String> *r_platform_variants, List<String> *r_gen_files, Variant *r_metadata) {
 	Ref<MidiFile> mdf;
-	mdf.instance();
+	mdf.instantiate();
 	mdf->load(p_source_file);
 	return ResourceSaver::save(p_save_path + ".mdf", mdf);
 }

@@ -171,7 +171,7 @@ Ref<InvokeState> GoostEngine::_invoke(Object *p_obj, StringName p_method, real_t
 	Ref<SceneTreeTimer> timer = tree->create_timer(p_delay, p_pause_mode);
 
 	Ref<InvokeState> state;
-	state.instance();
+	state.instantiate();
 	state->instance_id = p_obj->get_instance_id();
 	state->method = p_method;
 	state->timer = timer;

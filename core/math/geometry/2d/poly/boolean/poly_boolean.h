@@ -23,7 +23,7 @@ public:
 	virtual void boolean_polypaths_tree(const Vector<Vector<Point2>> &p_polypaths_A, const Vector<Vector<Point2>> &p_polypaths_B, Operation p_op, PolyNode2D *r_root) = 0;
 
 	PolyBoolean2DBackend() {
-		default_parameters.instance();
+		default_parameters.instantiate();
 		parameters.instance();
 	}
 	virtual ~PolyBoolean2DBackend() {}

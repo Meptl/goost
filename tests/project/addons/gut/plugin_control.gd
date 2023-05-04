@@ -138,7 +138,7 @@ func _ready():
 	# Engine.get_main_loop() is populated and the psuedo singleton utils.gd
 	# can be setup correctly.
 	if(Engine.editor_hint):
-		_placeholder = load('res://addons/gut/GutScene.tscn').instance()
+		_placeholder = load('res://addons/gut/GutScene.tscn').instantiate()
 		call_deferred('add_child', _placeholder)
 		_placeholder.rect_size = rect_size
 	else:

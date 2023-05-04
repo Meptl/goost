@@ -124,7 +124,7 @@ RES ResourceFormatLoaderImageFrames::load(const String &p_path, const String &p_
 		ERR_FAIL_V(RES());
 	}
 	Ref<ImageFrames> image_frames;
-	image_frames.instance();
+	image_frames.instantiate();
 
 	Error err = ImageFramesLoader::loader[idx]->load_image_frames(image_frames, f);
 	memdelete(f);

@@ -13,7 +13,7 @@ var solution = []
 
 
 func before_each():
-	testbed = preload("geometry_2d_testbed.tscn").instance()
+	testbed = preload("geometry_2d_testbed.tscn").instantiate()
 	add_child_autofree(testbed)
 
 
@@ -263,7 +263,7 @@ func test_smooth_polygon():
 		return
 	for i in smoothed.size():
 		assert_eq(smoothed[i], control[i])
-		
+
 
 func test_smooth_polyline():
 	var input = [Vector2(26, 20), Vector2(73, 23), Vector2(72, 62), Vector2(29, 57)]
@@ -283,7 +283,7 @@ func test_smooth_polygon_approx():
 	var input = [Vector2(25, 83), Vector2(49, 16), Vector2(66, 79)]
 	var control = [Vector2(31, 66.25), Vector2(43, 32.75), Vector2(53.25, 31.75), Vector2(61.75, 63.25), Vector2(55.75, 80), Vector2(35.25, 82)]
 	var smoothed = GoostGeometry2D.smooth_polygon_approx(input)
-	
+
 	if smoothed.size() != control.size():
 		assert_eq(smoothed.size(), control.size(), "Point count mismatch")
 		return
@@ -295,7 +295,7 @@ func test_smooth_polyline_approx():
 	var input = [Vector2(25, 83), Vector2(49, 16), Vector2(66, 79)]
 	var control = [Vector2(25, 83), Vector2(31, 66.25), Vector2(43, 32.75), Vector2(53.25, 31.75), Vector2(61.75, 63.25), Vector2(66, 79)]
 	var smoothed = GoostGeometry2D.smooth_polyline_approx(input)
-	
+
 	if smoothed.size() != control.size():
 		assert_eq(smoothed.size(), control.size(), "Point count mismatch")
 		return

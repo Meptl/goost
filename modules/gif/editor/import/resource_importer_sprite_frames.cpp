@@ -76,7 +76,7 @@ Error ResourceImporterSpriteFrames::import(const String &p_source_file, const St
 	}
 
 	Ref<ImageFrames> image_frames;
-	image_frames.instance();
+	image_frames.instantiate();
 	Error err = ImageFramesLoader::load_image_frames(p_source_file, image_frames, nullptr, max_frames);
 	if (err != OK) {
 		return err;

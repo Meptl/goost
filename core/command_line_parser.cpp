@@ -841,7 +841,7 @@ String CommandLineParser::get_help_text(const Ref<CommandLineHelpFormat> &p_form
 
 	Ref<CommandLineHelpFormat> format = p_format;
 	if (format.is_null()) {
-		format.instance();
+		format.instantiate();
 	}
 	// Build the formated "-x, --xxxxx" and save the longest size to align the descriptions.
 	int options_length = 0;

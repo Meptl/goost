@@ -6,10 +6,10 @@ LightTexture::LightTexture() {
 	set_fill_to(Vector2(0.5, 0.0));
 
 	Ref<Gradient> g;
-	g.instance();	
+	g.instantiate();
 	// Invert default black and white colors.
 	g->set_color(0, Color(1, 1, 1, 1));
 	g->set_color(1, Color(0, 0, 0, 0));
 	// Make sure it's updated upon gradient changes.
-	set_gradient(g); 
+	set_gradient(g);
 }

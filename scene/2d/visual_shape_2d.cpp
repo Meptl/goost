@@ -69,7 +69,7 @@ bool VisualShape2D::update_parent_shape() {
 			// This might be `CollisionPolygon2D` etc.
 			got_polygon_shape = true;
 			if (polygon_shape.is_null()) {
-				polygon_shape.instance();
+				polygon_shape.instantiate();
 			}
 			parent_shape = polygon_shape;
 		}

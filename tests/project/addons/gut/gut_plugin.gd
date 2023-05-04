@@ -4,7 +4,7 @@ extends EditorPlugin
 var _bottom_panel = null
 
 func _enter_tree():
-	_bottom_panel = preload('res://addons/gut/gui/GutBottomPanel.tscn').instance()
+	_bottom_panel = preload('res://addons/gut/gui/GutBottomPanel.tscn').instantiate()
 	# Initialization of the plugin goes here
 	# Add the new type with a name, a parent type, a script and an icon
 	add_custom_type("Gut", "Control", preload("plugin_control.gd"), preload("icon.png"))

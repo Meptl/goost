@@ -13,7 +13,7 @@ public:
 	virtual Vector<Vector<Point2>> offset_polypaths(const Vector<Vector<Point2>> &p_polypaths, real_t p_delta) = 0;
 
 	PolyOffset2DBackend() {
-		default_parameters.instance();
+		default_parameters.instantiate();
 		parameters.instance();
 	}
 	virtual ~PolyOffset2DBackend() {}

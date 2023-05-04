@@ -12,7 +12,7 @@ void register_audio_types() {
 #ifdef TOOLS_ENABLED
 	if (Engine::get_singleton()->is_editor_hint()) {
 		Ref<ResourceImporterMidiFile> midifile;
-		midifile.instance();
+		midifile.instantiate();
 		ResourceFormatImporter::get_singleton()->add_importer(midifile);
 	}
 #endif

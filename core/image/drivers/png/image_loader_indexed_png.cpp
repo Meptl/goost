@@ -230,7 +230,7 @@ static Ref<ImageIndexed> _load_mem_indexed_png(const uint8_t *p_png, int p_size)
 	prs.size = p_size;
 
 	Ref<ImageIndexed> img;
-	img.instance();
+	img.instantiate();
 	Error err = ImageLoaderIndexedPNG::_load_image(&prs, user_read_data, img);
 	ERR_FAIL_COND_V(err, Ref<ImageIndexed>());
 
