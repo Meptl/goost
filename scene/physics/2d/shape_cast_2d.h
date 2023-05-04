@@ -21,7 +21,7 @@ class ShapeCast2D : public Node2D {
 
 	// Result
 	int max_results = 32;
-	Vector<Physics2DDirectSpaceState::ShapeRestInfo> result;
+	Vector<PhysicsDirectSpaceState2D::ShapeRestInfo> result;
 	bool collided = false;
 	real_t collision_safe_distance = 1.0;
 	real_t collision_unsafe_distance = 1.0;

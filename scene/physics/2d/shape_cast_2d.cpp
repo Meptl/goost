@@ -251,7 +251,7 @@ void ShapeCast2D::_update_shapecast_state() {
 	Ref<World2D> w2d = get_world_2d();
 	ERR_FAIL_COND(w2d.is_null());
 
-	Physics2DDirectSpaceState *dss = Physics2DServer::get_singleton()->space_get_direct_state(w2d->get_space());
+	PhysicsDirectSpaceState2D *dss = Physics2DServer::get_singleton()->space_get_direct_state(w2d->get_space());
 	ERR_FAIL_COND(!dss);
 
 	Transform2D gt = get_global_transform();
@@ -273,7 +273,7 @@ void ShapeCast2D::_update_shapecast_state() {
 		Set<RID> checked = exclude;
 
 		while (intersected && result.size() < max_results) {
-			Physics2DDirectSpaceState::ShapeRestInfo sri;
+			PhysicsDirectSpaceState2D::ShapeRestInfo sri;
 			intersected = dss->rest_info(shape_rid, gt, Vector2(), margin, &sri,
 					checked, collision_mask, collide_with_bodies, collide_with_areas);
 			if (intersected) {
@@ -339,7 +339,7 @@ Array ShapeCast2D::_get_collision_result() const {
 	Array ret;
 
 	for (int i = 0; i < result.size(); ++i) {
-		const Physics2DDirectSpaceState::ShapeRestInfo &sri = result[i];
+		const PhysicsDirectSpaceState2D::ShapeRestInfo &sri = result[i];
 
 		Dictionary col;
 		col["point"] = sri.point;
