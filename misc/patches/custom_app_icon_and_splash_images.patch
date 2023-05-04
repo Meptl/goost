@@ -38,5 +38,5 @@ index 8ffff2e164..d9bfbcc7b6 100644
 +env.Depends("#main/app_icon.gen.h", env["app_icon"])
 +env.CommandNoCache("#main/app_icon.gen.h", env["app_icon"], run_in_subprocess(main_builders.make_app_icon))
  
- if env["tools"]:
+ if env.editor_build:
      SConscript("tests/SCsub")

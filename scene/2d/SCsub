@@ -3,7 +3,7 @@
 Import("env")
 Import("env_goost")
 
-if env["tools"] and env["goost_editor_enabled"]:
+if env.editor_build and env["goost_editor_enabled"]:
     SConscript("editor/SCsub", exports="env_goost")
 
 sources = Glob("*.cpp")

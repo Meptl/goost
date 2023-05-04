@@ -6,5 +6,5 @@ Import("env_goost")
 env_goost.add_source_files(env.modules_sources, "*.cpp")
 env_goost.add_source_files(env.modules_sources, "mixin_script/*.cpp")
 
-if env["tools"]:
+if env.editor_build:
     env_goost.add_source_files(env.modules_sources, "mixin_script/editor/*.cpp")

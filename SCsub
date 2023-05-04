@@ -53,9 +53,8 @@ env_goost.Prepend(CPPDEFINES={"SCALE_FACTOR" : env["goost_scale_factor"]})
 godot_add_source_files = env_goost.__class__.add_source_files
 
 def goost_add_source_files(self, sources, files):
-    from compat import isbasestring
     # Convert string to list of absolute paths (including expanding wildcard)
-    if isbasestring(files):
+    if isinstance(files, (str, bytes)):
         # Keep SCons project-absolute path as they are (no wildcard support)
         if files.startswith("#"):
             if "*" in files:

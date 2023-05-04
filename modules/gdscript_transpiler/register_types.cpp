@@ -1,5 +1,5 @@
 #include "register_types.h"
-#include "core/engine.h"
+#include "core/config/engine.h"
 
 #include "bind/gdscript_transpiler_bind.h"
 #include "gdscript_transpiler.h"

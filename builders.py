@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
 
 import os
-from compat import iteritems, itervalues, open_utf8, escape_string
 
 import goost
 
+from core_builders import escape_string
 
 def make_classes_enabled(target, source, env):
     h = open(target[0].abspath, "w")
@@ -81,8 +81,8 @@ def make_authors_header(target, source, env):
     ]
     src = source[0].abspath
     dst = target[0].abspath
-    f = open_utf8(src, "r")
-    g = open_utf8(dst, "w")
+    f = open(src, "r", encoding="utf-8")
+    g = open(dst, "w", encoding="utf-8")
 
     g.write("// THIS FILE IS GENERATED, DO NOT EDIT!\n")
     g.write("#ifndef GOOST_AUTHORS_H\n")
@@ -153,7 +153,7 @@ def make_license_header(target, source, env):
     projects = OrderedDict()
     license_list = []
 
-    with open_utf8(src_copyright, "r") as copyright_file:
+    with open(src_copyright, "r", encoding="utf-8") as copyright_file:
         reader = LicenseReader(copyright_file)
         part = {}
         while reader.current:
@@ -173,21 +173,21 @@ def make_license_header(target, source, env):
                 reader.next_line()
 
     data_list = []
-    for project in itervalues(projects):
+    for project in iter(projects.values()):
         for part in project:
             part["file_index"] = len(data_list)
             data_list += part["Files"]
             part["copyright_index"] = len(data_list)
             data_list += part["Copyright"]
 
-    with open_utf8(dst, "w") as f:
+    with open(dst, "w", encoding="utf-8") as f:
 
         f.write("/* THIS FILE IS GENERATED DO NOT EDIT */\n")
         f.write("#ifndef GOOST_LICENSE_H\n")
         f.write("#define GOOST_LICENSE_H\n")
         f.write("const char *const GOOST_LICENSE_TEXT =")
 
-        with open_utf8(src_license, "r") as license_file:
+        with open(src_license, "r", encoding="utf-8") as license_file:
             for line in license_file:
                 escaped_string = escape_string(line.strip())
                 f.write('\n\t\t"' + escaped_string + '\\n"')
@@ -219,7 +219,7 @@ def make_license_header(target, source, env):
         f.write("const ComponentCopyrightPart COPYRIGHT_PROJECT_PARTS[] = {\n")
         part_index = 0
         part_indexes = {}
-        for project_name, project in iteritems(projects):
+        for project_name, project in iter(projects.items()):
             part_indexes[project_name] = part_index
             for part in project:
                 f.write(
@@ -243,7 +243,7 @@ def make_license_header(target, source, env):
         f.write("const int COPYRIGHT_INFO_COUNT = " + str(len(projects)) + ";\n")
 
         f.write("const ComponentCopyright COPYRIGHT_INFO[] = {\n")
-        for project_name, project in iteritems(projects):
+        for project_name, project in iter(projects.items()):
             f.write(
                 '\t{ "'
                 + escape_string(project_name)

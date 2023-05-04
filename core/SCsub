@@ -15,5 +15,5 @@ if env["goost_script_enabled"]:
 env_goost.add_source_files(env.modules_sources, "*.cpp")
 env_goost.add_source_files(env.modules_sources, "types/*.cpp")
 
-if env["tools"]:
+if env.editor_build:
     env_goost.add_source_files(env.modules_sources, "types/editor/*.cpp")
