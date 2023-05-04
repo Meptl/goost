@@ -390,7 +390,7 @@ Error ImageIndexed::load_indexed_png(const String &p_path) {
 		return err;
 	}
 
-	int len = f->get_len();
+	int len = f->get_length();
 	buffer.resize(len);
 	uint8_t *png = buffer.ptrw();
 	f->get_buffer(png, len);

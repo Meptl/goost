@@ -1418,7 +1418,7 @@ func file_delete(path):
 func is_file_empty(path):
 	var f = File.new()
 	f.open(path, f.READ)
-	var empty = f.get_len() == 0
+	var empty = f.get_length() == 0
 	f.close()
 	return empty
 
