@@ -6,11 +6,11 @@
 void MixinScriptEditor::apply_code() {
 }
 
-RES MixinScriptEditor::get_edited_resource() const {
+Ref<Resource> MixinScriptEditor::get_edited_resource() const {
 	return script;
 }
 
-void MixinScriptEditor::set_edited_resource(const RES &p_res) {
+void MixinScriptEditor::set_edited_resource(const Ref<Resource> &p_res) {
 	ERR_FAIL_COND(script.is_valid());
 	ERR_FAIL_COND(p_res.is_null());
 	if (script.is_valid()) {

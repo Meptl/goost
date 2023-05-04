@@ -12,7 +12,7 @@ static void _write_png_data(png_structp png_ptr, png_bytep data, png_size_t p_le
 	f->store_buffer((const uint8_t *)data, p_length);
 }
 
-Error ResourceSaverIndexedPNG::save(const String &p_path, const RES &p_resource, uint32_t p_flags) {
+Error ResourceSaverIndexedPNG::save(const String &p_path, const Ref<Resource> &p_resource, uint32_t p_flags) {
 	Ref<ImageTexture> texture = p_resource;
 
 	ERR_FAIL_COND_V_MSG(texture.is_null(), ERR_INVALID_PARAMETER, "Invalid texture passed.");
@@ -195,10 +195,10 @@ Error ResourceSaverIndexedPNG::save_image(const String &p_path, const Ref<ImageI
 	return OK;
 }
 
-bool ResourceSaverIndexedPNG::recognize(const RES &p_resource) const {
+bool ResourceSaverIndexedPNG::recognize(const Ref<Resource> &p_resource) const {
 	return (p_resource.is_valid() && p_resource->is_class("ImageTexture"));
 }
-void ResourceSaverIndexedPNG::get_recognized_extensions(const RES &p_resource, List<String> *p_extensions) const {
+void ResourceSaverIndexedPNG::get_recognized_extensions(const Ref<Resource> &p_resource, List<String> *p_extensions) const {
 	if (Object::cast_to<Texture>(*p_resource)) {
 		p_extensions->push_back("png");
 	}
