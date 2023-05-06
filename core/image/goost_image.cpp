@@ -32,7 +32,7 @@ void GoostImage::replace_color(Ref<Image> p_image, const Color &p_color, const C
 // x35 faster compared to equivalent GDScript implementation in any case.
 Ref<Image> GoostImage::bucket_fill(Ref<Image> p_image, const Point2 &p_at, const Color &p_fill_color, bool p_fill_image, Connectivity p_con) {
 	ERR_FAIL_COND_V(p_image.is_null(), Ref<Image>());
-	ERR_FAIL_COND_V(p_image->empty(), Ref<Image>());
+	ERR_FAIL_COND_V(p_image->is_empty(), Ref<Image>());
 
 	if (!has_pixelv(p_image, p_at)) {
 		return Ref<Image>();
@@ -78,7 +78,7 @@ Ref<Image> GoostImage::bucket_fill(Ref<Image> p_image, const Point2 &p_at, const
 	to_fill.reserve(MIN(512 * 512, width * height));
 	to_fill.push_back(pos);
 
-	while (!to_fill.is_empty()) {
+	while (!to_fill.is_is_empty()) {
 		pos = to_fill.pop_front();
 
 		for (int i = 0; i < kernel.size(); ++i) {
@@ -114,7 +114,7 @@ Ref<Image> GoostImage::bucket_fill(Ref<Image> p_image, const Point2 &p_at, const
 
 void GoostImage::resize_hqx(Ref<Image> p_image, int p_scale) {
 	ERR_FAIL_COND(p_image.is_null());
-	ERR_FAIL_COND(p_image->empty());
+	ERR_FAIL_COND(p_image->is_empty());
 	ERR_FAIL_COND(p_scale < 2);
 	ERR_FAIL_COND(p_scale > 3);
 
@@ -156,7 +156,7 @@ void image_copy_from_pix(Ref<Image> p_image, PIX *p_pix, bool p_include_alpha = 
 
 void GoostImage::rotate(Ref<Image> p_image, real_t p_angle, bool p_expand) {
 	ERR_FAIL_COND(p_image.is_null());
-	ERR_FAIL_COND(p_image->empty());
+	ERR_FAIL_COND(p_image->is_empty());
 
 	PIX *pix_in = pix_create_from_image(p_image);
 
@@ -174,7 +174,7 @@ void GoostImage::rotate(Ref<Image> p_image, real_t p_angle, bool p_expand) {
 
 void GoostImage::rotate_90(Ref<Image> p_image, Direction p_direction) {
 	ERR_FAIL_COND(p_image.is_null());
-	ERR_FAIL_COND(p_image->empty());
+	ERR_FAIL_COND(p_image->is_empty());
 
 	PIX *pix_in = pix_create_from_image(p_image);
 
@@ -187,7 +187,7 @@ void GoostImage::rotate_90(Ref<Image> p_image, Direction p_direction) {
 
 void GoostImage::rotate_180(Ref<Image> p_image) {
 	ERR_FAIL_COND(p_image.is_null());
-	ERR_FAIL_COND(p_image->empty());
+	ERR_FAIL_COND(p_image->is_empty());
 
 	PIX *pix_in = pix_create_from_image(p_image);
 
@@ -200,7 +200,7 @@ void GoostImage::rotate_180(Ref<Image> p_image) {
 
 void GoostImage::binarize(Ref<Image> p_image, real_t p_threshold, bool p_invert) {
 	ERR_FAIL_COND(p_image.is_null());
-	ERR_FAIL_COND(p_image->empty());
+	ERR_FAIL_COND(p_image->is_empty());
 
 	PIX *pix_in = pix_create_from_image(p_image);
 
@@ -224,19 +224,19 @@ void GoostImage::binarize(Ref<Image> p_image, real_t p_threshold, bool p_invert)
 
 void GoostImage::dilate(Ref<Image> p_image, int p_kernel_size) {
 	ERR_FAIL_COND(p_image.is_null());
-	ERR_FAIL_COND(p_image->empty());
+	ERR_FAIL_COND(p_image->is_empty());
 	morph(p_image, MORPH_DILATE, Size2i(p_kernel_size, p_kernel_size));
 }
 
 void GoostImage::erode(Ref<Image> p_image, int p_kernel_size) {
 	ERR_FAIL_COND(p_image.is_null());
-	ERR_FAIL_COND(p_image->empty());
+	ERR_FAIL_COND(p_image->is_empty());
 	morph(p_image, MORPH_ERODE, Size2i(p_kernel_size, p_kernel_size));
 }
 
 void GoostImage::morph(Ref<Image> p_image, MorphOperation p_op, Size2i p_kernel_size) {
 	ERR_FAIL_COND(p_image.is_null());
-	ERR_FAIL_COND(p_image->empty());
+	ERR_FAIL_COND(p_image->is_empty());
 
 	const int hs = p_kernel_size.x;
 	const int vs = p_kernel_size.y;
@@ -275,7 +275,7 @@ void GoostImage::morph(Ref<Image> p_image, MorphOperation p_op, Size2i p_kernel_
 
 Ref<Image> GoostImage::tile(const Ref<Image> &p_image, const Size2i &p_size, WrapMode p_mode) {
 	ERR_FAIL_COND_V(p_image.is_null(), Variant());
-	ERR_FAIL_COND_V(p_image->empty(), Variant());
+	ERR_FAIL_COND_V(p_image->is_empty(), Variant());
 
 	const int sw = p_image->get_width();
 	const int sh = p_image->get_height();
@@ -293,7 +293,7 @@ Ref<Image> GoostImage::tile(const Ref<Image> &p_image, const Size2i &p_size, Wra
 
 Ref<Image> GoostImage::repeat(const Ref<Image> &p_image, const Size2i &p_count, WrapMode p_mode, const Size2i &p_max_size) {
 	ERR_FAIL_COND_V(p_image.is_null(), Variant());
-	ERR_FAIL_COND_V(p_image->empty(), Variant());
+	ERR_FAIL_COND_V(p_image->is_empty(), Variant());
 
 	const int cols = p_count.x;
 	const int rows = p_count.y;
@@ -373,7 +373,7 @@ Ref<Image> GoostImage::repeat(const Ref<Image> &p_image, const Size2i &p_count, 
 
 Point2 GoostImage::get_centroid(const Ref<Image> &p_image) {
 	ERR_FAIL_COND_V(p_image.is_null(), Point2());
-	ERR_FAIL_COND_V(p_image->empty(), Point2());
+	ERR_FAIL_COND_V(p_image->is_empty(), Point2());
 
 	PIX *pix_in = pix_create_from_image(p_image);
 
@@ -389,13 +389,13 @@ Point2 GoostImage::get_centroid(const Ref<Image> &p_image) {
 
 Color GoostImage::get_pixel_average(const Ref<Image> &p_image, const Rect2 &p_rect, const Ref<Image> &p_mask) {
 	ERR_FAIL_COND_V(p_image.is_null(), Color());
-	ERR_FAIL_COND_V(p_image->empty(), Color());
+	ERR_FAIL_COND_V(p_image->is_empty(), Color());
 
 	bool using_rect = !p_rect.has_no_area();
 
 	bool using_mask = p_mask.is_valid();
 	if (using_mask) {
-		ERR_FAIL_COND_V(p_mask->empty(), Color());
+		ERR_FAIL_COND_V(p_mask->is_empty(), Color());
 		ERR_FAIL_COND_V(p_mask->is_invisible(), Color());
 	}
 	PIX *pix = pix_create_from_image(p_image);
@@ -491,7 +491,7 @@ Ref<Image> GoostImage::render_polygon(Vector<Point2> p_polygon, bool p_fill, con
 Ref<Image> GoostImage::render_svg(const String &p_svg, real_t p_scale) {
 	Ref<Image> image;
 #ifdef MODULE_SVG_ENABLED
-	ERR_FAIL_COND_V_MSG(p_svg.empty(), Ref<Image>(), "Empty SVG document.");
+	ERR_FAIL_COND_V_MSG(p_svg.is_empty(), Ref<Image>(), "Empty SVG document.");
 	ERR_FAIL_COND_V_MSG(p_scale <= 0, Ref<Image>(), "Scale must be positive.");
 	image.instantiate();
 	CharString svg = p_svg.utf8();

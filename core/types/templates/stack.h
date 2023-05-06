@@ -32,7 +32,7 @@ public:
 		container.clear();
 		index = 0;
 	}
-	_FORCE_INLINE_ bool is_empty() const {
+	_FORCE_INLINE_ bool is_is_empty() const {
 		return index == 0;
 	}
 	_FORCE_INLINE_ U size() const {

@@ -80,7 +80,7 @@ public:
 	ListNode *find(const Variant &p_value);
 
 	bool erase(const Variant &value);
-	bool empty() const { return !_data || !_data->size_cache; }
+	bool is_empty() const { return !_data || !_data->size_cache; }
 	void clear();
 	int size() const { return _data ? _data->size_cache : 0; }
 

@@ -100,22 +100,22 @@ real_t ShapeCast2D::get_closest_collision_unsafe_distance() const {
 }
 
 Object *ShapeCast2D::get_closest_collider() const {
-	ERR_FAIL_COND_V_MSG(result.empty(), nullptr, "Shape cast has not collided with anything yet.");
+	ERR_FAIL_COND_V_MSG(result.is_empty(), nullptr, "Shape cast has not collided with anything yet.");
 	return ObjectDB::get_instance(result[0].collider_id);
 }
 
 int ShapeCast2D::get_closest_collider_shape() const {
-	ERR_FAIL_COND_V_MSG(result.empty(), -1, "Shape cast has not collided with anything yet.");
+	ERR_FAIL_COND_V_MSG(result.is_empty(), -1, "Shape cast has not collided with anything yet.");
 	return result[0].shape;
 }
 
 Vector2 ShapeCast2D::get_closest_collision_point() const {
-	ERR_FAIL_COND_V_MSG(result.empty(), Vector2(), "Shape cast has not collided with anything yet.");
+	ERR_FAIL_COND_V_MSG(result.is_empty(), Vector2(), "Shape cast has not collided with anything yet.");
 	return result[0].point;
 }
 
 Vector2 ShapeCast2D::get_closest_collision_normal() const {
-	ERR_FAIL_COND_V_MSG(result.empty(), Vector2(), "Shape cast has not collided with anything yet.");
+	ERR_FAIL_COND_V_MSG(result.is_empty(), Vector2(), "Shape cast has not collided with anything yet.");
 	return result[0].normal;
 }
 
@@ -282,7 +282,7 @@ void ShapeCast2D::_update_shapecast_state() {
 			}
 		}
 	}
-	collided = process_intersections && !result.empty();
+	collided = process_intersections && !result.is_empty();
 }
 
 void ShapeCast2D::force_shapecast_update() {
@@ -360,7 +360,7 @@ String ShapeCast2D::get_configuration_warning() const {
 	String warning = Node2D::get_configuration_warning();
 
 	if (shape.is_null()) {
-		if (!warning.empty()) {
+		if (!warning.is_empty()) {
 			warning += "\n\n";
 		}
 		warning += TTR("This node cannot interact with other objects unless a Shape2D is assigned.");

@@ -9,7 +9,7 @@ Vector<Vector<Point2>> PolyBoolean2DClipper6::boolean_polypaths(const Vector<Vec
 	GodotClipperUtils::scale_up_polypaths(p_polypaths_a, subject);
 	clp.AddPaths(subject, ClipperLib::ptSubject, !subject_open);
 
-	if (!p_polypaths_b.empty()) { // Optional for merge operation.
+	if (!p_polypaths_b.is_empty()) { // Optional for merge operation.
 		ClipperLib::Paths clip;
 		GodotClipperUtils::scale_up_polypaths(p_polypaths_b, clip);
 		clp.AddPaths(clip, ClipperLib::ptClip, true);
@@ -39,7 +39,7 @@ void PolyBoolean2DClipper6::boolean_polypaths_tree(const Vector<Vector<Point2>> 
 	GodotClipperUtils::scale_up_polypaths(p_polypaths_a, subject);
 	clp.AddPaths(subject, ClipperLib::ptSubject, !subject_open);
 
-	if (!p_polypaths_b.empty()) { // Optional for merge operation.
+	if (!p_polypaths_b.is_empty()) { // Optional for merge operation.
 		ClipperLib::Paths clip;
 		GodotClipperUtils::scale_up_polypaths(p_polypaths_b, clip);
 		clp.AddPaths(clip, ClipperLib::ptClip, true);
@@ -54,7 +54,7 @@ void PolyBoolean2DClipper6::boolean_polypaths_tree(const Vector<Vector<Point2>> 
 	nodes.insert(&tree, r_root);
 	to_visit.push_back(&tree);
 
-	while (!to_visit.empty()) {
+	while (!to_visit.is_empty()) {
 		ClipperLib::PolyNode *parent = to_visit.back()->get();
 		to_visit.pop_back();
 

@@ -23,7 +23,7 @@ void PolyNode2D::_draw() {
 	if (parent && operation != OP_NONE) {
 		return;
 	}
-	if (outlines.empty()) {
+	if (outlines.is_empty()) {
 		return;
 	}
 	if (open) { // Polylines.
@@ -40,7 +40,7 @@ void PolyNode2D::_draw() {
 		}
 	} else { // Filled polygons.
 		const Vector<Vector<Point2>> &triangles = PolyDecomp2D::triangulate_polygons(outlines);
-		if (triangles.empty()) {
+		if (triangles.is_empty()) {
 			return;
 		}
 		Vector<Point2> vertices;
@@ -157,10 +157,10 @@ Vector<Vector<Point2>> PolyNode2D::build_outlines() {
 			continue;
 		}
 		Vector<Vector<Point2>> clip_outlines = clip->get_outlines();
-		if (clip_outlines.empty()) {
+		if (clip_outlines.is_empty()) {
 			continue;
 		}
-		if (outlines.empty()) {
+		if (outlines.is_empty()) {
 			outlines = copy_outlines(clip_outlines, clip->get_transform());
 		} else if (clip->operation != OP_NONE) {
 			clip_outlines = copy_outlines(clip_outlines, clip->get_transform());
@@ -290,7 +290,7 @@ PolyNode2D *PolyNode2D::new_child(const Vector<Point2> &p_points) {
 
 bool PolyNode2D::is_inner() const {
 	PolyNode2D *n = Object::cast_to<PolyNode2D>(get_parent());
-	bool inner = !n && points.empty();
+	bool inner = !n && points.is_empty();
 	while (n) {
 		inner = !inner;
 		n = Object::cast_to<PolyNode2D>(n->get_parent());
@@ -299,7 +299,7 @@ bool PolyNode2D::is_inner() const {
 }
 
 void PolyNode2D::make_from_outlines(const Array &p_outlines) {
-	ERR_FAIL_COND(p_outlines.empty());
+	ERR_FAIL_COND(p_outlines.is_empty());
 
 	clear();
 	Vector<Vector<Point2>> outlines;
@@ -442,7 +442,7 @@ void PolyNode2D::_bind_methods() {
 Rect2 PolyNode2D::_edit_get_rect() const {
 	Rect2 rect = GoostGeometry2D::bounding_rect(points);
 	if (rect == Rect2()) {
-		if (!outlines.empty()) {
+		if (!outlines.is_empty()) {
 			for (int i = 0; i < outlines.size(); ++i) {
 				const Rect2 &outline_rect = GoostGeometry2D::bounding_rect(outlines[i]);
 				rect = rect.merge(outline_rect);
@@ -473,7 +473,7 @@ bool PolyNode2D::_edit_is_selected_on_click(const Point2 &p_point, double p_tole
 			}
 		}
 	} else {
-		if (!outlines.empty()) {
+		if (!outlines.is_empty()) {
 			bool inside = false;
 			for (int i = 0; i < outlines.size(); ++i) {
 				const Vector<Point2> &outline = outlines[i];

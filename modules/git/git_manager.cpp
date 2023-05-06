@@ -92,7 +92,7 @@ bool EditorVCSInterfaceGitManager::repository_exists() {
 		return true;
 	} else {
 		String custom_path = GLOBAL_GET("version_control/git/repository_path");
-		if (!custom_path.empty() && DirAccess::exists(custom_path)) {
+		if (!custom_path.is_empty() && DirAccess::exists(custom_path)) {
 			return true;
 		}
 	}

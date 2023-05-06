@@ -3,8 +3,8 @@ extends "res://addons/gut/test.gd"
 func test_goost():
 	var goost = GoostEngine
 	assert_true(goost is Object)
-	
-	
+
+
 func test_get_version_info():
 	var v = GoostEngine.get_version_info()
 	gut.p(v)
@@ -48,7 +48,7 @@ func test_get_license_text():
 
 func test_get_color_constants():
 	var colors = GoostEngine.get_color_constants()
-	assert_true(not colors.empty())
+	assert_true(not colors.is_empty())
 	for name in colors:
 		assert_typeof(name, TYPE_STRING)
 		var color = colors[name]
@@ -149,12 +149,12 @@ func test_invoke_repeating():
 
 	assert_not_null(state)
 	assert_false(state.is_active())
-	assert_false(GoostEngine.get_invokes().empty())
+	assert_false(GoostEngine.get_invokes().is_empty())
 
 	yield(get_tree(), "idle_frame")
 
 	assert_not_null(state) # We still hold a reference inside test script.
-	assert_true(GoostEngine.get_invokes().empty())
+	assert_true(GoostEngine.get_invokes().is_empty())
 
 	state = GoostEngine.invoke_deferred(m, "inc", 0.2, 0.1)
 	assert_eq(state, GoostEngine.get_invokes().back())

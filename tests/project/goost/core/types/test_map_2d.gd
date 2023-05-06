@@ -2,16 +2,16 @@ extends "res://addons/gut/test.gd"
 
 func test_create_clear():
 	var map = Map2D.new()
-	assert_true(map.is_empty())
+	assert_true(map.is_is_empty())
 
 	map.create(512, 1024)
-	assert_false(map.is_empty())
+	assert_false(map.is_is_empty())
 
 	assert_eq(map.get_width(), 512)
 	assert_eq(map.get_height(), 1024)
 
 	map.clear()
-	assert_true(map.is_empty())
+	assert_true(map.is_is_empty())
 
 
 func test_create_from_data():

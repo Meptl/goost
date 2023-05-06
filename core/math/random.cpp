@@ -68,7 +68,7 @@ Variant Random::pick(const Variant &p_sequence) {
 	switch (p_sequence.get_type()) {
 		case Variant::STRING: {
 			String str = p_sequence;
-			ERR_FAIL_COND_V_MSG(str.empty(), Variant(), "String is empty.");
+			ERR_FAIL_COND_V_MSG(str.is_empty(), Variant(), "String is empty.");
 			return str.substr(randi() % str.length(), 1); // Not size().
 		} break;
 		case Variant::PACKED_BYTE_ARRAY:
@@ -80,12 +80,12 @@ Variant Random::pick(const Variant &p_sequence) {
 		case Variant::PACKED_COLOR_ARRAY:
 		case Variant::ARRAY: {
 			Array arr = p_sequence;
-			ERR_FAIL_COND_V_MSG(arr.empty(), Variant(), "Array is empty.");
+			ERR_FAIL_COND_V_MSG(arr.is_empty(), Variant(), "Array is empty.");
 			return arr[randi() % arr.size()];
 		} break;
 		case Variant::DICTIONARY: {
 			Dictionary dict = p_sequence;
-			ERR_FAIL_COND_V_MSG(dict.empty(), Variant(), "Dictionary is empty.");
+			ERR_FAIL_COND_V_MSG(dict.is_empty(), Variant(), "Dictionary is empty.");
 			return dict.get_value_at_index(randi() % dict.size());
 		} break;
 		default: {
@@ -111,7 +111,7 @@ Variant Random::pop(const Variant &p_sequence) {
 		} break;
 		case Variant::ARRAY: {
 			Array arr = p_sequence;
-			ERR_FAIL_COND_V_MSG(arr.empty(), Variant(), "Array is empty.");
+			ERR_FAIL_COND_V_MSG(arr.is_empty(), Variant(), "Array is empty.");
 
 			int idx = randi() % arr.size();
 			Variant c = arr[idx];
@@ -123,7 +123,7 @@ Variant Random::pop(const Variant &p_sequence) {
 		} break;
 		case Variant::DICTIONARY: {
 			Dictionary dict = p_sequence;
-			ERR_FAIL_COND_V_MSG(dict.empty(), Variant(), "Dictionary is empty.");
+			ERR_FAIL_COND_V_MSG(dict.is_empty(), Variant(), "Dictionary is empty.");
 
 			int idx = randi() % dict.size();
 			Variant c = dict.get_value_at_index(idx);
@@ -145,7 +145,7 @@ Array Random::choices(const Variant &p_sequence, int p_count, const PackedInt32A
 	LocalVector<int, int> indices;
 	Array weighted_choices;
 
-	if ((p_sequence.get_type() == Variant::DICTIONARY) && p_weights.empty()) {
+	if ((p_sequence.get_type() == Variant::DICTIONARY) && p_weights.is_empty()) {
 		Dictionary dict = p_sequence;
 		Array w = dict.values();
 		for (int i = 0; i < w.size(); i++) {
@@ -157,8 +157,8 @@ Array Random::choices(const Variant &p_sequence, int p_count, const PackedInt32A
 		}
 	}
 
-	ERR_FAIL_COND_V_MSG(weights.empty() && p_is_cumulative, Array(), "Cumulative weights cannot be empty.");
-	if (!weights.empty()) {
+	ERR_FAIL_COND_V_MSG(weights.is_empty() && p_is_cumulative, Array(), "Cumulative weights cannot be empty.");
+	if (!weights.is_empty()) {
 		if (p_is_cumulative) {
 			int prev_cumulative = weights[0];
 			for(int i = 1; i < weights.size(); i++) {
@@ -197,8 +197,8 @@ Array Random::choices(const Variant &p_sequence, int p_count, const PackedInt32A
 	switch (p_sequence.get_type()) {
 		case Variant::STRING: {
 			String str = p_sequence;
-			ERR_FAIL_COND_V_MSG(str.empty(), Variant(), "String is empty.");
-			if (weights.empty()) {
+			ERR_FAIL_COND_V_MSG(str.is_empty(), Variant(), "String is empty.");
+			if (weights.is_empty()) {
 				for (int i = 0; i < p_count; i++) {
 					weighted_choices.push_back(str.substr((randi() % str.length()), 1));
 				}
@@ -219,9 +219,9 @@ Array Random::choices(const Variant &p_sequence, int p_count, const PackedInt32A
 		case Variant::PACKED_COLOR_ARRAY:
 		case Variant::ARRAY: {
 			Array arr = p_sequence;
-			ERR_FAIL_COND_V_MSG(arr.empty(), Variant(), "Array is empty.");
+			ERR_FAIL_COND_V_MSG(arr.is_empty(), Variant(), "Array is empty.");
 
-			if (weights.empty()) {
+			if (weights.is_empty()) {
 				for (int i = 0; i < p_count; i++) {
 					weighted_choices.push_back(arr[randi() % arr.size()]);
 				}
@@ -235,8 +235,8 @@ Array Random::choices(const Variant &p_sequence, int p_count, const PackedInt32A
 		} break;
 		case Variant::DICTIONARY: {
 			Dictionary dict = p_sequence;
-			ERR_FAIL_COND_V_MSG(dict.empty(), Variant(), "Dictionary is empty.");
-			ERR_FAIL_COND_V_MSG(((dict.size() != weights.size()) && (!weights.empty())), Variant(), "Size of weights does not match.");
+			ERR_FAIL_COND_V_MSG(dict.is_empty(), Variant(), "Dictionary is empty.");
+			ERR_FAIL_COND_V_MSG(((dict.size() != weights.size()) && (!weights.is_empty())), Variant(), "Size of weights does not match.");
 			for (int i = 0; i < p_count; i++) {
 				weighted_choices.push_back(dict.get_key_at_index(indices[i]));
 			}

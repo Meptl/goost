@@ -35,7 +35,7 @@ Vector<Vector<Point2>> PolyShape2D::_collect_outlines() {
 Vector<Vector<Point2>> PolyShape2D::_build_shapes() {
 	shapes.clear();
 	const Vector<Vector<Point2>> &outlines = _collect_outlines();
-	if (outlines.empty()) {
+	if (outlines.is_empty()) {
 		return shapes;
 	}
 	switch (build_mode) {
@@ -121,7 +121,7 @@ void PolyShape2D::_notification(int p_what) {
 			if (!Engine::get_singleton()->is_editor_hint() && !get_tree()->is_debugging_collisions_hint()) {
 				break;
 			}
-			if (shapes.empty()) {
+			if (shapes.is_empty()) {
 				break;
 			}
 			// Colors synced with `CollisionPolygon2D` node.
@@ -156,7 +156,7 @@ String PolyShape2D::get_configuration_warning() const {
 		}
 	}
 	if (!found) {
-		if (!warning.empty()) {
+		if (!warning.is_empty()) {
 			warning += "\n\n";
 		}
 		warning += TTR("PolyNode2D is required to build a shape. Add PolyNode2D as a child.");

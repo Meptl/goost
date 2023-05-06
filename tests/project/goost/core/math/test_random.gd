@@ -250,7 +250,7 @@ func test_pop():
 	for i in 100:
 		array.push_back(i)
 
-	while not array.empty():
+	while not array.is_empty():
 		var _e = rng.pop(array)
 
 	assert_eq(array.size(), 0)

@@ -177,7 +177,7 @@ GDScriptTranspilerCpp::ClassNode *GDScriptTranspilerCpp::translate_class(const G
 	if (gd_class->extends_used) {
 		if (gd_class->extends_file != String()) {
 			cpp_class->inherits = GDScriptTranspilerUtils::filepath_to_pascal_case(String(gd_class->extends_file));
-		} else if (!gd_class->extends_class.empty()) {
+		} else if (!gd_class->extends_class.is_empty()) {
 			cpp_class->inherits = gd_class->extends_class[0];
 		}
 	}
@@ -450,7 +450,7 @@ void GDScriptTranspilerCpp::transpile_node(const Node *p_node) {
 					String a = parsed_expression;
 					transpile_node(op_node->arguments[1]);
 					String b = parsed_expression;
-					if (!a.empty()) {
+					if (!a.is_empty()) {
 						parsed_expression = vformat("%s = %s", a, b);
 					} else {
 						parsed_expression = vformat(" = %s", b);

@@ -163,7 +163,7 @@ func test_erase():
 	assert_false(erased)
 
 
-func test_empty():
+func test_is_empty():
 	populate_test_data(list)
 	var n: ListNode = list.front
 	while n:
@@ -498,7 +498,7 @@ func test_create_from_null():
 	list.create_from(null)
 	assert_null(list.front)
 	assert_null(list.back)
-	assert_true(list.empty())
+	assert_true(list.is_empty())
 	assert_eq(list.size(), 0)
 
 
@@ -648,7 +648,7 @@ class TestInvalidData extends "res://addons/gut/test.gd":
 		list.swap(node_a, node_b)
 		list.swap(null, node_b)
 		list.swap(node_a, null)
-		assert_true(list.empty())
+		assert_true(list.is_empty())
 		node_a.free()
 		node_b.free()
 
@@ -659,21 +659,21 @@ class TestInvalidData extends "res://addons/gut/test.gd":
 		n = list.insert_after(node, Array([]))
 		node.free()
 		assert_null(n)
-		assert_true(list.empty())
+		assert_true(list.is_empty())
 
 	func test_move_to_front():
 		list.move_to_front(null)
 		var node = ListNode.new()
 		list.move_to_front(node)
 		node.free()
-		assert_true(list.empty())
+		assert_true(list.is_empty())
 
 	func test_move_to_back():
 		list.move_to_back(null)
 		var node = ListNode.new()
 		list.move_to_back(node)
 		node.free()
-		assert_true(list.empty())
+		assert_true(list.is_empty())
 
 	func test_move_before():
 		list.move_before(null, null)
@@ -683,24 +683,24 @@ class TestInvalidData extends "res://addons/gut/test.gd":
 		var node_b = ListNode.new()
 		list.move_before(node_b, null)
 		node_b.free()
-		assert_true(list.empty())
+		assert_true(list.is_empty())
 
 	func test_iter():
 		var _n = list.push_front(Array([]))
 		list._iter_init(Array([]))
 		list.clear()
 		var _v = list._iter_get(Array([]))
-		assert_true(list.empty())
+		assert_true(list.is_empty())
 
 	func test_iter_2():
 		var _n = list.push_back(AnimationNodeOneShot.new())
 		list._iter_init(Array([]))
 		list.pop_front()
 		var _v = list._iter_get(Array([]))
-		assert_true(list.empty())
+		assert_true(list.is_empty())
 
 	func test_invalid_cast():
 		var not_a_node = ClassDB.instance("_GoostGeometry2D")
 		list.move_to_back(not_a_node)
 		not_a_node.free()
-		assert_true(list.empty())
+		assert_true(list.is_empty())

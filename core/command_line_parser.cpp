@@ -69,7 +69,7 @@ void CommandLineOption::set_names(const PackedStringArray &p_names) {
 }
 
 void CommandLineOption::add_name(const String &p_name) {
-	ERR_FAIL_COND_MSG(p_name.empty(), "Option name cannot be empty.");
+	ERR_FAIL_COND_MSG(p_name.is_empty(), "Option name cannot be empty.");
 	ERR_FAIL_COND_MSG(p_name.find_char(' ') != -1, "Option name cannot contain spaces: " + p_name);
 
 	_names.push_back(p_name);
@@ -130,7 +130,7 @@ struct CommandLineParser::ParsedPrefix {
 	bool is_short = false;
 
 	_FORCE_INLINE_ bool exists() const {
-		return !string.empty();
+		return !string.is_empty();
 	}
 
 	_FORCE_INLINE_ int length() const {
@@ -170,8 +170,8 @@ static String join_args(const PackedStringArray &p_args) {
 }
 
 bool CommandLineParser::_are_options_valid() const {
-	ERR_FAIL_COND_V_MSG(_short_prefixes.empty(), false, "Short prefixes cannot be empty");
-	ERR_FAIL_COND_V_MSG(_long_prefixes.empty(), false, "Long prefixes cannot be empty");
+	ERR_FAIL_COND_V_MSG(_short_prefixes.is_empty(), false, "Short prefixes cannot be empty");
+	ERR_FAIL_COND_V_MSG(_long_prefixes.is_empty(), false, "Long prefixes cannot be empty");
 
 	for (int i = 0; i < _options.size(); ++i) {
 		const CommandLineOption *option = _options[i].ptr();
@@ -179,16 +179,16 @@ bool CommandLineParser::_are_options_valid() const {
 
 		ERR_FAIL_COND_V_MSG(option->is_positional() && option->get_arg_count() == 0, false,
 				vformat("Option '%s' cannot be positional and take no arguments.", _to_string(option->get_names())));
-		ERR_FAIL_COND_V_MSG(option->get_names().empty(), false, vformat("Option at index %d does not have any name.", i));
+		ERR_FAIL_COND_V_MSG(option->get_names().is_empty(), false, vformat("Option at index %d does not have any name.", i));
 
-		ERR_FAIL_COND_V_MSG(!default_args.empty() && default_args.size() != option->get_arg_count(), false,
+		ERR_FAIL_COND_V_MSG(!default_args.is_empty() && default_args.size() != option->get_arg_count(), false,
 				vformat("Option '%s' has %d default arguments, but requires %d.", _to_string(option->get_names()), default_args.size(), option->get_arg_count()));
-		ERR_FAIL_COND_V_MSG(!default_args.empty() && option->is_required(), false,
+		ERR_FAIL_COND_V_MSG(!default_args.is_empty() && option->is_required(), false,
 				vformat("Option '%s' cannot have default arguments and be required.", _to_string(option->get_names())));
 
 		const PackedStringArray allowed_args = option->get_allowed_args();
 		for (int j = 0; j < default_args.size(); ++j) {
-			if (!allowed_args.empty() && find_arg(allowed_args, default_args[j]) == -1) {
+			if (!allowed_args.is_empty() && find_arg(allowed_args, default_args[j]) == -1) {
 				ERR_PRINT(vformat("Option '%s' cannot have default argument '%s', because it's not allowed.", _to_string(option->get_names()), default_args[j]));
 				return false;
 			}
@@ -225,7 +225,7 @@ void CommandLineParser::_read_default_args() {
 		const CommandLineOption *option = _options[i].ptr();
 		if (!_parsed_values.has(option)) {
 			const PackedStringArray default_args = option->get_default_args();
-			if (!default_args.empty()) {
+			if (!default_args.is_empty()) {
 				_parsed_values[option] = default_args;
 			}
 		}
@@ -306,7 +306,7 @@ int CommandLineParser::_validate_short(const String &p_arg, const String &p_pref
 		if (option->get_arg_count() != 0) {
 			const String sticky_arg = p_arg.substr(i + 1); // Handle sticky arguments (e.g. -ovalue), empty if not present.
 			const String display_name = p_prefix + option_name;
-			if (!sticky_arg.empty()) {
+			if (!sticky_arg.is_empty()) {
 				// Validate sticky argument first if present.
 				if (unlikely(!_allow_sticky)) {
 					_error_text = vformat(RTR("Missing space between '%s' and '%s"), p_prefix + option_name, sticky_arg);
@@ -316,7 +316,7 @@ int CommandLineParser::_validate_short(const String &p_arg, const String &p_pref
 					return -1;
 				}
 			}
-			int args_taken = _validate_option_args(option, display_name, p_current_idx + 1, !sticky_arg.empty());
+			int args_taken = _validate_option_args(option, display_name, p_current_idx + 1, !sticky_arg.is_empty());
 			if (args_taken != -1) {
 				_save_parsed_option(option, p_prefix, p_current_idx + 1, args_taken, sticky_arg);
 				++args_taken; // Count option as taken argument.
@@ -347,7 +347,7 @@ const CommandLineOption *CommandLineParser::_validate_option(const String &p_nam
 		_error_text = vformat(RTR("'%s' is not a valid option."), p_prefix + p_name);
 		// Try to suggest the correct option.
 		const String similar_name = _find_most_similar(p_name);
-		if (!similar_name.empty()) {
+		if (!similar_name.is_empty()) {
 			_error_text += "\n";
 			_error_text += vformat(RTR("Perhaps you wanted to use: '%s'."), p_prefix + similar_name);
 		}
@@ -363,7 +363,7 @@ const CommandLineOption *CommandLineParser::_validate_option(const String &p_nam
 int CommandLineParser::_validate_option_args(const CommandLineOption *p_option, const String &p_display_name, int p_current_idx, bool p_skip_first) {
 	int validated_arg_count = 0;
 	int available_args = _args.size() - p_current_idx;
-	if (!_forwarding_args.empty()) {
+	if (!_forwarding_args.is_empty()) {
 		available_args -= _forwarding_args.size() + 1; // Exclude forwarded args with separator.
 	}
 
@@ -398,7 +398,7 @@ int CommandLineParser::_validate_option_args(const CommandLineOption *p_option, 
 }
 
 bool CommandLineParser::_validate_option_arg(const CommandLineOption *p_option, const String &p_display_name, const String &p_arg) {
-	if (unlikely(!p_option->get_allowed_args().empty() && !has_arg(p_option->get_allowed_args(), p_arg))) {
+	if (unlikely(!p_option->get_allowed_args().is_empty() && !has_arg(p_option->get_allowed_args(), p_arg))) {
 		_error_text = vformat(RTR("Argument '%s' cannot be used for '%s', possible values: %s."), p_arg, p_display_name, join_args(p_option->get_allowed_args()));
 		return false;
 	}
@@ -407,11 +407,11 @@ bool CommandLineParser::_validate_option_arg(const CommandLineOption *p_option, 
 
 void CommandLineParser::_save_parsed_option(const CommandLineOption *p_option, const String &p_prefix, int p_idx, int p_arg_count, const String &p_additional_value) {
 	_parsed_count[p_option] += 1;
-	if (!p_prefix.empty()) {
+	if (!p_prefix.is_empty()) {
 		_parsed_prefixes[p_option].push_back(p_prefix);
 	}
 	PackedStringArray &values = _parsed_values[p_option];
-	if (!p_additional_value.empty()) {
+	if (!p_additional_value.is_empty()) {
 		values.push_back(p_additional_value);
 	}
 	for (int i = p_idx; i < p_idx + p_arg_count; ++i) {
@@ -428,7 +428,7 @@ void CommandLineParser::_save_parsed_option(const CommandLineOption *p_option, i
 }
 
 String CommandLineParser::_get_usage(const Vector<Pair<const CommandLineOption *, String>> &p_printable_options, const String &p_title) const {
-	String usage = vformat(RTR("Usage: %s"), p_title.empty() ? OS::get_singleton()->get_executable_path().get_file() : p_title);
+	String usage = vformat(RTR("Usage: %s"), p_title.is_empty() ? OS::get_singleton()->get_executable_path().get_file() : p_title);
 	if (_contains_optional_options(p_printable_options)) {
 		usage += ' ' + RTR("[options]");
 	}
@@ -449,7 +449,7 @@ String CommandLineParser::_get_usage(const Vector<Pair<const CommandLineOption *
 		}
 		if (option->get_arg_count() != 0) {
 			const String arg_text = option->get_arg_text();
-			if (!arg_text.empty()) {
+			if (!arg_text.is_empty()) {
 				usage += ' ' + arg_text;
 				if (option->get_arg_count() < 0 || option->is_multitoken()) {
 					usage += "...";
@@ -467,7 +467,7 @@ String CommandLineParser::_get_options_description(const HashMap<String, PackedS
 		const PackedStringArray &lines = E.value();
 
 		description += '\n'; // Add a blank line for readability.
-		if (!category.empty()) {
+		if (!category.is_empty()) {
 			description += '\n' + category + ":";
 		}
 		for (int j = 0; j < lines.size(); ++j) {
@@ -695,7 +695,7 @@ Error CommandLineParser::parse(const PackedStringArray &p_args) {
 
 void CommandLineParser::append_option(const Ref<CommandLineOption> &p_option) {
 	ERR_FAIL_COND(p_option.is_null());
-	ERR_FAIL_COND_MSG(p_option->get_names().empty(), "Option does not have any names.");
+	ERR_FAIL_COND_MSG(p_option->get_names().is_empty(), "Option does not have any names.");
 
 	const String &opt_name = p_option->get_names()[0];
 	const Ref<CommandLineOption> &existing_option = find_option(opt_name);
@@ -737,16 +737,16 @@ Ref<CommandLineOption> CommandLineParser::find_option(const String &p_name) cons
 }
 
 Ref<CommandLineOption> CommandLineParser::add_option(const String &p_name, const String &p_description, const String &p_default_value, const PackedStringArray &p_allowed_values) {
-	ERR_FAIL_COND_V_MSG(p_name.empty(), Ref<CommandLineOption>(), "Option name cannot be empty.");
+	ERR_FAIL_COND_V_MSG(p_name.is_empty(), Ref<CommandLineOption>(), "Option name cannot be empty.");
 
 	Ref<CommandLineOption> option = memnew(CommandLineOption);
 	option->add_name(p_name);
 	option->set_description(p_description);
 
-	if (!p_default_value.empty()) {
+	if (!p_default_value.is_empty()) {
 		option->add_default_arg(p_default_value);
 	}
-	if (!p_allowed_values.empty()) {
+	if (!p_allowed_values.is_empty()) {
 		option->set_allowed_args(p_allowed_values);
 	}
 	append_option(option);
@@ -792,7 +792,7 @@ String CommandLineParser::get_value(const Ref<CommandLineOption> &p_option) cons
 	ERR_FAIL_COND_V_MSG(p_option->get_arg_count() == 0, String(), vformat("Option '%s' does not accept arguments.", _to_string(p_option->get_names())));
 
 	const PackedStringArray args = get_value_list(p_option);
-	if (args.empty()) {
+	if (args.is_empty()) {
 		return String();
 	}
 	return args[0];
@@ -811,7 +811,7 @@ PackedStringArray CommandLineParser::get_value_list(const Ref<CommandLineOption>
 String CommandLineParser::get_prefix(const Ref<CommandLineOption> &p_option) const {
 	ERR_FAIL_COND_V(p_option.is_null(), String());
 	const PackedStringArray args = get_prefix_list(p_option);
-	if (args.empty()) {
+	if (args.is_empty()) {
 		return String();
 	}
 	return args[0];
@@ -836,8 +836,8 @@ int CommandLineParser::get_occurrence_count(const Ref<CommandLineOption> &p_opti
 }
 
 String CommandLineParser::get_help_text(const Ref<CommandLineHelpFormat> &p_format) const {
-	ERR_FAIL_COND_V_MSG(_short_prefixes.empty(), String(), "Short prefixes cannot be empty");
-	ERR_FAIL_COND_V_MSG(_long_prefixes.empty(), String(), "Long prefixes cannot be empty");
+	ERR_FAIL_COND_V_MSG(_short_prefixes.is_empty(), String(), "Short prefixes cannot be empty");
+	ERR_FAIL_COND_V_MSG(_long_prefixes.is_empty(), String(), "Long prefixes cannot be empty");
 
 	Ref<CommandLineHelpFormat> format = p_format;
 	if (format.is_null()) {
@@ -852,7 +852,7 @@ String CommandLineParser::get_help_text(const Ref<CommandLineHelpFormat> &p_form
 			continue;
 		}
 		const PackedStringArray names = option->get_names();
-		ERR_CONTINUE_MSG(names.empty(), vformat("Option at index %d does not have any name.", i));
+		ERR_CONTINUE_MSG(names.is_empty(), vformat("Option at index %d does not have any name.", i));
 
 		String line = _to_string(names);
 		if (option->get_arg_count() != 0) {
@@ -879,7 +879,7 @@ String CommandLineParser::get_help_text(const Ref<CommandLineHelpFormat> &p_form
 		const CommandLineOption *option = printable_options[i].first;
 		int description_pos = line.length() + 1;
 		line += option->get_description();
-		if (!option->get_allowed_args().empty()) {
+		if (!option->get_allowed_args().is_empty()) {
 			line += vformat(RTR(" Allowed values: %s."), join_args(option->get_allowed_args()));
 		}
 
@@ -903,14 +903,14 @@ String CommandLineParser::get_help_text(const Ref<CommandLineHelpFormat> &p_form
 	}
 	// Start generating help.
 	String help_text;
-	if (!format->get_header().empty()) {
+	if (!format->get_header().is_empty()) {
 		help_text += format->get_header();
 	}
 	if (format->is_usage_autogenerated()) {
 		help_text += '\n' + _get_usage(printable_options, format->get_usage_title());
 	}
 	help_text += _get_options_description(categories_data);
-	if (!format->get_footer().empty()) {
+	if (!format->get_footer().is_empty()) {
 		help_text += '\n' + format->get_footer();
 	}
 	help_text += '\n';

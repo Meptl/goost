@@ -90,7 +90,7 @@ func test_decompose_polygons_convex_opt():
 	assert_eq(solution[0].size(), 8)
 
 
-func test_decompose_polygon_empty():
+func test_decompose_polygon_is_empty():
 	Engine.print_error_messages = false
 
 	solution = PolyDecomp2D.decompose_polygons(Array([]), PolyDecomp2D.DECOMP_TRIANGLES_OPT)

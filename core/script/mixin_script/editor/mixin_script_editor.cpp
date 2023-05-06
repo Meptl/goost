@@ -174,7 +174,7 @@ void MixinScriptEditor::_on_add_mixin_pressed() {
 
 	String base_name = "Mixin";
 	String base_path = script->get_path().get_basename();
-	if (base_path.empty()) {
+	if (base_path.is_empty()) {
 		EditorNode::get_singleton()->show_warning(TTR("The MixinScript is not yet saved to disk.\nPlease save the MixinScript first."));
 		return;
 	}

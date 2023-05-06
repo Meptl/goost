@@ -27,7 +27,7 @@ func test_save_indexed_png():
     assert_not_null(image)
 
 
-func test_save_indexed_png_empty():
+func test_save_indexed_png_is_empty():
     Engine.print_error_messages = false
 
     var image = ImageIndexed.new()

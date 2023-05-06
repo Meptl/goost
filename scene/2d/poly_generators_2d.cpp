@@ -290,8 +290,8 @@ void PolyPath2D::_notification(int p_what) {
 String PolyPath2D::get_configuration_warning() const {
 	String warning = Node2D::get_configuration_warning();
 
-	if (paths.empty()) {
-		if (!warning.empty()) {
+	if (paths.is_empty()) {
+		if (!warning.is_empty()) {
 			warning += "/n/n";
 		}
 		warning += TTR("Add Path2D with Curve2D as a child to this node to define the path.");

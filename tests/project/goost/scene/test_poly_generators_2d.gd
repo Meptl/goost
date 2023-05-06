@@ -7,7 +7,7 @@ func test_circle():
 	n.radius = 128
 
 	var outlines = n.build_outlines()
-	assert_false(outlines.empty())
+	assert_false(outlines.is_empty())
 
 	var circle = outlines[0]
 	var outlines_size = circle.size()
@@ -28,7 +28,7 @@ func test_capsule():
 	n.height = 256
 
 	var outlines = n.build_outlines()
-	assert_false(outlines.empty())
+	assert_false(outlines.is_empty())
 
 	var capsule = outlines[0]
 
@@ -55,7 +55,7 @@ func test_rectangle():
 	n.extents = Vector2(128, 128)
 
 	var outlines = n.build_outlines()
-	assert_false(outlines.empty())
+	assert_false(outlines.is_empty())
 
 	var rectangle = outlines[0]
 	var outlines_size = rectangle.size()
@@ -85,7 +85,7 @@ func test_poly_path():
 	n.buffer_parameters = params
 
 	var outlines = n.build_outlines()
-	assert_false(outlines.empty())
+	assert_false(outlines.is_empty())
 
 	var deflated = outlines[0]
 	var control = [

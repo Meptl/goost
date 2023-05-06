@@ -106,7 +106,7 @@ struct IndicesStack {
 		--stack_size;
 		return stack[--back];
 	}
-	_FORCE_INLINE_ bool is_empty() {
+	_FORCE_INLINE_ bool is_is_empty() {
 		return stack_size == 0;
 	}
 	_FORCE_INLINE_ const int &operator[](int p_index) const {
@@ -142,7 +142,7 @@ Vector<Point2> GoostGeometry2D::simplify_polyline(const Vector<Point2> &p_polyli
 	retain[parts[1]] = true;
 	int index = 0;
 
-	while (!parts.is_empty()) {
+	while (!parts.is_is_empty()) {
 		int second = parts.pop_back(); // Pop back in other order.
 		int first = parts.pop_back();
 

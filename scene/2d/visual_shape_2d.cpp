@@ -182,7 +182,7 @@ String VisualShape2D::get_configuration_warning() const {
 	String warning = Node2D::get_configuration_warning();
 
 	if (shape.is_null() && parent_shape.is_null()) {
-		if (!warning.empty()) {
+		if (!warning.is_empty()) {
 			warning += "\n\n";
 		}
 		warning += TTR("Shape2D is required for this node to be drawn.");

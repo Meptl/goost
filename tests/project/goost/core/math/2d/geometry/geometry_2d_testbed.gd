@@ -26,7 +26,7 @@ func _draw():
 				var c = Color.green
 				if solution is PolyNode2D:
 					var nodes = [solution]
-					while not nodes.empty():
+					while not nodes.is_empty():
 						var node = nodes.back()
 						nodes.pop_back()
 

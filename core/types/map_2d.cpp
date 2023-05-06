@@ -6,7 +6,7 @@ void Map2D::create(int p_width, int p_height) {
 }
 
 void Map2D::create_from_data(int p_width, int p_height, Array p_data) {
-	ERR_FAIL_COND_MSG(p_data.empty(), "Array is empty.");
+	ERR_FAIL_COND_MSG(p_data.is_empty(), "Array is empty.");
 	ERR_FAIL_COND_MSG(p_data.size() != p_width * p_height, "Element count mismatch in the Array to create a Map2D.");
 
 	create(p_width, p_height);
@@ -132,7 +132,7 @@ Dictionary Map2D::_get_data() const {
 }
 
 String Map2D::to_string() {
-	if (is_empty()) {
+	if (is_is_empty()) {
 		return "[]";
 	}
 	String str;

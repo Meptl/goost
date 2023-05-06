@@ -36,7 +36,7 @@ func test_parse_multiple_options():
     var verbose = cmd.add_option("verbose", "Run in verbose mode.", "no", ["yes", "no"])
     var debug = cmd.add_option("debug", "Run in debug mode.", "yes", ["yes", "no"])
 
-    assert_true(input.default_args.empty())
+    assert_true(input.default_args.is_empty())
     assert_true("no" in verbose.default_args)
     assert_true("yes" in debug.default_args)
 
@@ -91,7 +91,7 @@ func test_long_prefixes_precedence():
     assert_eq(cmd.parse(["--no-debug"]), OK)
     assert_true(cmd.is_set(debug))
     assert_eq(cmd.get_prefix(debug), "--no-")
-    
+
     cmd.long_prefixes = ["--", "--no-"] # Swap precedence.
 
     assert_eq(cmd.parse(["--debug"]), OK)
@@ -264,7 +264,7 @@ func test_forwarding_args():
 
     cmd.allow_forwarding_args = true
     assert_eq(cmd.parse(["--"]), OK, "Forwarding zero arguments should succeed.")
-    assert_true(cmd.get_forwarding_args().empty())
+    assert_true(cmd.get_forwarding_args().is_empty())
 
     assert_eq(cmd.parse(["--", "arg1", "arg2"]), OK,
             "Forwarding two arguments should succeed with `allow_forwarding_args = true`")

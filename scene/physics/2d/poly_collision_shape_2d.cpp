@@ -10,7 +10,7 @@ void PolyCollisionShape2D::_apply_shapes() {
 		return;
 	}
 	parent->shape_owner_clear_shapes(owner_id);
-	if (shapes.empty()) {
+	if (shapes.is_empty()) {
 		return;
 	}
 	switch (build_mode) {

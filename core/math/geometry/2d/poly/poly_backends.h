@@ -92,7 +92,7 @@ public:
 			// Suggest restart because the singleton can also be used in extension mode.
 			GLOBAL_DEF_RST(setting_name, default_backend_name);
 		}
-		if (!backends_list.empty()) {
+		if (!backends_list.is_empty()) {
 			ProjectSettings::get_singleton()->set_custom_property_info(
 					setting_name,
 					PropertyInfo(Variant::STRING, setting_name, PROPERTY_HINT_ENUM, backends_list));

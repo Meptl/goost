@@ -73,7 +73,7 @@ void GraphData::remove_edge(GraphEdge *p_edge) {
 			break;
 		}
 	}
-	if (list.empty()) {
+	if (list.is_empty()) {
 		edges.erase(EdgeKey(a->id, b->id));
 	}
 }
@@ -109,7 +109,7 @@ GraphEdge *Graph::_create_edge() {
 }
 
 void Graph::_set_data(const Dictionary &p_data) {
-	ERR_FAIL_COND(p_data.empty());
+	ERR_FAIL_COND(p_data.is_empty());
 	ERR_FAIL_COND(!p_data.has("vertices"));
 	ERR_FAIL_COND(!p_data.has("edges"));
 
@@ -415,7 +415,7 @@ GraphEdge *Graph::_find_minimum_edge(GraphVertex *p_a, GraphVertex *p_b) const {
 	ERR_FAIL_NULL_V(p_b, nullptr);
 
 	const EdgeList &list = graph->get_edges(p_a->id, p_b->id);
-	if (list.empty()) {
+	if (list.is_empty()) {
 		return nullptr;
 	}
 	GraphEdge *min_edge = list[0];
@@ -578,7 +578,7 @@ Dictionary Graph::shortest_path_tree(GraphVertex *p_root) const {
 	queue.initialize(vertices);
 
 	// Find shortest path tree.
-	while (!queue.is_empty()) {
+	while (!queue.is_is_empty()) {
 		GraphVertex *u = queue.pop();
 
 		const uint32_t *k = nullptr;
@@ -966,7 +966,7 @@ GraphVertex *GraphIteratorDFS::next() {
 void GraphIteratorDFS::advance() {
 	next_vertex = nullptr;
 
-	while (!stack.is_empty()) {
+	while (!stack.is_is_empty()) {
 		Element &v = stack.pop();
 
 		if (v.neighbor) {
@@ -997,7 +997,7 @@ void GraphIteratorBFS::initialize(GraphVertex *p_root) {
 }
 
 bool GraphIteratorBFS::has_next() const {
-	return !queue.is_empty();
+	return !queue.is_is_empty();
 }
 
 GraphVertex *GraphIteratorBFS::next() {

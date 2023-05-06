@@ -156,7 +156,7 @@ void Debug2D::draw_set_line_width(real_t p_width) {
 }
 
 void Debug2D::draw_reset(const String &p_option) {
-	if (p_option.empty()) {
+	if (p_option.is_empty()) {
 		draw_override["color"] = Variant();
 		draw_override["filled"] = Variant();
 		draw_override["line_width"] = Variant();
@@ -273,7 +273,7 @@ void Debug2D::_draw_command(const DrawCommand &p_command, CanvasItem *p_item) {
 
 			if (filled) {
 				const Vector<Vector<Point2>> &triangles = GoostGeometry2D::triangulate_polygon(polygon);
-				if (triangles.empty()) {
+				if (triangles.is_empty()) {
 					break;
 				}
 				Vector<Point2> vertices;
@@ -447,7 +447,7 @@ void Debug2D::_on_canvas_item_draw(Object *p_item) {
 	}
 	// Process rest of the commands that were not explicitly captured.
 	// These type of commands will be drawn regardless.
-	if (state->snapshots.empty()) {
+	if (state->snapshots.is_empty()) {
 		for (int j = 0; j < commands.size(); ++j) {
 			_draw_command(commands[j], item);
 		}

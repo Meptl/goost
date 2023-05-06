@@ -56,7 +56,7 @@ public:
 
 	void initialize(const LocalVector<T> &p_elements) {
 		vector.clear();
-		if (p_elements.empty()) {
+		if (p_elements.is_empty()) {
 			return;
 		}
 		vector = p_elements;
@@ -83,11 +83,11 @@ public:
 		sift_down(0);
 		return root;
 	}
-	_FORCE_INLINE_ bool is_empty() const {
-		return vector.empty();
+	_FORCE_INLINE_ bool is_is_empty() const {
+		return vector.is_empty();
 	}
 	_FORCE_INLINE_ T top() {
-		ERR_FAIL_COND_V(vector.empty(), T());
+		ERR_FAIL_COND_V(vector.is_empty(), T());
 		return vector[0];
 	}
 

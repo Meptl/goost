@@ -22,7 +22,7 @@ void EditorVCSInterfaceGit::_commit(const String p_msg) {
 	String name = EDITOR_GET("version_control/git/user/name");
 	String email = EDITOR_GET("version_control/git/user/email");
 
-	if (!name.empty() && !email.empty()) {
+	if (!name.is_empty() && !email.is_empty()) {
 		if (name.find("<") >= 0 || name.find(">") >= 0 || email.find("<") >= 0 || email.find(">") >= 0) {
 			EditorNode::get_singleton()->show_warning(
 					TTR("Invalid Git \"user.name\" or \"user.email\": Should not contain '<' and '>' characters. Aborting commit."));
@@ -365,7 +365,7 @@ bool EditorVCSInterfaceGit::_initialize(const String p_project_root_path) {
 	}
 
 	String path = GLOBAL_GET("version_control/git/repository_path");
-	if (path.empty()) {
+	if (path.is_empty()) {
 		path = p_project_root_path;
 	} else if (!DirAccess::exists(path)) {
 		WARN_PRINT(vformat("Repository path \"%s\" does not exist, please configure \"version_control/git/repository_path\" project setting.", path));

@@ -8,7 +8,7 @@ ImageIndexedMemLoadFunc ImageIndexed::_indexed_png_mem_loader_func = nullptr;
 SaveIndexedPNGFunc ImageIndexed::save_indexed_png_func = nullptr;
 
 Error ImageIndexed::create_indexed(int p_num_palette_entries) {
-	ERR_FAIL_COND_V(empty(), ERR_UNCONFIGURED);
+	ERR_FAIL_COND_V(is_empty(), ERR_UNCONFIGURED);
 
 	// Indexed image width and height determined by this image
 	const int width = get_width();
@@ -34,7 +34,7 @@ Error ImageIndexed::create_indexed(int p_num_palette_entries) {
 }
 
 Error ImageIndexed::create_indexed_from_data(const Vector<uint8_t> &p_palette_data, const Vector<uint8_t> &p_index_data) {
-	ERR_FAIL_COND_V(empty(), ERR_UNCONFIGURED);
+	ERR_FAIL_COND_V(is_empty(), ERR_UNCONFIGURED);
 	ERR_FAIL_COND_V(p_index_data.size() == 0, ERR_CANT_CREATE);
 	ERR_FAIL_COND_V(p_palette_data.size() == 0, ERR_CANT_CREATE);
 
@@ -109,7 +109,7 @@ int ImageIndexed::get_pixel_indexed(int p_x, int p_y) const {
 }
 
 real_t ImageIndexed::generate_palette(int p_num_colors, DitherMode p_dither, bool p_with_alpha, bool p_high_quality) {
-	ERR_FAIL_COND_V_MSG(empty(), -1.0, "Cannot generate a palette from an empty image.");
+	ERR_FAIL_COND_V_MSG(is_empty(), -1.0, "Cannot generate a palette from an empty image.");
 	ERR_FAIL_COND_V_MSG(get_format() != FORMAT_RGBA8, -1.0, "Cannot generate a palette, convert to FORMAT_RBGA8 first.");
 
 	const int width = get_width();

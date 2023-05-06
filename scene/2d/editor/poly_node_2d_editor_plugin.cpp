@@ -48,7 +48,7 @@ void PolyNode2DEditor::_menu_option(int p_option) {
 		case MENU_OPTION_FLATTEN_OUTLINES: {
 			PolyNode2D *new_node = memnew(PolyNode2D);
 			const Vector<Vector<Point2>> &outlines = node->get_outlines();
-			if (!outlines.empty()) {
+			if (!outlines.is_empty()) {
 				const Vector<Point2> &points = outlines[0];
 				new_node->set_points(points);
 			}

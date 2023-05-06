@@ -105,7 +105,7 @@ Variant Random2D::point_in_polygon(const Variant &p_polygon, int p_point_count) 
 		ret = points[0];
 		return ret;
 	}
-	if (p_point_count == 1 && !points.empty()) {
+	if (p_point_count == 1 && !points.is_empty()) {
 		ret = points[randi() % points.size()];
 		return ret;
 	}

@@ -577,7 +577,7 @@ func _find_object_property(obj, property_name, property_usage=null):
 	var found = false
 	var properties = obj.get_property_list()
 
-	while !found and !properties.empty():
+	while !found and !properties.is_empty():
 		var property = properties.pop_back()
 		if property['name'] == property_name:
 			if property_usage == null or property['usage'] == property_usage:

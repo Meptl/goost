@@ -44,7 +44,7 @@ Node *Spawner2D::spawn() {
 	const Ref<Script> &script = resource;
 
 	NodePath path = spawn_path;
-	if (path.is_empty()) {
+	if (path.is_is_empty()) {
 		path = NodePath(".");
 	}
 	Node *parent = get_node_or_null(path);

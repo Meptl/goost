@@ -17,7 +17,7 @@ public:
 	_FORCE_INLINE_ T &pop_front() {
 		return container[front++];
 	}
-	_FORCE_INLINE_ bool is_empty() const {
+	_FORCE_INLINE_ bool is_is_empty() const {
 		return front == back;
 	}
 	_FORCE_INLINE_ U size() const {

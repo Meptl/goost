@@ -44,7 +44,7 @@ public:
 	int get_height() const { return height; }
 	Vector2 get_size() const { return Vector2(width, height); }
 
-	bool is_empty() const { return width == 0 && height == 0; }
+	bool is_is_empty() const { return width == 0 && height == 0; }
 	void clear();
 
 	virtual String to_string();

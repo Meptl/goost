@@ -44,20 +44,20 @@ func test_clip():
 	c.operation = PolyNode2D.OP_DIFFERENCE
 	# var _err = n.connect("outlines_updated", self, "_on_clip_outlines_updated", [], CONNECT_ONESHOT)
 	var outlines = n.build_outlines()
-	assert_false(outlines.empty())
+	assert_false(outlines.is_empty())
 	assert_eq(outlines[0].size(), 12)
 	remove_child(n)
 
 
 func _on_clip_outlines_updated():
 	var outlines = n.get_outlines()
-	assert_false(outlines.empty())
+	assert_false(outlines.is_empty())
 	assert_eq(outlines[0].size(), 12)
 	remove_child(n)
 
 
-func test_is_hole_empty():
-	assert_true(n.is_inner())	
+func test_is_hole_is_empty():
+	assert_true(n.is_inner())
 
 
 func test_is_hole_outer():

@@ -90,7 +90,7 @@ String GoostEngine::get_license_text() const {
 }
 
 Dictionary GoostEngine::get_color_constants() const {
-	if (_named_colors.empty()) {
+	if (_named_colors.is_empty()) {
 		_populate_named_colors(); // color_names.inc
 	}
 	Dictionary colors;

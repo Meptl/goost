@@ -25,7 +25,7 @@ Error ImageFrames::load(const String &p_path, int max_frames) {
 }
 
 Error ImageFrames::load_gif_from_buffer(const PackedByteArray &p_data, int max_frames) {
-	ERR_FAIL_COND_V_MSG(p_data.empty(), ERR_INVALID_DATA, "Invalid GIF data");
+	ERR_FAIL_COND_V_MSG(p_data.is_empty(), ERR_INVALID_DATA, "Invalid GIF data");
 	clear();
 	if (p_data[0] == 'G') {
 		Ref<ImageFrames> image_frames = Ref<ImageFrames>(this);
@@ -186,7 +186,7 @@ Error ImageFrames::save_gif(const String &p_filepath, int p_color_count) {
 
 void ImageFrames::add_frame(const Ref<Image> &p_image, float p_delay) {
 	ERR_FAIL_COND(p_image.is_null());
-	ERR_FAIL_COND(p_image->empty());
+	ERR_FAIL_COND(p_image->is_empty());
 
 	Frame frame;
 	frame.image = p_image;

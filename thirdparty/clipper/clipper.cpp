@@ -473,10 +473,10 @@ namespace clipperlib {
 
   bool Clipper::PopScanline(int64_t &y)
   {
-    if (scanline_list_.empty()) return false;
+    if (scanline_list_.is_empty()) return false;
     y = scanline_list_.top();
     scanline_list_.pop();
-    while (!scanline_list_.empty() && y == scanline_list_.top())
+    while (!scanline_list_.is_empty() && y == scanline_list_.top())
       scanline_list_.pop(); // Pop duplicates.
     return true;
   }
@@ -503,7 +503,7 @@ namespace clipperlib {
 
   void Clipper::DisposeVerticesAndLocalMinima()
   {
-    for (MinimaList::iterator ml_iter = minima_list_.begin(); 
+    for (MinimaList::iterator ml_iter = minima_list_.begin();
       ml_iter != minima_list_.end(); ++ml_iter)
         delete (*ml_iter);
     minima_list_.clear();
@@ -514,7 +514,7 @@ namespace clipperlib {
   }
   //------------------------------------------------------------------------------
 
-  void Clipper::AddLocMin(Vertex &vert, PathType polytype, bool is_open) 
+  void Clipper::AddLocMin(Vertex &vert, PathType polytype, bool is_open)
   {
     //make sure the vertex is added only once ...
     if (vfLocMin & vert.flags) return;
@@ -528,7 +528,7 @@ namespace clipperlib {
   }
   //----------------------------------------------------------------------------
 
-  void Clipper::AddPathToVertexList(const Path &path, PathType polytype, bool is_open) 
+  void Clipper::AddPathToVertexList(const Path &path, PathType polytype, bool is_open)
   {
     int path_len = (int)path.size();
     while (path_len > 1 && (path[path_len - 1] == path[0])) --path_len;
@@ -543,7 +543,7 @@ namespace clipperlib {
       if (!is_open) return;    //Ignore closed paths that have ZERO area.
       going_up = false;           //And this just stops a compiler warning.
     }
-    else 
+    else
     {
       going_up = path[i].y < path[0].y; //because I'm using an inverted Y-axis display
       if (going_up) {
@@ -566,7 +566,7 @@ namespace clipperlib {
 
     if (is_open) {
       vertices[0].flags |= vfOpenStart;
-      if (going_up) AddLocMin(vertices[0], polytype, is_open); 
+      if (going_up) AddLocMin(vertices[0], polytype, is_open);
       else vertices[0].flags |= vfLocalMax;
     }
 
@@ -592,7 +592,7 @@ namespace clipperlib {
     vertices[i].next = &vertices[0];
     vertices[0].prev = &vertices[i];
 
-    if (is_open) {    
+    if (is_open) {
       vertices[i].flags |= vfOpenEnd;
       if (going_up)
         vertices[i].flags |= vfLocalMax;
@@ -616,7 +616,7 @@ namespace clipperlib {
   }
   //------------------------------------------------------------------------------
 
-  void Clipper::AddPath(const Path &path, PathType polytype, bool is_open) 
+  void Clipper::AddPath(const Path &path, PathType polytype, bool is_open)
   {
     if (is_open) {
       if (polytype == ptClip)
@@ -680,11 +680,11 @@ namespace clipperlib {
           case frNonZero: return (e.wind_cnt2 != 0);
           case frPositive: return (e.wind_cnt2 > 0);
           case frNegative: return (e.wind_cnt2 < 0);
-        }; 
+        };
       break;
     case ctXor: return true; //XOr is always contributing unless open
     }
-    return false; //we should never get here 
+    return false; //we should never get here
   }
   //------------------------------------------------------------------------------
 
@@ -700,7 +700,7 @@ namespace clipperlib {
   }
   //------------------------------------------------------------------------------
 
-  void Clipper::SetWindingLeftEdgeClosed(Active &e) 
+  void Clipper::SetWindingLeftEdgeClosed(Active &e)
   {
     //Wind counts generally refer to polygon regions not edges, so here an edge's
     //WindCnt indicates the higher of the two wind counts of the regions touching
@@ -896,10 +896,10 @@ namespace clipperlib {
         if (IsHorizontal(*right_bound)) PushHorz(*right_bound);
         else InsertScanline(right_bound->top.y);
       }
-      else if (contributing) 
+      else if (contributing)
         StartOpenPath(*left_bound, left_bound->bot);
 
-      if (IsHorizontal(*left_bound)) PushHorz(*left_bound); 
+      if (IsHorizontal(*left_bound)) PushHorz(*left_bound);
       else InsertScanline(left_bound->top.y);
 
       if (right_bound && left_bound->next_in_ael != right_bound) {
@@ -946,7 +946,7 @@ namespace clipperlib {
     }
     else {
       e = e->prev_in_ael;
-      while (e && (!IsHotEdge(*e) || IsOpen(*e))) 
+      while (e && (!IsHotEdge(*e) || IsOpen(*e)))
         e = e->prev_in_ael;
       if (!e) return NULL;
       return ((e->outrec->flag == orOuter) == (e->outrec->end_e == e)) ?
@@ -966,7 +966,7 @@ namespace clipperlib {
     if (IsOpen(e1))
       outrec->flag = orOpen;
     else if (!outrec->owner || outrec->owner->flag == orInner)
-      outrec->flag = orOuter; 
+      outrec->flag = orOuter;
     else
       outrec->flag = orInner;
 
@@ -980,8 +980,8 @@ namespace clipperlib {
     }
     else if (e1.dx < e2.dx) swap_sides_needed = true;
     if ((outrec->flag == orOuter) != swap_sides_needed)
-      SetOrientation(*outrec, e1, e2); 
-    else 
+      SetOrientation(*outrec, e1, e2);
+    else
       SetOrientation(*outrec, e2, e1);
 
     OutPt *op = CreateOutPt();
@@ -1016,7 +1016,7 @@ namespace clipperlib {
     if (IsStartSide(e1) == IsStartSide(e2)) {
       //one or other edge orientation is wrong...
       if (IsOpen(e1)) SwapSides(*e2.outrec);
-      else if (!FixOrientation(e1) && !FixOrientation(e2)) 
+      else if (!FixOrientation(e1) && !FixOrientation(e2))
         CLIPPER_THROW(ClipperException("Error in JoinOutrecPaths()"));
       if (e1.outrec->owner == e2.outrec) e1.outrec->owner = e2.outrec->owner;
     }
@@ -1140,7 +1140,7 @@ namespace clipperlib {
   {
     e1.curr = pt;
     e2.curr = pt;
- 
+
     //if either edge is an OPEN path ...
     if (has_open_paths_ && (IsOpen(e1) || IsOpen(e2))) {
       if (IsOpen(e1) && IsOpen(e2)) return; //ignore lines that intersect
@@ -1335,7 +1335,7 @@ namespace clipperlib {
       if (!PopScanline(y)) break;   //Y is now at the top of the scanbeam
       ProcessIntersections(y);
       DoTopOfScanbeam(y);
-    } 
+    }
     return true;
   }
   //------------------------------------------------------------------------------
@@ -1383,7 +1383,7 @@ namespace clipperlib {
   inline void Clipper::DisposeIntersectNodes()
   {
     for (IntersectList::iterator node_iter = intersect_list_.begin();
-      node_iter != intersect_list_.end(); ++node_iter) 
+      node_iter != intersect_list_.end(); ++node_iter)
         delete (*node_iter);
     intersect_list_.resize(0);
   }
@@ -1425,7 +1425,7 @@ namespace clipperlib {
 
     //Merge sort actives_ into their new positions at the top of scanbeam, and
     //create an intersection node every time an edge crosses over another ...
-    //see also https://stackoverflow.com/a/46319131/359538 
+    //see also https://stackoverflow.com/a/46319131/359538
     int mul = 1;
     while (true) {
 
@@ -1690,7 +1690,7 @@ namespace clipperlib {
     bool is_left_to_right = ResetHorzDirection(horz, max_pair, horz_left, horz_right);
     if (IsHotEdge(horz)) AddOutPt(horz, horz.curr);
 
-    while (true) { //loops through consec. horizontal edges (if open)    
+    while (true) { //loops through consec. horizontal edges (if open)
       Active *e;
       bool isMax = IsMaxima(horz);
       if (is_left_to_right)
@@ -1729,7 +1729,7 @@ namespace clipperlib {
         }
 
         Active *next_e;
-        if (is_left_to_right) next_e = e->next_in_ael; 
+        if (is_left_to_right) next_e = e->next_in_ael;
         else next_e = e->prev_in_ael;
         SwapPositionsInAEL(horz, *e);
         e = next_e;
@@ -1750,15 +1750,15 @@ namespace clipperlib {
 
     if (IsHotEdge(horz)) AddOutPt(horz, horz.top);
     if (!IsOpen(horz))
-      UpdateEdgeIntoAEL(&horz); //this is the } of an intermediate horiz.      
+      UpdateEdgeIntoAEL(&horz); //this is the } of an intermediate horiz.
     else if (!IsMaxima(horz))
       UpdateEdgeIntoAEL(&horz);
     else if (!max_pair)      //ie open at top
       DeleteFromAEL(horz);
     else if (IsHotEdge(horz))
       AddLocalMaxPoly(horz, *max_pair, horz.top);
-    else { 
-      DeleteFromAEL(*max_pair); DeleteFromAEL(horz); 
+    else {
+      DeleteFromAEL(*max_pair); DeleteFromAEL(horz);
     }
   }
   //------------------------------------------------------------------------------
@@ -1846,9 +1846,9 @@ namespace clipperlib {
       solution_open->resize(0);
       solution_open->reserve(outrec_list_.size());
     }
-    
-    for (OutRecList::const_iterator ol_iter = outrec_list_.begin(); 
-      ol_iter != outrec_list_.end(); ++ol_iter) 
+
+    for (OutRecList::const_iterator ol_iter = outrec_list_.begin();
+      ol_iter != outrec_list_.end(); ++ol_iter)
     {
       OutRec *outrec = *ol_iter;
       if (!outrec->pts) continue;
@@ -1876,8 +1876,8 @@ namespace clipperlib {
       solution_open->reserve(outrec_list_.size());
     }
 
-    for (OutRecList::const_iterator ol_iter = outrec_list_.begin(); 
-      ol_iter != outrec_list_.end(); ++ol_iter) 
+    for (OutRecList::const_iterator ol_iter = outrec_list_.begin();
+      ol_iter != outrec_list_.end(); ++ol_iter)
     {
       OutRec *outrec = *ol_iter;
       if (!outrec->pts) continue;
@@ -1892,7 +1892,7 @@ namespace clipperlib {
       Path p;
       p.reserve(cnt);
       for (int i = 0; i < cnt; i++) { p.push_back(op->pt); op = op->next; }
-      if (is_open) 
+      if (is_open)
         solution_open->push_back(p);
       else if (outrec->owner && outrec->owner->polypath)
         outrec->polypath = &outrec->owner->polypath->AddChild(p);
@@ -1931,7 +1931,7 @@ namespace clipperlib {
 
   std::ostream& operator <<(std::ostream &s, const Path &path)
   {
-    if (path.empty()) return s;
+    if (path.is_empty()) return s;
     Path::size_type last = path.size() -1;
     for (Path::size_type i = 0; i < last; i++) s  << path[i] << " ";
     s << path[last] << "\n";
