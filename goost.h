@@ -29,5 +29,4 @@
 #include "scene/gui/grid_rect.h"
 #include "scene/main/stopwatch.h"
 #include "scene/physics/2d/poly_collision_shape_2d.h"
-#include "scene/physics/2d/shape_cast_2d.h"
 #include "scene/resources/light_texture.h"

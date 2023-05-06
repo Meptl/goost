@@ -5,8 +5,6 @@
 namespace goost {
 
 void register_physics_types() {
-	ClassDB::register_class<ShapeCast2D>();
-
 #if defined(GOOST_GEOMETRY_ENABLED) && defined(GOOST_PolyNode2D) && defined(GOOST_PolyShape2D)
 	ClassDB::register_class<PolyCollisionShape2D>();
 #endif
