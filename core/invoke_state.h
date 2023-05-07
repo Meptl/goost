@@ -8,7 +8,7 @@ class InvokeState : public RefCounted {
 
 	friend class GoostEngine;
 
-	ObjectID instance_id = 0;
+	ObjectID instance_id;
 	StringName method;
 	Ref<SceneTreeTimer> timer; // Needed to fetch `time_left`.
 
