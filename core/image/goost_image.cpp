@@ -391,7 +391,7 @@ Color GoostImage::get_pixel_average(const Ref<Image> &p_image, const Rect2 &p_re
 	ERR_FAIL_COND_V(p_image.is_null(), Color());
 	ERR_FAIL_COND_V(p_image->is_empty(), Color());
 
-	bool using_rect = !p_rect.has_no_area();
+	bool using_rect = p_rect.has_area();
 
 	bool using_mask = p_mask.is_valid();
 	if (using_mask) {

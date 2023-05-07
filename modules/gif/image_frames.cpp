@@ -51,7 +51,7 @@ Error ImageFrames::save_gif(const String &p_filepath, int p_color_count) {
 	// GIF allows to add images of different sizes,
 	// but we need to determine the canvas size that could contain all frames.
 	const Rect2 &rect = get_bounding_rect();
-	ERR_FAIL_COND_V_MSG(rect.has_no_area(), ERR_CANT_CREATE, "ImageFrames contain uninitialized images.");
+	ERR_FAIL_COND_V_MSG(!rect.has_area(), ERR_CANT_CREATE, "ImageFrames contain uninitialized images.");
 
 	FileAccess *f = FileAccess::open(p_filepath, FileAccess::WRITE);
 	ERR_FAIL_COND_V_MSG(!f, ERR_CANT_OPEN, "Error opening file.");
