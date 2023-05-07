@@ -94,7 +94,7 @@ void ImageBlender::blend_rect(const Ref<Image> p_src, const Rect2 &p_src_rect, R
 	ERR_FAIL_COND(srcdsize == 0);
 	ERR_FAIL_COND(p_dst->get_format() != p_src->get_format());
 
-	Rect2i clipped_src_rect = Rect2i(0, 0, p_src->get_width(), p_src->get_height()).clip(p_src_rect);
+	Rect2i clipped_src_rect = Rect2i(0, 0, p_src->get_width(), p_src->get_height()).intersection(p_src_rect);
 
 	if (p_dst_pos.x < 0)
 		clipped_src_rect.position.x = ABS(p_dst_pos.x);
@@ -105,7 +105,7 @@ void ImageBlender::blend_rect(const Ref<Image> p_src, const Rect2 &p_src_rect, R
 		return;
 
 	Point2 src_underscan = Point2(MIN(0, p_src_rect.position.x), MIN(0, p_src_rect.position.y));
-	Rect2i dest_rect = Rect2i(0, 0, p_dst->get_width(), p_dst->get_height()).clip(Rect2i(p_dst_pos - src_underscan, clipped_src_rect.size));
+	Rect2i dest_rect = Rect2i(0, 0, p_dst->get_width(), p_dst->get_height()).intersection(Rect2i(p_dst_pos - src_underscan, clipped_src_rect.size));
 
 	Ref<Image> img = p_src;
 
