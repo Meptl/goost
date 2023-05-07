@@ -31,7 +31,7 @@ bool MixinScriptInstance::get(const StringName &p_name, Variant &r_ret) const {
 void MixinScriptInstance::get_property_list(List<PropertyInfo> *p_properties) const {
 	ScriptInstance *const *sarr = instances.ptr();
 
-	Set<String> existing;
+	RBSet<String> existing;
 
 	for (int i = 0; i < instances.size(); i++) {
 		if (!sarr[i]) {
@@ -53,7 +53,7 @@ void MixinScriptInstance::get_property_list(List<PropertyInfo> *p_properties) co
 void MixinScriptInstance::get_method_list(List<MethodInfo> *p_list) const {
 	ScriptInstance *const *sarr = instances.ptr();
 
-	Set<StringName> existing;
+	RBSet<StringName> existing;
 
 	for (int i = 0; i < instances.size(); i++) {
 		if (!sarr[i]) {

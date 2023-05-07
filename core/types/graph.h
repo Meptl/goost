@@ -248,7 +248,7 @@ public:
 
 protected:
 	Stack<Element> stack;
-	Set<GraphVertex *> visited;
+	RBSet<GraphVertex *> visited;
 	GraphVertex *next_vertex = nullptr;
 
 	static void _bind_methods();
@@ -265,7 +265,7 @@ class GraphIteratorBFS : public GraphIterator {
 
 protected:
 	Queue<GraphVertex *> queue;
-	Set<GraphVertex *> visited;
+	RBSet<GraphVertex *> visited;
 
 	static void _bind_methods();
 
