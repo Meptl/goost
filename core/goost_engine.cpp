@@ -100,8 +100,8 @@ Dictionary GoostEngine::get_color_constants() const {
 	return colors;
 }
 
-void GoostEngine::defer_call(Object *p_obj, StringName p_method, VARIANT_ARG_DECLARE) {
-	deferred_calls.push_call(p_obj->get_instance_id(), p_method, VARIANT_ARG_PASS);
+void GoostEngine::defer_callp(Object *p_obj, StringName p_method, const Variant **p_args, int p_argcount, bool p_show_error) {
+	deferred_calls.push_call(p_obj->get_instance_id(), p_method, p_args, p_argcount);
 }
 
 Variant GoostEngine::_defer_call_bind(const Variant **p_args, int p_argcount, Variant::CallError &r_error) {
@@ -131,8 +131,8 @@ Variant GoostEngine::_defer_call_bind(const Variant **p_args, int p_argcount, Va
 	return Variant();
 }
 
-void GoostEngine::defer_call_unique(Object *p_obj, StringName p_method, VARIANT_ARG_DECLARE) {
-	deferred_calls.push_call_unique(p_obj->get_instance_id(), p_method, VARIANT_ARG_PASS);
+void GoostEngine::defer_call_uniquep(Object *p_obj, StringName p_method, const Variant **p_args, int p_argcount, bool p_show_error) {
+	deferred_calls.push_call_unique(p_obj->get_instance_id(), p_method, p_args, p_argcount);
 }
 
 Variant GoostEngine::_defer_call_unique_bind(const Variant **p_args, int p_argcount, Variant::CallError &r_error) {

@@ -14,17 +14,8 @@ Error FuncBuffer::push_call(ObjectID p_id, const StringName &p_method, const Var
 	return OK;
 }
 
-Error FuncBuffer::push_call(ObjectID p_id, const StringName &p_method, VARIANT_ARG_DECLARE) {
-	VARIANT_ARGPTRS;
-
-	int argc = 0;
-	for (int i = 0; i < VARIANT_ARG_MAX; i++) {
-		if (argptr[i]->get_type() == Variant::NIL) {
-			break;
-		}
-		argc++;
-	}
-	return push_call(p_id, p_method, argptr, argc);
+Error FuncBuffer::push_callp(ObjectID p_id, const StringName &p_method, const Variant **p_args, int p_argcount, bool p_show_error) {
+	return push_call(p_id, p_method, p_args, p_argcount);
 }
 
 Error FuncBuffer::push_call_unique(ObjectID p_id, const StringName &p_method, const Variant **p_args, int p_argcount) {
@@ -53,17 +44,8 @@ Error FuncBuffer::push_call_unique(ObjectID p_id, const StringName &p_method, co
 	return OK;
 }
 
-Error FuncBuffer::push_call_unique(ObjectID p_id, const StringName &p_method, VARIANT_ARG_DECLARE) {
-	VARIANT_ARGPTRS;
-
-	int argc = 0;
-	for (int i = 0; i < VARIANT_ARG_MAX; i++) {
-		if (argptr[i]->get_type() == Variant::NIL) {
-			break;
-		}
-		argc++;
-	}
-	return push_call_unique(p_id, p_method, argptr, argc);
+Error FuncBuffer::push_call_uniquep(ObjectID p_id, const StringName &p_method, const Variant **p_args, int p_argcount, bool p_show_error) {
+	return push_call_unique(p_id, p_method, p_args, p_argcount);
 }
 
 void FuncBuffer::flush() {

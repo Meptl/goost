@@ -16,13 +16,13 @@ private:
 
 public:
 	Error push_call(ObjectID p_id, const StringName &p_method, const Variant **p_args, int p_argcount);
-	Error push_call(ObjectID p_id, const StringName &p_method, VARIANT_ARG_DECLARE);
+	Error push_call(ObjectID p_id, const StringName &p_method, const Variant **p_args, int p_argcount, bool p_show_error);
 
 	Error push_call_unique(ObjectID p_id, const StringName &p_method, const Variant **p_args, int p_argcount);
-	Error push_call_unique(ObjectID p_id, const StringName &p_method, VARIANT_ARG_DECLARE);
+	Error push_call_unique(ObjectID p_id, const StringName &p_method, const Variant **p_args, int p_argcount, bool p_show_error);
 
 	void flush();
-	
+
 	~FuncBuffer() {
 		for (int i = 0; i < buffer.size(); ++i) {
 			memdelete(buffer[i]);

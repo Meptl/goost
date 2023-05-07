@@ -34,8 +34,25 @@ public:
 
 	Dictionary get_color_constants() const;
 
-	void defer_call(Object *p_obj, StringName p_method, VARIANT_ARG_LIST);
-	void defer_call_unique(Object *p_obj, StringName p_method, VARIANT_ARG_LIST);
+	template <typename... VarArgs>
+	void defer_callp(Object *p_obj, StringName p_method, VarArgs... p_args) {
+		Variant args[sizeof...(p_args) + 1] = { p_args..., Variant() }; // +1 makes sure zero sized arrays are also supported.
+		const Variant *argptrs[sizeof...(p_args) + 1];
+		for (uint32_t i = 0; i < sizeof...(p_args); i++) {
+			argptrs[i] = &args[i];
+		}
+		defer_callp(0, p_method, sizeof...(p_args) == 0 ? nullptr : (const Variant **)argptrs, sizeof...(p_args));
+	}
+
+	template <typename... VarArgs>
+	void defer_call_uniquep(Object *p_obj, StringName p_method, VarArgs... p_args) {
+		Variant args[sizeof...(p_args) + 1] = { p_args..., Variant() }; // +1 makes sure zero sized arrays are also supported.
+		const Variant *argptrs[sizeof...(p_args) + 1];
+		for (uint32_t i = 0; i < sizeof...(p_args); i++) {
+			argptrs[i] = &args[i];
+		}
+		defer_call_uniquep(0, p_method, sizeof...(p_args) == 0 ? nullptr : (const Variant **)argptrs, sizeof...(p_args));
+	}
 
 	Ref<InvokeState> invoke(Object *p_obj, StringName p_method, real_t p_delay, real_t p_repeat_rate, bool p_pause_mode_process = true);
 	Ref<InvokeState> invoke_deferred(Object *p_obj, StringName p_method, real_t p_delay, real_t p_repeat_rate, bool p_pause_mode_process = true);
