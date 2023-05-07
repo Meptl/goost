@@ -71,7 +71,7 @@ void MidiFile::_bind_methods() {
 	ClassDB::bind_method(D_METHOD("set_format", "format"), &MidiFile::set_format);
 	ClassDB::bind_method(D_METHOD("get_format"), &MidiFile::get_format);
 
-	ADD_PROPERTY(PropertyInfo(Variant::PACKED_BYTE_ARRAY, "data", PROPERTY_HINT_NONE, "", PROPERTY_USAGE_NOEDITOR), "set_data", "get_data");
+	ADD_PROPERTY(PropertyInfo(Variant::PACKED_BYTE_ARRAY, "data", PROPERTY_HINT_NONE, "", PROPERTY_USAGE_NO_EDITOR), "set_data", "get_data");
 	ADD_PROPERTY(PropertyInfo(Variant::INT, "format"), "set_format", "get_format");
 
 	BIND_ENUM_CONSTANT(FORMAT_MIDI);

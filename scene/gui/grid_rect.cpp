@@ -313,7 +313,7 @@ void GridRect::_get_property_list(List<PropertyInfo> *p_list) const {
 void GridRect::_validate_property(PropertyInfo &property) const {
 	if (property.name == "origin_axes_line_width") {
 		if (!origin_axes_visible) {
-			property.usage = PROPERTY_USAGE_NOEDITOR;
+			property.usage = PROPERTY_USAGE_NO_EDITOR;
 		}
 	}
 }

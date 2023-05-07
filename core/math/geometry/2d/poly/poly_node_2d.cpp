@@ -200,12 +200,12 @@ void PolyNode2D::_update_outlines() {
 void PolyNode2D::_validate_property(PropertyInfo &property) const {
 	if (property.name == "filled") {
 		if (open) {
-			property.usage = PROPERTY_USAGE_NOEDITOR;
+			property.usage = PROPERTY_USAGE_NO_EDITOR;
 		}
 	}
 	if (property.name == "line_width") {
 		if (!open && filled) {
-			property.usage = PROPERTY_USAGE_NOEDITOR;
+			property.usage = PROPERTY_USAGE_NO_EDITOR;
 		}
 	}
 }
