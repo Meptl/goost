@@ -126,7 +126,7 @@ void Random2D::_bind_methods() {
 	ClassDB::bind_method(D_METHOD("point_in_polygon", "polygon", "point_count"), &Random2D::point_in_polygon, DEFVAL(1));
 
 	ADD_PROPERTY(PropertyInfo(Variant::VECTOR2, "direction"), "", "get_direction");
-	ADD_PROPERTY(PropertyInfo(Variant::REAL, "rotation"), "", "get_rotation");
+	ADD_PROPERTY(PropertyInfo(Variant::FLOAT, "rotation"), "", "get_rotation");
 
 	// Default values are non-deterministic, override those for documentation purposes.
 	ADD_PROPERTY_DEFAULT("direction", Vector2(1, 0));

@@ -148,8 +148,8 @@ void PolyOffsetParameters2D::_bind_methods() {
 
 	ADD_PROPERTY(PropertyInfo(Variant::INT, "join_type", PROPERTY_HINT_ENUM, "Square,Round,Miter"), "set_join_type", "get_join_type");
 	ADD_PROPERTY(PropertyInfo(Variant::INT, "end_type", PROPERTY_HINT_ENUM, "Polygon,Joined,Butt,Square,Round"), "set_end_type", "get_end_type");
-	ADD_PROPERTY(PropertyInfo(Variant::REAL, "arc_tolerance", PROPERTY_HINT_RANGE, "0.01,5.0,0.01,or_greater"), "set_arc_tolerance", "get_arc_tolerance");
-	ADD_PROPERTY(PropertyInfo(Variant::REAL, "miter_limit", PROPERTY_HINT_RANGE, "0.1,10.0,0.1,or_greater"), "set_miter_limit", "get_miter_limit");
+	ADD_PROPERTY(PropertyInfo(Variant::FLOAT, "arc_tolerance", PROPERTY_HINT_RANGE, "0.01,5.0,0.01,or_greater"), "set_arc_tolerance", "get_arc_tolerance");
+	ADD_PROPERTY(PropertyInfo(Variant::FLOAT, "miter_limit", PROPERTY_HINT_RANGE, "0.1,10.0,0.1,or_greater"), "set_miter_limit", "get_miter_limit");
 
 	BIND_ENUM_CONSTANT(JOIN_SQUARE);
 	BIND_ENUM_CONSTANT(JOIN_ROUND);

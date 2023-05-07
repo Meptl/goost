@@ -34,8 +34,8 @@ void PolyCircle2D::_bind_methods() {
 	ClassDB::bind_method(D_METHOD("set_max_error", "max_error"), &PolyCircle2D::set_max_error);
 	ClassDB::bind_method(D_METHOD("get_max_error"), &PolyCircle2D::get_max_error);
 
-	ADD_PROPERTY(PropertyInfo(Variant::REAL, "radius", PROPERTY_HINT_RANGE, "0.01,1024.0,0.01,or_greater"), "set_radius", "get_radius");
-	ADD_PROPERTY(PropertyInfo(Variant::REAL, "max_error", PROPERTY_HINT_RANGE, "0.01,5.0,0.01,or_greater"), "set_max_error", "get_max_error");
+	ADD_PROPERTY(PropertyInfo(Variant::FLOAT, "radius", PROPERTY_HINT_RANGE, "0.01,1024.0,0.01,or_greater"), "set_radius", "get_radius");
+	ADD_PROPERTY(PropertyInfo(Variant::FLOAT, "max_error", PROPERTY_HINT_RANGE, "0.01,5.0,0.01,or_greater"), "set_max_error", "get_max_error");
 }
 
 // PolyEllipse2D
@@ -77,9 +77,9 @@ void PolyEllipse2D::_bind_methods() {
 	ClassDB::bind_method(D_METHOD("set_max_error", "max_error"), &PolyEllipse2D::set_max_error);
 	ClassDB::bind_method(D_METHOD("get_max_error"), &PolyEllipse2D::get_max_error);
 
-	ADD_PROPERTY(PropertyInfo(Variant::REAL, "width", PROPERTY_HINT_RANGE, "0.01,1024.0,0.01,or_greater"), "set_width", "get_width");
-	ADD_PROPERTY(PropertyInfo(Variant::REAL, "height", PROPERTY_HINT_RANGE, "0.01,1024.0,0.01,or_greater"), "set_height", "get_height");
-	ADD_PROPERTY(PropertyInfo(Variant::REAL, "max_error", PROPERTY_HINT_RANGE, "0.01,5.0,0.01,or_greater"), "set_max_error", "get_max_error");
+	ADD_PROPERTY(PropertyInfo(Variant::FLOAT, "width", PROPERTY_HINT_RANGE, "0.01,1024.0,0.01,or_greater"), "set_width", "get_width");
+	ADD_PROPERTY(PropertyInfo(Variant::FLOAT, "height", PROPERTY_HINT_RANGE, "0.01,1024.0,0.01,or_greater"), "set_height", "get_height");
+	ADD_PROPERTY(PropertyInfo(Variant::FLOAT, "max_error", PROPERTY_HINT_RANGE, "0.01,5.0,0.01,or_greater"), "set_max_error", "get_max_error");
 }
 
 // PolyCapsule2D
@@ -121,9 +121,9 @@ void PolyCapsule2D::_bind_methods() {
 	ClassDB::bind_method(D_METHOD("set_max_error", "max_error"), &PolyCapsule2D::set_max_error);
 	ClassDB::bind_method(D_METHOD("get_max_error"), &PolyCapsule2D::get_max_error);
 
-	ADD_PROPERTY(PropertyInfo(Variant::REAL, "radius", PROPERTY_HINT_RANGE, "0.01,1024.0,0.01,or_greater"), "set_radius", "get_radius");
-	ADD_PROPERTY(PropertyInfo(Variant::REAL, "height", PROPERTY_HINT_RANGE, "0.0,1024.0,0.01,or_greater"), "set_height", "get_height");
-	ADD_PROPERTY(PropertyInfo(Variant::REAL, "max_error", PROPERTY_HINT_RANGE, "0.01,5.0,0.01,or_greater"), "set_max_error", "get_max_error");
+	ADD_PROPERTY(PropertyInfo(Variant::FLOAT, "radius", PROPERTY_HINT_RANGE, "0.01,1024.0,0.01,or_greater"), "set_radius", "get_radius");
+	ADD_PROPERTY(PropertyInfo(Variant::FLOAT, "height", PROPERTY_HINT_RANGE, "0.0,1024.0,0.01,or_greater"), "set_height", "get_height");
+	ADD_PROPERTY(PropertyInfo(Variant::FLOAT, "max_error", PROPERTY_HINT_RANGE, "0.01,5.0,0.01,or_greater"), "set_max_error", "get_max_error");
 }
 
 // PolyRectangle2D
@@ -313,10 +313,10 @@ void PolyPath2D::_bind_methods() {
 	ClassDB::bind_method(D_METHOD("get_tessellation_tolerance_degrees"), &PolyPath2D::get_tessellation_tolerance_degrees);
 
 	ADD_GROUP("Buffer", "buffer_");
-	ADD_PROPERTY(PropertyInfo(Variant::REAL, "buffer_offset", PROPERTY_HINT_RANGE, "0.01,256.0,0.01,or_greater"), "set_buffer_offset", "get_buffer_offset");
+	ADD_PROPERTY(PropertyInfo(Variant::FLOAT, "buffer_offset", PROPERTY_HINT_RANGE, "0.01,256.0,0.01,or_greater"), "set_buffer_offset", "get_buffer_offset");
 	ADD_PROPERTY(PropertyInfo(Variant::OBJECT, "buffer_parameters", PROPERTY_HINT_RESOURCE_TYPE, "PolyOffsetParameters2D"), "set_buffer_parameters", "get_buffer_parameters");
 
 	ADD_GROUP("Tessellation", "tessellation_");
 	ADD_PROPERTY(PropertyInfo(Variant::INT, "tessellation_stages", PROPERTY_HINT_RANGE, "1,6,1"), "set_tessellation_stages", "get_tessellation_stages");
-	ADD_PROPERTY(PropertyInfo(Variant::REAL, "tessellation_tolerance_degrees", PROPERTY_HINT_RANGE, "1.0,180.0,0.1"), "set_tessellation_tolerance_degrees", "get_tessellation_tolerance_degrees");
+	ADD_PROPERTY(PropertyInfo(Variant::FLOAT, "tessellation_tolerance_degrees", PROPERTY_HINT_RANGE, "1.0,180.0,0.1"), "set_tessellation_tolerance_degrees", "get_tessellation_tolerance_degrees");
 }

@@ -624,7 +624,7 @@ void CommandLineParser::_bind_methods() {
 
 	ADD_PROPERTY(PropertyInfo(Variant::PACKED_STRING_ARRAY, "long_prefixes"), "set_long_prefixes", "get_long_prefixes");
 	ADD_PROPERTY(PropertyInfo(Variant::PACKED_STRING_ARRAY, "short_prefixes"), "set_short_prefixes", "get_short_prefixes");
-	ADD_PROPERTY(PropertyInfo(Variant::REAL, "similarity_bias"), "set_similarity_bias", "get_similarity_bias");
+	ADD_PROPERTY(PropertyInfo(Variant::FLOAT, "similarity_bias"), "set_similarity_bias", "get_similarity_bias");
 	ADD_PROPERTY(PropertyInfo(Variant::BOOL, "allow_forwarding_args"), "set_allow_forwarding_args", "are_forwarding_args_allowed");
 	ADD_PROPERTY(PropertyInfo(Variant::BOOL, "allow_adjacent"), "set_allow_adjacent", "is_adjacent_allowed");
 	ADD_PROPERTY(PropertyInfo(Variant::BOOL, "allow_sticky"), "set_allow_sticky", "is_sticky_allowed");

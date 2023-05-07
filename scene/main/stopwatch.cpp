@@ -105,12 +105,12 @@ void Stopwatch::_bind_methods() {
 
 	ADD_PROPERTY(PropertyInfo(Variant::INT, "process_mode", PROPERTY_HINT_ENUM, "Physics,Idle"), "set_process_mode", "get_process_mode");
 	ADD_PROPERTY(PropertyInfo(Variant::BOOL, "autostart"), "set_autostart", "has_autostart");
-	ADD_PROPERTY(PropertyInfo(Variant::REAL, "time_elapsed", PROPERTY_HINT_NONE, "", 0), "", "get_time_elapsed");
+	ADD_PROPERTY(PropertyInfo(Variant::FLOAT, "time_elapsed", PROPERTY_HINT_NONE, "", 0), "", "get_time_elapsed");
 
 	ADD_SIGNAL(MethodInfo("interval_measured",
-			PropertyInfo(Variant::REAL, "time_interval"),
-			PropertyInfo(Variant::REAL, "time_start"),
-			PropertyInfo(Variant::REAL, "time_stop")));
+			PropertyInfo(Variant::FLOAT, "time_interval"),
+			PropertyInfo(Variant::FLOAT, "time_start"),
+			PropertyInfo(Variant::FLOAT, "time_stop")));
 
 	BIND_ENUM_CONSTANT(PROCESS_PHYSICS);
 	BIND_ENUM_CONSTANT(PROCESS_IDLE);

@@ -13,7 +13,7 @@ void InvokeState::_bind_methods() {
 
 	ADD_PROPERTY(PropertyInfo(Variant::OBJECT, "target"), "", "get_target");
 	ADD_PROPERTY(PropertyInfo(Variant::STRING, "method"), "", "get_target_method");
-	ADD_PROPERTY(PropertyInfo(Variant::REAL, "time_left"), "", "get_time_left");
+	ADD_PROPERTY(PropertyInfo(Variant::FLOAT, "time_left"), "", "get_time_left");
 
 	ADD_SIGNAL(MethodInfo("pre_call"));
 	ADD_SIGNAL(MethodInfo("post_call"));

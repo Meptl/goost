@@ -95,7 +95,7 @@ void register_scene_types() {
 	GLOBAL_DEF("debug/draw/2d/filled", true);
 	GLOBAL_DEF("debug/draw/2d/line_width", 1.0);
 	ProjectSettings::get_singleton()->set_custom_property_info("debug/draw/2d/line_width",
-			PropertyInfo(Variant::REAL, "debug/draw/2d/line_width", PROPERTY_HINT_RANGE, "0.1,5.0,0.1,or_greater"));
+			PropertyInfo(Variant::FLOAT, "debug/draw/2d/line_width", PROPERTY_HINT_RANGE, "0.1,5.0,0.1,or_greater"));
 	GLOBAL_DEF("debug/draw/2d/antialiased", false);
 
 	// Grid layer.

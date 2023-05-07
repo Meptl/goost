@@ -44,7 +44,7 @@ Variant GoostMath::catmull_rom(const Variant &p0, const Variant &p1, const Varia
 #endif
 	switch (p0.get_type()) {
 		case Variant::INT:
-		case Variant::REAL: {
+		case Variant::FLOAT: {
 			return goost::math::catmull_rom(p0.operator real_t(), p1.operator real_t(), p2.operator real_t(), p3.operator real_t(), t);
 		} break;
 		case Variant::VECTOR2: {
@@ -67,7 +67,7 @@ Variant GoostMath::bezier(const Variant &p0, const Variant &p1, const Variant &p
 #endif
 	switch (p0.get_type()) {
 		case Variant::INT:
-		case Variant::REAL: {
+		case Variant::FLOAT: {
 			return goost::math::bezier(p0.operator real_t(), p1.operator real_t(), p2.operator real_t(), p3.operator real_t(), t);
 		} break;
 		case Variant::VECTOR2: {

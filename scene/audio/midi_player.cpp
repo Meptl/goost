@@ -474,7 +474,7 @@ void MidiPlayer::_bind_methods() {
 
 	ADD_PROPERTY(PropertyInfo(Variant::OBJECT, "soundfont", PROPERTY_HINT_RESOURCE_TYPE, "MidiFile"), "set_soundfont", "get_soundfont");
 	ADD_PROPERTY(PropertyInfo(Variant::OBJECT, "midi", PROPERTY_HINT_RESOURCE_TYPE, "MidiFile"), "set_midi", "get_midi");
-	ADD_PROPERTY(PropertyInfo(Variant::REAL, "midi_speed", PROPERTY_HINT_RANGE, "0,8,0.1"), "set_midi_speed", "get_midi_speed");
+	ADD_PROPERTY(PropertyInfo(Variant::FLOAT, "midi_speed", PROPERTY_HINT_RANGE, "0,8,0.1"), "set_midi_speed", "get_midi_speed");
 	ADD_PROPERTY(PropertyInfo(Variant::BOOL, "looping"), "set_looping", "is_looping");
 
 	ADD_SIGNAL(MethodInfo("loop_finished"));

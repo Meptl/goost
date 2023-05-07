@@ -383,7 +383,7 @@ void GridRect::_bind_methods() {
 			PropertyInfo(Variant::VECTOR2, "from"),
 			PropertyInfo(Variant::VECTOR2, "to"),
 			PropertyInfo(Variant::COLOR, "color"),
-			PropertyInfo(Variant::REAL, "width"),
+			PropertyInfo(Variant::FLOAT, "width"),
 			PropertyInfo(Variant::DICTIONARY, "line")));
 
 	BIND_ENUM_CONSTANT(CELL_ORIGIN_TOP_LEFT);
@@ -399,19 +399,19 @@ void GridRect::_bind_methods() {
 	ADD_GROUP("Cell", "cell");
 	ADD_PROPERTY(PropertyInfo(Variant::VECTOR2, "cell_size"), "set_cell_size", "get_cell_size");
 	ADD_PROPERTY(PropertyInfo(Variant::INT, "cell_origin", PROPERTY_HINT_ENUM, "Top-left,Center"), "set_cell_origin", "get_cell_origin");
-	ADD_PROPERTY(PropertyInfo(Variant::REAL, "cell_line_width", PROPERTY_HINT_RANGE, "0.0,5.0,0.5,or_greater"), "set_cell_line_width", "get_cell_line_width");
+	ADD_PROPERTY(PropertyInfo(Variant::FLOAT, "cell_line_width", PROPERTY_HINT_RANGE, "0.0,5.0,0.5,or_greater"), "set_cell_line_width", "get_cell_line_width");
 
 	ADD_GROUP("Divisions", "divisions");
 	ADD_PROPERTY(PropertyInfo(Variant::INT, "divisions_horizontal", PROPERTY_HINT_RANGE, "0,16,1,or_greater"), "set_divisions_horizontal", "get_divisions_horizontal");
 	ADD_PROPERTY(PropertyInfo(Variant::INT, "divisions_vertical", PROPERTY_HINT_RANGE, "0,16,1,or_greater"), "set_divisions_vertical", "get_divisions_vertical");
-	ADD_PROPERTY(PropertyInfo(Variant::REAL, "divisions_line_width", PROPERTY_HINT_RANGE, "0.0,5.0,0.5,or_greater"), "set_divisions_line_width", "get_divisions_line_width");
+	ADD_PROPERTY(PropertyInfo(Variant::FLOAT, "divisions_line_width", PROPERTY_HINT_RANGE, "0.0,5.0,0.5,or_greater"), "set_divisions_line_width", "get_divisions_line_width");
 
 	ADD_GROUP("Origin", "origin");
 	ADD_PROPERTY(PropertyInfo(Variant::VECTOR2, "origin_offset"), "set_origin_offset", "get_origin_offset");
 	ADD_PROPERTY(PropertyInfo(Variant::VECTOR2, "origin_scale"), "set_origin_scale", "get_origin_scale");
 	ADD_PROPERTY(PropertyInfo(Variant::BOOL, "origin_centered"), "set_origin_centered", "is_origin_centered");
 	ADD_PROPERTY(PropertyInfo(Variant::BOOL, "origin_axes_visible"), "set_origin_axes_visible", "is_origin_axes_visible");
-	ADD_PROPERTY(PropertyInfo(Variant::REAL, "origin_axes_line_width", PROPERTY_HINT_RANGE, "0.0,5.0,0.5,or_greater"), "set_origin_axes_line_width", "get_origin_axes_line_width");
+	ADD_PROPERTY(PropertyInfo(Variant::FLOAT, "origin_axes_line_width", PROPERTY_HINT_RANGE, "0.0,5.0,0.5,or_greater"), "set_origin_axes_line_width", "get_origin_axes_line_width");
 
 	ADD_GROUP("Metadata", "metadata");
 	ADD_PROPERTY(PropertyInfo(Variant::BOOL, "metadata_show_tooltip"), "set_metadata_show_tooltip", "is_showing_metadata_tooltip");

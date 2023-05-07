@@ -32,7 +32,7 @@ Variant Random::range(const Variant &p_from, const Variant &p_to) {
 			int to = p_to;
 			return randi_range(from, to);
 		} break;
-		case Variant::REAL: {
+		case Variant::FLOAT: {
 			real_t from = p_from;
 			real_t to = p_to;
 			return randf_range(from, to);
@@ -286,7 +286,7 @@ void Random::_bind_methods() {
 	ClassDB::bind_method(D_METHOD("decision", "probability"), &Random::decision);
 
 	ADD_PROPERTY(PropertyInfo(Variant::INT, "number"), "", "get_number");
-	ADD_PROPERTY(PropertyInfo(Variant::REAL, "value"), "", "get_value");
+	ADD_PROPERTY(PropertyInfo(Variant::FLOAT, "value"), "", "get_value");
 	ADD_PROPERTY(PropertyInfo(Variant::COLOR, "color"), "", "get_color");
 	ADD_PROPERTY(PropertyInfo(Variant::BOOL, "condition"), "", "get_condition");
 
