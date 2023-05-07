@@ -17,8 +17,8 @@ private:
 protected:
 	static void _bind_methods();
 
-	Variant _defer_call_bind(const Variant **p_args, int p_argcount, Variant::CallError &r_error);
-	Variant _defer_call_unique_bind(const Variant **p_args, int p_argcount, Variant::CallError &r_error);
+	Variant _defer_call_bind(const Variant **p_args, int p_argcount, Callable::CallError &r_error);
+	Variant _defer_call_unique_bind(const Variant **p_args, int p_argcount, Callable::CallError &r_error);
 
 	Ref<InvokeState> _invoke(Object *p_obj, StringName p_method, real_t p_delay, real_t p_repeat_rate, bool p_pause_mode_process, bool p_deferred);
 	void _on_invoke_timeout(Ref<InvokeState> p_state, bool p_pause_mode, bool p_deferred);

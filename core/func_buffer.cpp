@@ -59,11 +59,11 @@ void FuncBuffer::flush() {
 				argptrs[j] = &r[j];
 			}
 		}
-		Variant::CallError ce;
+		Callable::CallError ce;
 		Object *obj = ObjectDB::get_instance(c->instance_id);
 		if (obj != nullptr) {
 			obj->call(c->target, argptrs, c->argcount, ce);
-			if (ce.error != Variant::CallError::CALL_OK) {
+			if (ce.error != Callable::CallError::CALL_OK) {
 				ERR_PRINT("Error calling deferred method: " + Variant::get_call_error_text(obj, c->target, argptrs, c->argcount, ce) + ".");
 			}
 		}

@@ -14,12 +14,12 @@ void DataContainer::set_type(int p_type) {
 }
 
 Variant DataContainer::create(const Variant::Type &p_type) {
-	Variant::CallError error;
+	Callable::CallError error;
 	return Variant::construct(p_type, nullptr, 0, error);
 }
 
 Variant DataContainer::convert(const Variant &p_value, const Variant::Type &p_to_type) {
-	Variant::CallError error;
+	Callable::CallError error;
 	const Variant *args[1];
 	args[0] = &p_value;
 	return Variant::construct(p_to_type, args, 1, error, false); // Non-strict.

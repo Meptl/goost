@@ -83,7 +83,7 @@ bool MixinScriptInstance::has_method(const StringName &p_method) const {
 	return false;
 }
 
-Variant MixinScriptInstance::call(const StringName &p_method, const Variant **p_args, int p_argcount, Variant::CallError &r_error) {
+Variant MixinScriptInstance::call(const StringName &p_method, const Variant **p_args, int p_argcount, Callable::CallError &r_error) {
 	ScriptInstance *const *sarr = instances.ptr();
 
 	for (int i = 0; i < instances.size(); i++) {
@@ -91,12 +91,12 @@ Variant MixinScriptInstance::call(const StringName &p_method, const Variant **p_
 			continue;
 		}
 		Variant r = sarr[i]->call(p_method, p_args, p_argcount, r_error);
-		if (r_error.error == Variant::CallError::CALL_OK)
+		if (r_error.error == Callable::CallError::CALL_OK)
 			return r;
-		else if (r_error.error != Variant::CallError::CALL_ERROR_INVALID_METHOD)
+		else if (r_error.error != Callable::CallError::CALL_ERROR_INVALID_METHOD)
 			return r;
 	}
-	r_error.error = Variant::CallError::CALL_ERROR_INVALID_METHOD;
+	r_error.error = Callable::CallError::CALL_ERROR_INVALID_METHOD;
 
 	return Variant();
 }
@@ -522,7 +522,7 @@ void Mixin::_bind_methods() {
 	ADD_PROPERTY(PropertyInfo(Variant::OBJECT, "owner"), "", "get_owner");
 }
 
-Variant Mixin::call(const StringName &p_method, const Variant **p_args, int p_argcount, Variant::CallError &r_error) {
+Variant Mixin::call(const StringName &p_method, const Variant **p_args, int p_argcount, Callable::CallError &r_error) {
 	if (real_owner) {
 		return real_owner->call(p_method, p_args, p_argcount, r_error);
 	}

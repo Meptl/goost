@@ -104,25 +104,25 @@ void GoostEngine::defer_callp(Object *p_obj, StringName p_method, const Variant 
 	deferred_calls.push_call(p_obj->get_instance_id(), p_method, p_args, p_argcount);
 }
 
-Variant GoostEngine::_defer_call_bind(const Variant **p_args, int p_argcount, Variant::CallError &r_error) {
+Variant GoostEngine::_defer_call_bind(const Variant **p_args, int p_argcount, Callable::CallError &r_error) {
 	if (p_argcount < 2) {
-		r_error.error = Variant::CallError::CALL_ERROR_TOO_FEW_ARGUMENTS;
+		r_error.error = Callable::CallError::CALL_ERROR_TOO_FEW_ARGUMENTS;
 		r_error.argument = 0;
 		return Variant();
 	}
 	if (p_args[0]->get_type() != Variant::OBJECT) {
-		r_error.error = Variant::CallError::CALL_ERROR_INVALID_ARGUMENT;
+		r_error.error = Callable::CallError::CALL_ERROR_INVALID_ARGUMENT;
 		r_error.argument = 0;
 		r_error.expected = Variant::OBJECT;
 		return Variant();
 	}
 	if (p_args[1]->get_type() != Variant::STRING) {
-		r_error.error = Variant::CallError::CALL_ERROR_INVALID_ARGUMENT;
+		r_error.error = Callable::CallError::CALL_ERROR_INVALID_ARGUMENT;
 		r_error.argument = 1;
 		r_error.expected = Variant::STRING;
 		return Variant();
 	}
-	r_error.error = Variant::CallError::CALL_OK;
+	r_error.error = Callable::CallError::CALL_OK;
 
 	Object *obj = *p_args[0];
 	StringName method = *p_args[1];
@@ -135,25 +135,25 @@ void GoostEngine::defer_call_uniquep(Object *p_obj, StringName p_method, const V
 	deferred_calls.push_call_unique(p_obj->get_instance_id(), p_method, p_args, p_argcount);
 }
 
-Variant GoostEngine::_defer_call_unique_bind(const Variant **p_args, int p_argcount, Variant::CallError &r_error) {
+Variant GoostEngine::_defer_call_unique_bind(const Variant **p_args, int p_argcount, Callable::CallError &r_error) {
 	if (p_argcount < 2) {
-		r_error.error = Variant::CallError::CALL_ERROR_TOO_FEW_ARGUMENTS;
+		r_error.error = Callable::CallError::CALL_ERROR_TOO_FEW_ARGUMENTS;
 		r_error.argument = 0;
 		return Variant();
 	}
 	if (p_args[0]->get_type() != Variant::OBJECT) {
-		r_error.error = Variant::CallError::CALL_ERROR_INVALID_ARGUMENT;
+		r_error.error = Callable::CallError::CALL_ERROR_INVALID_ARGUMENT;
 		r_error.argument = 0;
 		r_error.expected = Variant::OBJECT;
 		return Variant();
 	}
 	if (p_args[1]->get_type() != Variant::STRING) {
-		r_error.error = Variant::CallError::CALL_ERROR_INVALID_ARGUMENT;
+		r_error.error = Callable::CallError::CALL_ERROR_INVALID_ARGUMENT;
 		r_error.argument = 1;
 		r_error.expected = Variant::STRING;
 		return Variant();
 	}
-	r_error.error = Variant::CallError::CALL_OK;
+	r_error.error = Callable::CallError::CALL_OK;
 
 	Object *obj = *p_args[0];
 	StringName method = *p_args[1];
@@ -201,15 +201,15 @@ void GoostEngine::_on_invoke_timeout(Ref<InvokeState> p_state, bool p_pause_mode
 		p_state->active = false;
 	}
 	if (obj && p_state->is_active()) {
-		Variant::CallError ce;
+		Callable::CallError ce;
 		p_state->emit_signal("pre_call");
 		obj->call(p_state->method, nullptr, 0, ce);
-		if (ce.error != Variant::CallError::CALL_OK) {
+		if (ce.error != Callable::CallError::CALL_OK) {
 			ERR_PRINT("Error invoking method: " + Variant::get_call_error_text(obj, p_state->method, nullptr, 0, ce) + ".");
 			p_state->active = false;
 		}
 		p_state->emit_signal("post_call");
-		if (p_state->is_repeating() && ce.error == Variant::CallError::CALL_OK) {
+		if (p_state->is_repeating() && ce.error == Callable::CallError::CALL_OK) {
 			SceneTree *tree = Object::cast_to<SceneTree>(OS::get_singleton()->get_main_loop());
 			Ref<SceneTreeTimer> timer = tree->create_timer(p_state->repeat_rate, p_pause_mode);
 			p_state->timer = timer;
