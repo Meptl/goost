@@ -95,7 +95,7 @@ Error ImageFrames::save_gif(const String &p_filepath, int p_color_count) {
 		Ref<ImageIndexed> indexed = frame;
 		if (indexed.is_null()) {
 			indexed.instantiate();
-			indexed->create(frame->get_width(), frame->get_height(), false, frame->get_format(), frame->get_data());
+			indexed->initialize_data(frame->get_width(), frame->get_height(), false, frame->get_format(), frame->get_data());
 			indexed->convert(Image::FORMAT_RGBA8);
 			int num_colors = CLAMP(p_color_count, 1, 256);
 			num_colors = next_power_of_2(num_colors);

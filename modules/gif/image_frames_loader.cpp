@@ -180,7 +180,7 @@ RES ResourceFormatLoaderAnimatedTexture::load(const String &p_path, const String
 
 		Ref<Image> image;
 		image.instantiate();
-		image->create(width, height, false, Image::FORMAT_RGBA8, data);
+		image->initialize_data(width, height, false, Image::FORMAT_RGBA8, data);
 		frame->create_from_image(image, tex_flags);
 		atex->set_frame_texture(i, frame);
 
@@ -245,7 +245,7 @@ RES ResourceFormatLoaderSpriteFrames::load(const String &p_path, const String &p
 
 		Ref<Image> image;
 		image.instantiate();
-		image->create(width, height, false, Image::FORMAT_RGBA8, data);
+		image->initialize_data(width, height, false, Image::FORMAT_RGBA8, data);
 		frame->create_from_image(image, tex_flags);
 		sframes->add_frame("default", frame);
 	}

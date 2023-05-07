@@ -211,7 +211,7 @@ Error ImageIndexed::apply_palette() {
 	}
 	bool used_mipmaps = has_mipmaps();
 
-	create(get_width(), get_height(), has_mipmaps(), get_format(), dest_data);
+	initialize_data(get_width(), get_height(), has_mipmaps(), get_format(), dest_data);
 
 	if (used_mipmaps) {
 		generate_mipmaps();

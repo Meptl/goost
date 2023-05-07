@@ -175,14 +175,14 @@ Error ImageLoaderIndexedPNG::_load_image(void *rf_up, png_rw_ptr p_func, Ref<Ima
 			}
 		}
 		// Create image with palette and extend it
-		p_image->create(width, height, 0, Image::FORMAT_RGBA8);
+		p_image->initialize_data(width, height, 0, Image::FORMAT_RGBA8);
 		p_image->create_indexed_from_data(palette_data, dstbuff);
 		p_image->apply_palette(); // (png_palette_to_rgb)
 
 	} else {
 		ERR_FAIL_COND_V_MSG(png_palette, ERR_BUG, "Attempt to create a regular image with a palette.");
 		// Loaded data are pixels
-		p_image->create(width, height, 0, fmt, dstbuff);
+		p_image->initialize_data(width, height, 0, fmt, dstbuff);
 	}
 
 	png_destroy_read_struct(&png, &info, nullptr);

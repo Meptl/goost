@@ -30,7 +30,7 @@ Ref<Texture> DataContainerPreviewGenerator::generate(const Ref<Resource> &p_from
 			// The icon is stretched in grid mode so it's possible to speed up
 			// generation in those cases, but won't work in tree mode (default).
 			// Therefore, we must still use `p_size` for the preview...
-			image->create(p_size.x, p_size.y, false, Image::FORMAT_RGBA8);
+			image->initialize_data(p_size.x, p_size.y, false, Image::FORMAT_RGBA8);
 			image->fill(color);
 			Ref<ImageTexture> img_tex;
 			img_tex.instantiate();

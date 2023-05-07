@@ -46,7 +46,7 @@ Ref<Image> GoostImage::bucket_fill(Ref<Image> p_image, const Point2 &p_at, const
 	Image::Format format = p_image->get_format();
 
 	Ref<Image> fill_image = memnew(Image);
-	fill_image->create(width, height, mipmaps, format);
+	fill_image->initialize_data(width, height, mipmaps, format);
 
 	Vector2 at;
 	Vector2 pos = p_at;
@@ -142,7 +142,7 @@ void GoostImage::resize_hqx(Ref<Image> p_image, int p_scale) {
 		hqx->resize((const uint32_t *)src.ptr(), p_image->get_width(), p_image->get_height(), (uint32_t *)dest.ptrw());
 		memdelete(hqx);
 	}
-	p_image->create(new_width, new_height, false, Image::FORMAT_RGBA8, dest);
+	p_image->initialize_data(new_width, new_height, false, Image::FORMAT_RGBA8, dest);
 
 	if (used_mipmaps) {
 		p_image->generate_mipmaps();
@@ -337,7 +337,7 @@ Ref<Image> GoostImage::repeat(const Ref<Image> &p_image, const Size2i &p_count, 
 	if (rows == 1 && p_max_size.y < src->get_size().y) {
 		dh = p_max_size.y;
 	}
-	dest->create(dw, dh, false, src->get_format());
+	dest->initialize_data(dw, dh, false, src->get_format());
 
 	for (int i = 0; i < rows; ++i) {
 		for (int j = 0; j < cols; ++j) {
@@ -645,7 +645,7 @@ void _image_from_pix(Ref<Image> p_image, PIX *p_pix, bool p_include_alpha) {
 			} break;
 		}
 	}
-	p_image->create(width, height, false, format, image_data);
+	p_image->initialize_data(width, height, false, format, image_data);
 }
 
 Ref<Image> image_create_from_pix(PIX *p_pix, bool p_include_alpha) {
