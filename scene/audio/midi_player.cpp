@@ -35,7 +35,7 @@ Error MidiFile::load(const String fileName) {
 		ERR_FAIL_COND_V("Incorrect file type", FAILED);
 	}
 
-	FileAccess *f = FileAccess::open(fileName, FileAccess::READ);
+	Ref<FileAccess> f = FileAccess::open(fileName, FileAccess::READ);
 	ERR_FAIL_COND_V_MSG(!f, FAILED, "Couldn't open file " + fileName + ".");
 
 	int size = f->get_length();

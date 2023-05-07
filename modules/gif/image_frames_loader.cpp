@@ -15,13 +15,12 @@ bool ImageFramesFormatLoader::recognize(String p_extension) {
 	return false;
 }
 
-Error ImageFramesLoader::load_image_frames(String p_file, Ref<ImageFrames> p_image_frames, FileAccess *p_custom, int p_max_frames) {
+Error ImageFramesLoader::load_image_frames(String p_file, Ref<ImageFrames> p_image_frames, Ref<FileAccess> p_custom, int p_max_frames) {
 	ERR_FAIL_COND_V_MSG(p_image_frames.is_null(), ERR_INVALID_PARAMETER, "It's not a reference to a valid ImageFrames object.");
 
-	FileAccess *f = p_custom;
-	if (!f) {
+	if (p_custom.is_null()) {
 		Error err;
-		f = FileAccess::open(p_file, FileAccess::READ, &err);
+		Ref<FileAccess> f = FileAccess::open(p_file, FileAccess::READ, &err);
 		if (!f) {
 			ERR_PRINT("Error opening file '" + p_file + "'.");
 			return err;
@@ -39,20 +38,11 @@ Error ImageFramesLoader::load_image_frames(String p_file, Ref<ImageFrames> p_ima
 		}
 		if (p_image_frames->get_frame_count() == 0) {
 			ERR_PRINT("Images frames should contain at least one frame to be loaded.");
-			if (!p_custom) {
-				memdelete(f);
-			}
 			return ERR_INVALID_DATA;
 		}
 		if (err != ERR_FILE_UNRECOGNIZED) {
-			if (!p_custom) {
-				memdelete(f);
-			}
 			return err;
 		}
-	}
-	if (!p_custom) {
-		memdelete(f);
 	}
 	return ERR_FILE_UNRECOGNIZED;
 }
@@ -89,8 +79,8 @@ void ImageFramesLoader::cleanup() {
 // ImageFrames
 
 RES ResourceFormatLoaderImageFrames::load(const String &p_path, const String &p_original_path, Error *r_error, bool p_no_subresource_cache) {
-	FileAccess *f = FileAccess::open(p_path, FileAccess::READ);
-	if (!f) {
+	Ref<FileAccess> f = FileAccess::open(p_path, FileAccess::READ);
+	if (f.is_null()) {
 		if (r_error) {
 			*r_error = ERR_CANT_OPEN;
 		}
@@ -101,7 +91,6 @@ RES ResourceFormatLoaderImageFrames::load(const String &p_path, const String &p_
 
 	bool unrecognized = header[0] != 'G' || header[1] != 'D' || header[2] != 'I' || header[3] != 'M' || header[4] != 'F';
 	if (unrecognized) {
-		memdelete(f);
 		if (r_error) {
 			*r_error = ERR_FILE_UNRECOGNIZED;
 		}
@@ -117,7 +106,6 @@ RES ResourceFormatLoaderImageFrames::load(const String &p_path, const String &p_
 		}
 	}
 	if (idx == -1) {
-		memdelete(f);
 		if (r_error) {
 			*r_error = ERR_FILE_UNRECOGNIZED;
 		}
@@ -127,7 +115,6 @@ RES ResourceFormatLoaderImageFrames::load(const String &p_path, const String &p_
 	image_frames.instantiate();
 
 	Error err = ImageFramesLoader::loader[idx]->load_image_frames(image_frames, f);
-	memdelete(f);
 
 	if (err != OK) {
 		if (r_error) {
@@ -156,8 +143,8 @@ String ResourceFormatLoaderImageFrames::get_resource_type(const String &p_path) 
 // AnimatedTexture
 
 RES ResourceFormatLoaderAnimatedTexture::load(const String &p_path, const String &p_original_path, Error *r_error, bool p_no_subresource_cache) {
-	FileAccess *f = FileAccess::open(p_path, FileAccess::READ);
-	if (!f) {
+	Ref<FileAccess> f = FileAccess::open(p_path, FileAccess::READ);
+	if (f.is_null()) {
 		if (r_error) {
 			*r_error = ERR_CANT_OPEN;
 		}
@@ -168,7 +155,6 @@ RES ResourceFormatLoaderAnimatedTexture::load(const String &p_path, const String
 
 	bool unrecognized = header[0] != 'G' || header[1] != 'D' || header[2] != 'A' || header[3] != 'T';
 	if (unrecognized) {
-		memdelete(f);
 		if (r_error) {
 			*r_error = ERR_FILE_UNRECOGNIZED;
 		}
@@ -203,8 +189,6 @@ RES ResourceFormatLoaderAnimatedTexture::load(const String &p_path, const String
 	}
 	atex->set_frames(frame_count);
 
-	f->close();
-	memdelete(f);
 
 	return atex;
 }
@@ -224,8 +208,8 @@ String ResourceFormatLoaderAnimatedTexture::get_resource_type(const String &p_pa
 // SpriteFrames
 
 RES ResourceFormatLoaderSpriteFrames::load(const String &p_path, const String &p_original_path, Error *r_error, bool p_no_subresource_cache) {
-	FileAccess *f = FileAccess::open(p_path, FileAccess::READ);
-	if (!f) {
+	Ref<FileAccess> f = FileAccess::open(p_path, FileAccess::READ);
+	if (f.is_null()) {
 		if (r_error) {
 			*r_error = ERR_CANT_OPEN;
 		}
@@ -236,7 +220,6 @@ RES ResourceFormatLoaderSpriteFrames::load(const String &p_path, const String &p
 
 	bool unrecognized = header[0] != 'G' || header[1] != 'D' || header[2] != 'S' || header[3] != 'F';
 	if (unrecognized) {
-		memdelete(f);
 		if (r_error) {
 			*r_error = ERR_FILE_UNRECOGNIZED;
 		}
@@ -267,9 +250,6 @@ RES ResourceFormatLoaderSpriteFrames::load(const String &p_path, const String &p
 		sframes->add_frame("default", frame);
 	}
 	sframes->set_animation_speed("default", f->get_real());
-
-	f->close();
-	memdelete(f);
 
 	return sframes;
 }

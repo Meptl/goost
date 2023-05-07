@@ -52,16 +52,14 @@ Error ResourceSaverIndexedPNG::save_image(const String &p_path, const Ref<ImageI
 		ERR_FAIL_V(ERR_CANT_OPEN);
 	}
 	Error err;
-	FileAccess *f = FileAccess::open(p_path, FileAccess::WRITE, &err);
+	Ref<FileAccess> f = FileAccess::open(p_path, FileAccess::WRITE, &err);
 	if (err != OK) {
 		ERR_FAIL_V_MSG(err, "Cannot open file.");
 	}
-	png_set_write_fn(png_ptr, f, _write_png_data, nullptr);
+	png_set_write_fn(png_ptr, f.ptr(), _write_png_data, nullptr);
 
 	// Write header.
 	if (setjmp(png_jmpbuf(png_ptr))) {
-		f->close();
-		memdelete(f);
 		ERR_FAIL_V(ERR_CANT_OPEN);
 	}
 
@@ -159,8 +157,6 @@ Error ResourceSaverIndexedPNG::save_image(const String &p_path, const Ref<ImageI
 
 	// Write data.
 	if (setjmp(png_jmpbuf(png_ptr))) {
-		f->close();
-		memdelete(f);
 		ERR_FAIL_V(ERR_CANT_OPEN);
 	}
 
@@ -178,8 +174,6 @@ Error ResourceSaverIndexedPNG::save_image(const String &p_path, const Ref<ImageI
 	memfree(row_pointers);
 
 	if (setjmp(png_jmpbuf(png_ptr))) {
-		f->close();
-		memdelete(f);
 		ERR_FAIL_V(ERR_CANT_OPEN);
 	}
 	png_write_end(png_ptr, nullptr);
@@ -190,9 +184,6 @@ Error ResourceSaverIndexedPNG::save_image(const String &p_path, const Ref<ImageI
 	png_destroy_write_struct(&png_ptr, &info_ptr);
 
 	f->close();
-	memdelete(f);
-
-	return OK;
 }
 
 bool ResourceSaverIndexedPNG::recognize(const Ref<Resource> &p_resource) const {

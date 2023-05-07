@@ -8,21 +8,19 @@ static Error _load_gif(Ref<ImageFrames> &r_image_frames, const Variant &source, 
 	GifLoader gif;
 	if (source.get_type() == Variant::STRING) {
 		Error err;
-		FileAccess *f = FileAccess::open(source, FileAccess::READ, &err);
-		if (!f) {
+		Ref<FileAccess> f = FileAccess::open(source, FileAccess::READ, &err);
+		if (f.is_null()) {
 			ERR_PRINT("Error opening file '" + String(source) + "'.");
 			return err;
 		}
 		err = gif.load_from_file_access(r_image_frames, f, max_frames);
-		f->close();
-		memdelete(f);
 		return err;
 	} else {
 		return gif.load_from_buffer(r_image_frames, source, max_frames);
 	}
 }
 
-Error ImageFramesLoaderGIF::load_image_frames(Ref<ImageFrames> &r_image_frames, FileAccess *f, int max_frames) const {
+Error ImageFramesLoaderGIF::load_image_frames(Ref<ImageFrames> &r_image_frames, Ref<FileAccess> f, int max_frames) const {
 	GifLoader gif;
 	return gif.load_from_file_access(r_image_frames, f, max_frames);
 }

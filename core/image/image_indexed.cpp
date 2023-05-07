@@ -384,8 +384,8 @@ Error ImageIndexed::load_indexed_png(const String &p_path) {
 	Error err;
 	Vector<uint8_t> buffer;
 
-	FileAccess *f = FileAccess::open(p_path, FileAccess::READ, &err);
-	if (!f) {
+	Ref<FileAccess> f = FileAccess::open(p_path, FileAccess::READ, &err);
+	if (f.is_null()) {
 		ERR_PRINT("Error opening file: " + p_path);
 		return err;
 	}
@@ -400,8 +400,6 @@ Error ImageIndexed::load_indexed_png(const String &p_path) {
 		copy_internals_from(img);
 		create_indexed_from_data(img->get_palette_data(), img->get_index_data());
 	}
-	f->close();
-	memdelete(f);
 
 	return err;
 }
