@@ -131,7 +131,7 @@ Vector<Vector<Point2>> PolyNode2D::_build_outlines() {
 	Vector<Vector<Point2>> outlines;
 	Vector<Point2> outer_points = points;
 	if (Geometry2D::is_polygon_clockwise(outer_points)) {
-		outer_points.invert();
+		outer_points.reverse();
 	}
 	outlines.push_back(points);
 
