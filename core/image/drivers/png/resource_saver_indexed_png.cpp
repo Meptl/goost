@@ -19,7 +19,7 @@ Error ResourceSaverIndexedPNG::save(const String &p_path, const Ref<Resource> &p
 	ERR_FAIL_COND_V_MSG(texture->get_width() == 0, ERR_INVALID_DATA, "Can't save empty texture as PNG.");
 	ERR_FAIL_COND_V_MSG(texture->get_height() == 0, ERR_INVALID_DATA, "Can't save empty texture as PNG.");
 
-	Ref<ImageIndexed> img = texture->get_data();
+	Ref<ImageIndexed> img = texture->get_image();
 	Error err = save_image(p_path, img);
 
 	return err;
