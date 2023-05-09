@@ -1,6 +1,7 @@
 #include "random.h"
 
 #include "core/templates/local_vector.h"
+#include "scene/resources/animation.h"
 
 Random *Random::singleton = nullptr;
 
@@ -39,7 +40,7 @@ Variant Random::range(const Variant &p_from, const Variant &p_to) {
 		} break;
 		default: {
 			Variant ret;
-			Variant::interpolate(p_from, p_to, randf(), ret);
+			Animation::interpolate_variant(p_from, p_to, randf(), ret);
 			return ret;
 		}
 	}
