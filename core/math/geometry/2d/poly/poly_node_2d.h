@@ -1,6 +1,7 @@
 #pragma once
 
 #include "scene/2d/node_2d.h"
+#include "core/math/geometry_2d.h"
 
 class PolyNode2D : public Node2D {
 	GDCLASS(PolyNode2D, Node2D);
