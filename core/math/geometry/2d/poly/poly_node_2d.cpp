@@ -71,7 +71,7 @@ void PolyNode2D::_draw() {
 		RID texture_rid = texture.is_valid() ? texture->get_rid() : RID();
 		RID normal_map_rid = normal_map.is_valid() ? normal_map->get_rid() : RID();
 
-		VS::get_singleton()->canvas_item_add_triangle_array(
+		RS::get_singleton()->canvas_item_add_triangle_array(
 				get_canvas_item(), indices, vertices, colors, uvs,
 				Vector<int>(), Vector<float>(), texture_rid, -1, normal_map_rid, antialiased);
 	}
