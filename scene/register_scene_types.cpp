@@ -85,7 +85,7 @@ void register_scene_types() {
 
 #ifdef GOOST_GUI_ENABLED
 	// Before Debug2D, need to access default values, property hints etc.
-	ClassDB::register_class<GridRect>(); 
+	ClassDB::register_class<GridRect>();
 #endif
 
 #if defined(GOOST_GEOMETRY_ENABLED) && defined(GOOST_Debug2D)
@@ -94,7 +94,7 @@ void register_scene_types() {
 	GLOBAL_DEF("debug/draw/2d/color", Color(0.0, 0.6, 0.7, 1));
 	GLOBAL_DEF("debug/draw/2d/filled", true);
 	GLOBAL_DEF("debug/draw/2d/line_width", 1.0);
-	ProjectSettings::get_singleton()->set_custom_property_info("debug/draw/2d/line_width",
+	ProjectSettings::get_singleton()->set_custom_property_info(
 			PropertyInfo(Variant::FLOAT, "debug/draw/2d/line_width", PROPERTY_HINT_RANGE, "0.1,5.0,0.1,or_greater"));
 	GLOBAL_DEF("debug/draw/2d/antialiased", false);
 
@@ -115,15 +115,15 @@ void register_scene_types() {
 			continue;
 		}
 		const String &setting = "debug/draw/2d/grid/" + p.name;
-	
+
 		if (p.name == "cell_line_width") {
 			GLOBAL_DEF(setting, g->get(p.name));
-			ProjectSettings::get_singleton()->set_custom_property_info(setting, p);
+			ProjectSettings::get_singleton()->set_custom_property_info(p);
 			GLOBAL_DEF("debug/draw/2d/grid/cell_line_color", Color(1.0, 1.0, 1.0, 0.07)); // From GraphEdit in godot/editor/editor_themes.cpp
 
 		} else if (p.name == "divisions_line_width") {
 			GLOBAL_DEF(setting, g->get(p.name));
-			ProjectSettings::get_singleton()->set_custom_property_info(setting, p);
+			ProjectSettings::get_singleton()->set_custom_property_info(p);
 			GLOBAL_DEF("debug/draw/2d/grid/divisions_line_color", Color(1.0, 1.0, 1.0, 0.15)); // From GraphEdit in godot/editor/editor_themes.cpp
 
 		} else if (p.name == "origin_axes_visible") {
@@ -132,7 +132,7 @@ void register_scene_types() {
 			GLOBAL_DEF("debug/draw/2d/grid/origin_axis_y_color", Color(0.53, 0.84, 0.01)); // From godot/editor/editor_themes.cpp
 		} else {
 			GLOBAL_DEF(setting, g->get(p.name));
-			ProjectSettings::get_singleton()->set_custom_property_info(setting, p);
+			ProjectSettings::get_singleton()->set_custom_property_info(p);
 		}
 	}
 	GLOBAL_DEF("debug/draw/2d/grid/background_color", Color(0, 0, 0, 0));

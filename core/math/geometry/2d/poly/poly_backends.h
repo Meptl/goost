@@ -94,7 +94,6 @@ public:
 		}
 		if (!backends_list.is_empty()) {
 			ProjectSettings::get_singleton()->set_custom_property_info(
-					setting_name,
 					PropertyInfo(Variant::STRING, setting_name, PROPERTY_HINT_ENUM, backends_list));
 		}
 		return ProjectSettings::get_singleton()->has_setting(setting_name) ? GLOBAL_GET(setting_name) : "";
