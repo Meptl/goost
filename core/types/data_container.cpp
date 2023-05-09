@@ -10,7 +10,7 @@ void DataContainer::set_type(int p_type) {
 		value = create(type);
 	}
 	emit_changed();
-	_change_notify();
+	notify_property_list_changed();
 }
 
 Variant DataContainer::create(const Variant::Type &p_type) {
@@ -49,22 +49,22 @@ bool DataContainer::_get(const StringName &p_name, Variant &r_ret) const {
 
 void DataContainer::set_property_name(const String &p_property_name) {
 	pi.name = p_property_name;
-	_change_notify();
+	notify_property_list_changed();
 }
 
 void DataContainer::set_property_hint(PropertyHint p_property_hint) {
 	pi.hint = p_property_hint;
-	_change_notify();
+	notify_property_list_changed();
 }
 
 void DataContainer::set_property_hint_string(const String &p_property_hint_string) {
 	pi.hint_string = p_property_hint_string;
-	_change_notify();
+	notify_property_list_changed();
 }
 
 void DataContainer::set_property_usage(PropertyUsageFlags p_property_usage) {
 	pi.usage = p_property_usage;
-	_change_notify();
+	notify_property_list_changed();
 }
 
 void DataContainer::_get_property_list(List<PropertyInfo> *p_list) const {

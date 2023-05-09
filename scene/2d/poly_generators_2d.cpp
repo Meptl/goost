@@ -11,14 +11,12 @@ void PolyCircle2D::set_radius(real_t p_radius) {
 	ERR_FAIL_COND(p_radius <= 0);
 	radius = p_radius;
 	_queue_update();
-	_change_notify("radius");
 }
 
 void PolyCircle2D::set_max_error(real_t p_max_error) {
 	ERR_FAIL_COND(p_max_error <= 0);
 	max_error = p_max_error;
 	_queue_update();
-	_change_notify("max_error");
 }
 
 Vector<Vector<Point2>> PolyCircle2D::_build_outlines() {
@@ -44,21 +42,18 @@ void PolyEllipse2D::set_width(real_t p_width) {
 	ERR_FAIL_COND(p_width <= 0);
 	width = p_width;
 	_queue_update();
-	_change_notify("width");
 }
 
 void PolyEllipse2D::set_height(real_t p_height) {
 	ERR_FAIL_COND(p_height <= 0);
 	height = p_height;
 	_queue_update();
-	_change_notify("height");
 }
 
 void PolyEllipse2D::set_max_error(real_t p_max_error) {
 	ERR_FAIL_COND(p_max_error <= 0);
 	max_error = p_max_error;
 	_queue_update();
-	_change_notify("max_error");
 }
 
 Vector<Vector<Point2>> PolyEllipse2D::_build_outlines() {
@@ -88,21 +83,18 @@ void PolyCapsule2D::set_radius(real_t p_radius) {
 	ERR_FAIL_COND(p_radius <= 0.0);
 	radius = p_radius;
 	_queue_update();
-	_change_notify("radius");
 }
 
 void PolyCapsule2D::set_height(real_t p_height) {
 	ERR_FAIL_COND(p_height < 0.0);
 	height = p_height;
 	_queue_update();
-	_change_notify("height");
 }
 
 void PolyCapsule2D::set_max_error(real_t p_max_error) {
 	ERR_FAIL_COND(p_max_error <= 0.0);
 	max_error = p_max_error;
 	_queue_update();
-	_change_notify("max_error");
 }
 
 Vector<Vector<Point2>> PolyCapsule2D::_build_outlines() {
@@ -133,7 +125,6 @@ void PolyRectangle2D::set_extents(const Vector2 &p_extents) {
 	ERR_FAIL_COND(p_extents.y <= 0.0);
 	extents = p_extents;
 	_queue_update();
-	_change_notify("extents");
 }
 
 Vector<Vector<Point2>> PolyRectangle2D::_build_outlines() {
@@ -190,7 +181,6 @@ void PolyPath2D::remove_child_notify(Node *p_child) {
 void PolyPath2D::set_buffer_offset(real_t p_buffer_offset) {
 	buffer_offset = MAX(0.0, p_buffer_offset);
 	_queue_update();
-	_change_notify("buffer_offset");
 }
 
 void PolyPath2D::set_buffer_parameters(const Ref<PolyOffsetParameters2D> &p_buffer_parameters) {
@@ -205,19 +195,16 @@ void PolyPath2D::set_buffer_parameters(const Ref<PolyOffsetParameters2D> &p_buff
 		buffer_parameters->connect(CoreStringNames::get_singleton()->changed, this, "_queue_update");
 	}
 	_queue_update();
-	_change_notify("buffer_parameters");
 }
 
 void PolyPath2D::set_tessellation_stages(int p_tessellation_stages) {
 	tessellation_stages = MAX(1, p_tessellation_stages);
 	_queue_update();
-	_change_notify("tessellation_stages");
 }
 
 void PolyPath2D::set_tessellation_tolerance_degrees(float p_tessellation_tolerance_degrees) {
 	tessellation_tolerance_degrees = CLAMP(p_tessellation_tolerance_degrees, 0.0f, 180.0f);
 	_queue_update();
-	_change_notify("tessellation_tolerance_degrees");
 }
 
 Vector<Vector<Point2>> PolyPath2D::_build_outlines() {

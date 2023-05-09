@@ -299,9 +299,9 @@ void MixinScript::add_mixin(const Ref<Script> &p_script) {
 		} else {
 			msi->instances.push_back(nullptr);
 		}
-		msi->object->_change_notify();
+		msi->object->notify_property_list_changed();
 	}
-	_change_notify();
+	notify_property_list_changed();
 	emit_changed();
 }
 
@@ -320,7 +320,7 @@ void MixinScript::remove_mixin(int p_idx) {
 	for (Map<Object *, MixinScriptInstance *>::Element *E = instances.front(); E; E = E->next()) {
 		MixinScriptInstance *msi = E->get();
 		msi->instances.remove(p_idx);
-		msi->object->_change_notify();
+		msi->object->notify_property_list_changed();
 	}
 	emit_changed();
 }
@@ -345,9 +345,9 @@ void MixinScript::insert_mixin(int p_pos, const Ref<Script> &p_script) {
 		} else {
 			msi->instances.insert(p_pos, nullptr);
 		}
-		msi->object->_change_notify();
+		msi->object->notify_property_list_changed();
 	}
-	_change_notify();
+	notify_property_list_changed();
 	emit_changed();
 }
 
@@ -380,7 +380,7 @@ ScriptInstance *MixinScript::instance_create(Object *p_this) {
 		msi->instances.push_back(si);
 	}
 	instances[p_this] = msi;
-	p_this->_change_notify();
+	p_this->notify_property_list_changed();
 
 	return msi;
 }

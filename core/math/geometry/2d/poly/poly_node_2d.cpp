@@ -223,7 +223,6 @@ void PolyNode2D::set_operation(Operation p_operation) {
 void PolyNode2D::set_open(bool p_open) {
 	open = p_open;
 	_queue_update();
-	_change_notify();
 }
 
 void PolyNode2D::set_texture(const Ref<Texture> &p_texture) {
@@ -268,7 +267,6 @@ void PolyNode2D::set_color(const Color &p_color) {
 void PolyNode2D::set_filled(bool p_filled) {
 	filled = p_filled;
 	queue_redraw();
-	_change_notify();
 }
 
 void PolyNode2D::set_line_width(real_t p_line_width) {

@@ -289,7 +289,7 @@ void MixinScriptEditor::_update_list() {
 		panel_mixins->show();
 	}
 
-	script->_change_notify();
+	script->notify_property_list_changed();
 	update_queued = false;
 }
 
