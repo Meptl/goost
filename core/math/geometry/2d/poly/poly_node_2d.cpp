@@ -108,7 +108,7 @@ void PolyNode2D::_queue_update() {
 		call_deferred("_update_outlines");
 	}
 	update_queued = true;
-	update();
+	queue_redraw();
 }
 
 Vector<Vector<Point2>> copy_outlines(const Vector<Vector<Point2>> &p_outlines, const Transform2D &p_trans) {
@@ -193,7 +193,7 @@ void PolyNode2D::_update_outlines() {
 		return;
 	}
 	get_outlines();
-	update();
+	queue_redraw();
 	emit_signal("outlines_updated");
 }
 
@@ -228,27 +228,27 @@ void PolyNode2D::set_open(bool p_open) {
 
 void PolyNode2D::set_texture(const Ref<Texture> &p_texture) {
 	texture = p_texture;
-	update();
+	queue_redraw();
 }
 
 void PolyNode2D::set_normal_map(const Ref<Texture> &p_texture) {
 	normal_map = p_texture;
-	update();
+	queue_redraw();
 }
 
 void PolyNode2D::set_texture_offset(const Vector2 &p_offset) {
 	tex_ofs = p_offset;
-	update();
+	queue_redraw();
 }
 
 void PolyNode2D::set_texture_rotation(float p_rot) {
 	tex_rot = p_rot;
-	update();
+	queue_redraw();
 }
 
 void PolyNode2D::set_texture_rotation_degrees(float p_rot) {
 	set_texture_rotation(Math::deg2rad(p_rot));
-	update();
+	queue_redraw();
 }
 
 float PolyNode2D::get_texture_rotation_degrees() const {
@@ -257,28 +257,28 @@ float PolyNode2D::get_texture_rotation_degrees() const {
 
 void PolyNode2D::set_texture_scale(const Size2 &p_scale) {
 	tex_scale = p_scale;
-	update();
+	queue_redraw();
 }
 
 void PolyNode2D::set_color(const Color &p_color) {
 	color = p_color;
-	update();
+	queue_redraw();
 }
 
 void PolyNode2D::set_filled(bool p_filled) {
 	filled = p_filled;
-	update();
+	queue_redraw();
 	_change_notify();
 }
 
 void PolyNode2D::set_line_width(real_t p_line_width) {
 	line_width = p_line_width;
-	update();
+	queue_redraw();
 }
 
 void PolyNode2D::set_antialiased(bool p_antialiased) {
 	antialiased = p_antialiased;
-	update();
+	queue_redraw();
 }
 
 PolyNode2D *PolyNode2D::new_child(const Vector<Point2> &p_points) {
@@ -324,7 +324,7 @@ void PolyNode2D::make_from_outlines(const Array &p_outlines) {
 		}
 	}
 	memdelete(tree);
-	update();
+	queue_redraw();
 }
 
 Array PolyNode2D::get_outlines_array() {
