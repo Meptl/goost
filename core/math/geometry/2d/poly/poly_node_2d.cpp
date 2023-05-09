@@ -130,7 +130,7 @@ Vector<Vector<Point2>> copy_outlines(const Vector<Vector<Point2>> &p_outlines, c
 Vector<Vector<Point2>> PolyNode2D::_build_outlines() {
 	Vector<Vector<Point2>> outlines;
 	Vector<Point2> outer_points = points;
-	if (Geometry::is_polygon_clockwise(outer_points)) {
+	if (Geometry2D::is_polygon_clockwise(outer_points)) {
 		outer_points.invert();
 	}
 	outlines.push_back(points);
@@ -317,7 +317,7 @@ void PolyNode2D::make_from_outlines(const Array &p_outlines) {
 		for (int i = 0; i < outer->get_child_count(); ++i) {
 			PolyNode2D *inner = Object::cast_to<PolyNode2D>(outer->get_child(i));
 			outer->remove_child(inner);
-			if (Geometry::is_polygon_clockwise(inner->points)) {
+			if (Geometry2D::is_polygon_clockwise(inner->points)) {
 				inner->operation = OP_DIFFERENCE; // Cut a hole.
 			}
 			add_child(inner);
@@ -466,7 +466,7 @@ bool PolyNode2D::_edit_is_selected_on_click(const Point2 &p_point, double p_tole
 		if (points.size() >= 2) {
 			const Point2 *ptr = points.ptr();
 			for (int i = 0; i < points.size() - 1; ++i) {
-				Vector2 p = Geometry::get_closest_point_to_segment_2d(p_point, &ptr[i]);
+				Vector2 p = Geometry2D::get_closest_point_to_segment_2d(p_point, &ptr[i]);
 				if (p.distance_to(p_point) <= p_tolerance) {
 					return true;
 				}

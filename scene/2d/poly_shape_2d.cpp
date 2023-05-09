@@ -1,7 +1,7 @@
 #include "poly_shape_2d.h"
 
 #include "core/config/engine.h"
-#include "core/math/geometry.h"
+#include "core/math/geometry_2d.h"
 
 #include "goost/core/math/geometry/2d/goost_geometry_2d.h"
 #include "goost/core/math/geometry/2d/poly/decomp/poly_decomp.h"
