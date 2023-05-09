@@ -3,6 +3,8 @@
 #include "editor/plugins/abstract_polygon_2d_editor.h"
 #include "goost/core/math/geometry/2d/poly/poly_node_2d.h"
 
+class MenuButton;
+
 class PolyNode2DEditor : public AbstractPolygon2DEditor {
 	GDCLASS(PolyNode2DEditor, AbstractPolygon2DEditor);
 
