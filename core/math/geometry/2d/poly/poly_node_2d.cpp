@@ -246,12 +246,12 @@ void PolyNode2D::set_texture_rotation(float p_rot) {
 }
 
 void PolyNode2D::set_texture_rotation_degrees(float p_rot) {
-	set_texture_rotation(Math::deg2rad(p_rot));
+	set_texture_rotation(Math::deg_to_rad(p_rot));
 	queue_redraw();
 }
 
 float PolyNode2D::get_texture_rotation_degrees() const {
-	return Math::rad2deg(get_texture_rotation());
+	return Math::rad_to_deg(get_texture_rotation());
 }
 
 void PolyNode2D::set_texture_scale(const Size2 &p_scale) {
