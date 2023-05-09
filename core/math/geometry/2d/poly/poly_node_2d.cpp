@@ -413,8 +413,8 @@ void PolyNode2D::_bind_methods() {
 	ADD_PROPERTY(PropertyInfo(Variant::BOOL, "open"), "set_open", "is_open");
 
 	ADD_GROUP("Textures", "");
-	ADD_PROPERTY(PropertyInfo(Variant::OBJECT, "texture", PROPERTY_HINT_RESOURCE_TYPE, "Texture"), "set_texture", "get_texture");
-	ADD_PROPERTY(PropertyInfo(Variant::OBJECT, "normal_map", PROPERTY_HINT_RESOURCE_TYPE, "Texture"), "set_normal_map", "get_normal_map");
+	ADD_PROPERTY(PropertyInfo(Variant::OBJECT, "texture", PROPERTY_HINT_RESOURCE_TYPE, "Texture2D"), "set_texture", "get_texture");
+	ADD_PROPERTY(PropertyInfo(Variant::OBJECT, "normal_map", PROPERTY_HINT_RESOURCE_TYPE, "Texture2D"), "set_normal_map", "get_normal_map");
 	ADD_GROUP("Textures", "texture_");
 	ADD_PROPERTY(PropertyInfo(Variant::VECTOR2, "texture_offset"), "set_texture_offset", "get_texture_offset");
 	ADD_PROPERTY(PropertyInfo(Variant::VECTOR2, "texture_scale"), "set_texture_scale", "get_texture_scale");
@@ -464,7 +464,7 @@ bool PolyNode2D::_edit_is_selected_on_click(const Point2 &p_point, double p_tole
 		if (points.size() >= 2) {
 			const Point2 *ptr = points.ptr();
 			for (int i = 0; i < points.size() - 1; ++i) {
-				Vector2 p = Geometry2D::get_closest_point_to_segment_2d(p_point, &ptr[i]);
+				Vector2 p = Geometry2D::get_closest_point_to_segment(p_point, &ptr[i]);
 				if (p.distance_to(p_point) <= p_tolerance) {
 					return true;
 				}
